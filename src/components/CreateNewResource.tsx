@@ -29,7 +29,7 @@ export default function CreateNewResource(): JSX.Element {
     opinion_reason,
     description,
   } = newResourceData;
-  const [tags, setTags] = useState<{ tag_name: string }[]>([]);
+  const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [stageNames, setStageNames] = useState<{ stage_name: string }[]>([]);
@@ -51,17 +51,26 @@ export default function CreateNewResource(): JSX.Element {
     getOptions();
   }, []);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setNewResourceData(templateResourceRequest);
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
   const handleSubmit = async () => {
-    try {
-      axios.post(dbURL + "/resources", {
-        ...newResourceData,
-        tag_array: tags,
-      });
-      handleClose();
-    } catch (error) {
-      console.error(error);
+    if (newResourceData.opinion === "") {
+      alert("You need to select an opinion");
+    } else if (newResourceData.build_stage === "") {
+      alert("You need to select a stage");
+    } else {
+      try {
+        axios.post(dbURL + "/resources", {
+          ...newResourceData,
+          tag_array: selectedTags,
+        });
+        handleClose();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -130,6 +139,7 @@ export default function CreateNewResource(): JSX.Element {
           <label htmlFor="opinion-select">opinion:</label>
           <select
             id="opinion-select"
+            defaultValue={"nothing selected"}
             onChange={(e) =>
               setNewResourceData({
                 ...newResourceData,
@@ -137,9 +147,7 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           >
-            <option disabled selected>
-              nothing selected
-            </option>
+            <option disabled>nothing selected</option>
             {opinions.map((option, i) => (
               <option key={i}>{option.opinion}</option>
             ))}
@@ -158,6 +166,7 @@ export default function CreateNewResource(): JSX.Element {
           <label htmlFor="stagename-select">stage: </label>
           <select
             id="stagename-select"
+            defaultValue={"nothing selected"}
             onChange={(e) =>
               setNewResourceData({
                 ...newResourceData,
@@ -165,14 +174,15 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           >
-            <option disabled selected>
-              nothing selected
-            </option>
+            <option disabled>nothing selected</option>
             {stageNames.map((stage, i) => (
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
-          <SelectOrCreateTag tags={tags} setTags={setTags} />
+          <SelectOrCreateTag
+            selectedTags={selectedTags}
+            setSelectedTags={setSelectedTags}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

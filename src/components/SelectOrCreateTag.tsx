@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface PropsTags {
-  tags: { tag_name: string }[];
-  setTags: React.Dispatch<
+  selectedTags: { tag_name: string }[];
+  setSelectedTags: React.Dispatch<
     React.SetStateAction<
       {
         tag_name: string;
@@ -12,7 +12,10 @@ interface PropsTags {
   >;
 }
 
-export function SelectOrCreateTag({ tags, setTags }: PropsTags): JSX.Element {
+export function SelectOrCreateTag({
+  selectedTags,
+  setSelectedTags,
+}: PropsTags): JSX.Element {
   const dbURL = "http://localhost:4000";
 
   const [currentTag, setCurrentTag] = useState<string>("");
@@ -31,12 +34,27 @@ export function SelectOrCreateTag({ tags, setTags }: PropsTags): JSX.Element {
   }, []);
 
   const handleCreateNewTag = () => {
-    setAllTags([...allTags, { tag_name: currentTag }]);
+    setSelectedTags([...selectedTags, { tag_name: currentTag }]);
     setCurrentTag("");
   };
 
   const handleRemoveTag = (tag: { tag_name: string }) => {
-    setTags(tags.filter((arrayItem) => arrayItem.tag_name !== tag.tag_name));
+    setSelectedTags(
+      selectedTags.filter((arrayItem) => arrayItem.tag_name !== tag.tag_name)
+    );
+  };
+
+  const filterTags = (tag: { tag_name: string }) => {
+    if (!tag.tag_name.includes(currentTag)) {
+      return false;
+    }
+    const selectedTagNames = selectedTags.map(
+      (selectedTag) => selectedTag.tag_name
+    );
+    if (selectedTagNames.includes(tag.tag_name)) {
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -47,16 +65,17 @@ export function SelectOrCreateTag({ tags, setTags }: PropsTags): JSX.Element {
       />
       <button onClick={handleCreateNewTag}>Add new tag</button>
       <div className="tag-cloud">
-        {allTags
-          .filter((tag) => tag.tag_name.includes(currentTag))
-          .map((tag, i) => (
-            <button key={i} onClick={() => setTags([...tags, tag])}>
-              {tag.tag_name}
-            </button>
-          ))}
+        {allTags.filter(filterTags).map((tag, i) => (
+          <button
+            key={i}
+            onClick={() => setSelectedTags([...selectedTags, tag])}
+          >
+            {tag.tag_name}
+          </button>
+        ))}
       </div>
-      <div className="selected-tags">
-        {tags.map((tag, i) => (
+      <div className="selected-selectedTags">
+        {selectedTags.map((tag, i) => (
           <button key={i} onClick={() => handleRemoveTag(tag)}>
             {tag.tag_name} x
           </button>
