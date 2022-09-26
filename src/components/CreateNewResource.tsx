@@ -13,7 +13,7 @@ const templateResourceRequest = {
   build_stage: "",
   opinion: "",
   opinion_reason: "",
-  user_id: NaN,
+  user_id: 2,
 };
 
 export default function CreateNewResource(): JSX.Element {
@@ -26,9 +26,7 @@ export default function CreateNewResource(): JSX.Element {
     url,
     author_name,
     content_type,
-    opinion,
     opinion_reason,
-    build_stage,
     description,
   } = newResourceData;
   const [tags, setTags] = useState<{ tag_name: string }[]>([]);
@@ -36,8 +34,9 @@ export default function CreateNewResource(): JSX.Element {
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [stageNames, setStageNames] = useState<{ stage_name: string }[]>([]);
 
+  const dbURL = "http://localhost:4000";
+
   useEffect(() => {
-    const dbURL = "http://localhost:4000";
     const getOptions = async () => {
       try {
         const opinionsResponse = await axios.get(dbURL + "/opinions");
@@ -54,6 +53,17 @@ export default function CreateNewResource(): JSX.Element {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleSubmit = async () => {
+    try {
+      axios.post(dbURL + "/resources", {
+        ...newResourceData,
+        tag_array: tags,
+      });
+      handleClose();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -134,6 +144,17 @@ export default function CreateNewResource(): JSX.Element {
               <option key={i}>{option.opinion}</option>
             ))}
           </select>
+          <label htmlFor="opinion-reason-input">opinion-reason: </label>
+          <input
+            id="opinion-reason-input"
+            value={opinion_reason}
+            onChange={(e) =>
+              setNewResourceData({
+                ...newResourceData,
+                opinion_reason: e.target.value,
+              })
+            }
+          />
           <label htmlFor="stagename-select">stage: </label>
           <select
             id="stagename-select"
@@ -157,8 +178,8 @@ export default function CreateNewResource(): JSX.Element {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={handleSubmit}>
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
