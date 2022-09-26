@@ -31,16 +31,19 @@ export default function CreateNewResource(): JSX.Element {
     build_stage,
     description,
   } = newResourceData;
+  const [tags, setTags] = useState<{ tag_name: string }[]>([]);
 
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [stageNames, setStageNames] = useState<{ stage_name: string }[]>([]);
+
   useEffect(() => {
     const dbURL = "http://localhost:4000";
     const getOptions = async () => {
       try {
         const opinionsResponse = await axios.get(dbURL + "/opinions");
-        const stageNamesResponse = await axios.get(dbURL + "/stage_names");
         setOpinions(opinionsResponse.data);
+
+        const stageNamesResponse = await axios.get(dbURL + "/stage_names");
         setStageNames(stageNamesResponse.data);
       } catch (error) {
         console.error(error);
@@ -148,7 +151,7 @@ export default function CreateNewResource(): JSX.Element {
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
-          <SelectOrCreateTag />
+          <SelectOrCreateTag tags={tags} setTags={setTags} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
