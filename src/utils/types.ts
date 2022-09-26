@@ -9,3 +9,15 @@ export interface IResourceRequest {
   opinion_reason: string;
   user_id: number;
 }
+
+export interface IResourceResponse extends IResourceRequest {
+  resource_id: number;
+  time_date: string;
+}
+
+export interface IComment {
+  comment_id: number;
+  resource_id: number;
+  comment_body: string;
+  user_id: number;
+}

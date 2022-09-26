@@ -19,16 +19,8 @@ export default function CreateNewResource(): JSX.Element {
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
     templateResourceRequest
   );
-  const {
-    resource_name,
-    url,
-    author_name,
-    content_type,
-    opinion,
-    opinion_reason,
-    build_stage,
-    description,
-  } = newResourceData;
+  const { resource_name, url, author_name, content_type, description } =
+    newResourceData;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
