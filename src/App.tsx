@@ -1,7 +1,8 @@
-import { greet } from "./utils/greet";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CreateNewResource from "./components/CreateNewResource";
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  return <CreateNewResource />;
 }
 
 export default App;
