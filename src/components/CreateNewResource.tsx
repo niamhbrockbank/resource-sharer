@@ -1,6 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IResourceRequest } from "../utils/types";
+import { SelectOrCreateTag } from "./SelectOrCreateTag";
+import axios from "axios";
 
 const templateResourceRequest = {
   resource_name: "",
@@ -30,6 +32,23 @@ export default function CreateNewResource(): JSX.Element {
     description,
   } = newResourceData;
 
+  const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
+  const [stageNames, setStageNames] = useState<{ stage_name: string }[]>([]);
+  useEffect(() => {
+    const dbURL = "http://localhost:4000";
+    const getOptions = async () => {
+      try {
+        const opinionsResponse = await axios.get(dbURL + "/opinions");
+        const stageNamesResponse = await axios.get(dbURL + "/stage_names");
+        setOpinions(opinionsResponse.data);
+        setStageNames(stageNamesResponse.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getOptions();
+  }, []);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -44,7 +63,9 @@ export default function CreateNewResource(): JSX.Element {
           <Modal.Title>Create New Resource</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <label htmlFor="resource-name-input">resource name: </label>
           <input
+            id="resource-name-input"
             value={resource_name}
             onChange={(e) =>
               setNewResourceData({
@@ -53,6 +74,7 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           />
+          <label htmlFor="author-name-input">author name: </label>
           <input
             value={author_name}
             onChange={(e) =>
@@ -62,13 +84,17 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           />
+          <label htmlFor="url-input">URL: </label>
           <input
+            id="url-input"
             value={url}
             onChange={(e) =>
               setNewResourceData({ ...newResourceData, url: e.target.value })
             }
           />
+          <label htmlFor="content-type-input">content type: </label>
           <input
+            id="content-type-input"
             value={content_type}
             onChange={(e) =>
               setNewResourceData({
@@ -77,7 +103,9 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           />
+          <label htmlFor="description-input">description: </label>
           <input
+            id="description-input"
             value={description}
             onChange={(e) =>
               setNewResourceData({
@@ -86,6 +114,41 @@ export default function CreateNewResource(): JSX.Element {
               })
             }
           />
+          <label htmlFor="opinion-select">opinion:</label>
+          <select
+            id="opinion-select"
+            onChange={(e) =>
+              setNewResourceData({
+                ...newResourceData,
+                opinion: e.target.value,
+              })
+            }
+          >
+            <option disabled selected>
+              nothing selected
+            </option>
+            {opinions.map((option, i) => (
+              <option key={i}>{option.opinion}</option>
+            ))}
+          </select>
+          <label htmlFor="stagename-select">stage: </label>
+          <select
+            id="stagename-select"
+            onChange={(e) =>
+              setNewResourceData({
+                ...newResourceData,
+                build_stage: e.target.value,
+              })
+            }
+          >
+            <option disabled selected>
+              nothing selected
+            </option>
+            {stageNames.map((stage, i) => (
+              <option key={i}>{stage.stage_name}</option>
+            ))}
+          </select>
+          <SelectOrCreateTag />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
