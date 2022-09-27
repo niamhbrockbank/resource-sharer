@@ -1,4 +1,6 @@
-import { expect } from 'cypress';
+// import { expect } from 'cypress';
+// import 'cypress';
+// import visit from 'cypress'
 
 //Default test given by cypress:
 
