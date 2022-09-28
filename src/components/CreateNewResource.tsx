@@ -22,6 +22,7 @@ export default function CreateNewResource(): JSX.Element {
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
     templateResourceRequest
   );
+
   const {
     resource_name,
     url,
