@@ -33,7 +33,6 @@ export default function CreateNewResource(): JSX.Element {
   } = newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
-
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [buildStageNames, setBuildStageNames] = useState<
     { stage_name: string }[]
