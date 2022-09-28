@@ -17,8 +17,8 @@ function App(): JSX.Element {
   return (
     <div>
       <NavigationBar currentUserManager={currentUserManager} />
-      <CreateNewResource/>
-      <ResourceList/>
+      <CreateNewResource />
+      <ResourceList currentUserManager={currentUserManager}/>
     </div>
   );
 }
