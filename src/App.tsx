@@ -22,7 +22,10 @@ function App(): JSX.Element {
         currentUserManager={currentUserManager}
       />
       <CreateNewResource currentUserManager={currentUserManager} />
-      <ResourceList searchTerm={searchTerm} currentUserManager={currentUserManager} />
+      <ResourceList
+        searchTerm={searchTerm}
+        currentUserManager={currentUserManager}
+      />
     </div>
   );
 }

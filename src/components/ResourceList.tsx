@@ -14,7 +14,8 @@ interface IProps {
 }
 
 export default function ResourceList({
-  currentUserManager, searchTerm
+  currentUserManager,
+  searchTerm,
 }: IProps): JSX.Element {
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   useEffect(() => {
