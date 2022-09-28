@@ -21,3 +21,8 @@ export interface IComment {
   comment_body: string;
   user_id: number;
 }
+
+export interface MainComponentProps {
+  resourceList: IResourceResponse[];
+  setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+}

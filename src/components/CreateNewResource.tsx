@@ -1,9 +1,10 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { IResourceRequest } from "../utils/types";
+import { IResourceRequest, MainComponentProps } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../utils/inputsValid";
+import getResourcesFromServer from "../utils/getResourcesFromServer";
 
 const templateResourceRequest = {
   resource_name: "",
@@ -17,7 +18,9 @@ const templateResourceRequest = {
   user_id: 2,
 };
 
-export default function CreateNewResource(): JSX.Element {
+export default function CreateNewResource({
+  setResourceList,
+}: MainComponentProps): JSX.Element {
   const [show, setShow] = useState(false);
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
     templateResourceRequest
@@ -57,19 +60,26 @@ export default function CreateNewResource(): JSX.Element {
 
   const handleClose = () => {
     setNewResourceData(templateResourceRequest);
+    setSelectedTags([]);
     setShow(false);
   };
+
   const handleShow = () => setShow(true);
+
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
       try {
-        axios.post(dbURL + "/resources", {
+        await axios.post(dbURL + "/resources", {
           ...newResourceData,
           tag_array: selectedTags,
         });
+
+        await getResourcesFromServer(setResourceList);
+
         handleClose();
       } catch (error) {
         console.error(error);
+        alert("Something went wrong. Try changing some of your inputs.");
       }
     }
   };
