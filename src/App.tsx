@@ -1,3 +1,6 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import CreateNewResource from "./components/CreateNewResource";
+import ResourceList from "./components/ResourceList";
 import { useState } from "react";
 import NavigationBar from "./NavigationBar";
 
@@ -10,7 +13,13 @@ export interface IUserResponse {
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
 
-  return <NavigationBar currentUserManager={currentUserManager} />;
+  return (
+    <div>
+      <NavigationBar currentUserManager={currentUserManager} />
+      <CreateNewResource />
+      <ResourceList />
+    </div>
+  );
 }
 
 export default App;
