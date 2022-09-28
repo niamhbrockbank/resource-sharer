@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-interface PropsTags {
+interface SelectOrCreateTagProps {
   selectedTags: { tag_name: string }[];
   setSelectedTags: React.Dispatch<
     React.SetStateAction<
@@ -15,7 +15,7 @@ interface PropsTags {
 export function SelectOrCreateTag({
   selectedTags,
   setSelectedTags,
-}: PropsTags): JSX.Element {
+}: SelectOrCreateTagProps): JSX.Element {
   const dbURL = "http://localhost:4000";
 
   const [currentTag, setCurrentTag] = useState<string>("");
@@ -62,6 +62,7 @@ export function SelectOrCreateTag({
       <input
         value={currentTag}
         onChange={(e) => setCurrentTag(e.target.value)}
+        placeholder="create or search tag"
       />
       <button onClick={handleCreateNewTag}>Add new tag</button>
       <div className="tag-cloud">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IResourceRequest } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
+import { inputsValid } from "../utils/inputsValid";
 
 const templateResourceRequest = {
   resource_name: "",
@@ -32,7 +33,9 @@ export default function CreateNewResource(): JSX.Element {
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
-  const [stageNames, setStageNames] = useState<{ stage_name: string }[]>([]);
+  const [buildStageNames, setBuildStageNames] = useState<
+    { stage_name: string }[]
+  >([]);
 
   const dbURL = "http://localhost:4000";
 
@@ -42,8 +45,8 @@ export default function CreateNewResource(): JSX.Element {
         const opinionsResponse = await axios.get(dbURL + "/opinions");
         setOpinions(opinionsResponse.data);
 
-        const stageNamesResponse = await axios.get(dbURL + "/stage_names");
-        setStageNames(stageNamesResponse.data);
+        const buildStageNamesResponse = await axios.get(dbURL + "/stage_names");
+        setBuildStageNames(buildStageNamesResponse.data);
       } catch (error) {
         console.error(error);
       }
@@ -57,11 +60,7 @@ export default function CreateNewResource(): JSX.Element {
   };
   const handleShow = () => setShow(true);
   const handleSubmit = async () => {
-    if (newResourceData.opinion === "") {
-      alert("You need to select an opinion");
-    } else if (newResourceData.build_stage === "") {
-      alert("You need to select a stage");
-    } else {
+    if (inputsValid(newResourceData)) {
       try {
         axios.post(dbURL + "/resources", {
           ...newResourceData,
@@ -95,6 +94,7 @@ export default function CreateNewResource(): JSX.Element {
                 resource_name: e.target.value,
               })
             }
+            placeholder="start typing"
           />
           <label htmlFor="author-name-input">author name: </label>
           <input
@@ -105,6 +105,7 @@ export default function CreateNewResource(): JSX.Element {
                 author_name: e.target.value,
               })
             }
+            placeholder="start typing"
           />
           <label htmlFor="url-input">URL: </label>
           <input
@@ -113,6 +114,7 @@ export default function CreateNewResource(): JSX.Element {
             onChange={(e) =>
               setNewResourceData({ ...newResourceData, url: e.target.value })
             }
+            placeholder="paste here"
           />
           <label htmlFor="content-type-input">content type: </label>
           <input
@@ -124,6 +126,7 @@ export default function CreateNewResource(): JSX.Element {
                 content_type: e.target.value,
               })
             }
+            placeholder="start typing"
           />
           <label htmlFor="description-input">description: </label>
           <input
@@ -135,6 +138,7 @@ export default function CreateNewResource(): JSX.Element {
                 description: e.target.value,
               })
             }
+            placeholder="start typing"
           />
           <label htmlFor="opinion-select">opinion:</label>
           <select
@@ -162,10 +166,11 @@ export default function CreateNewResource(): JSX.Element {
                 opinion_reason: e.target.value,
               })
             }
+            placeholder="start typing"
           />
-          <label htmlFor="stagename-select">stage: </label>
+          <label htmlFor="buildStageName-select">stage: </label>
           <select
-            id="stagename-select"
+            id="buildStageName-select"
             defaultValue={"nothing selected"}
             onChange={(e) =>
               setNewResourceData({
@@ -175,7 +180,7 @@ export default function CreateNewResource(): JSX.Element {
             }
           >
             <option disabled>nothing selected</option>
-            {stageNames.map((stage, i) => (
+            {buildStageNames.map((stage, i) => (
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
