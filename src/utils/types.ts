@@ -13,6 +13,7 @@ export interface IResourceRequest {
 export interface IResourceResponse extends IResourceRequest {
   resource_id: number;
   time_date: string;
+  user_name : string
 }
 
 export interface IComment {

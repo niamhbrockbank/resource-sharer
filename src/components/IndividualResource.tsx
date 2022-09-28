@@ -23,7 +23,7 @@ export default function IndividualResource({
   const currentUserId = currentUser ? currentUser.user_id : undefined
 
   const handleClose = () => setShowResource(false);
-  const { description, build_stage, opinion_reason, user_id, resource_id } =
+  const { description, build_stage, opinion_reason, user_name, resource_id } =
     resourceData;
 
   async function addToStudyList(): Promise<void> {
@@ -51,7 +51,7 @@ export default function IndividualResource({
           />
           <h4>{build_stage}</h4>
           <p>{description}</p>
-          <h4>{user_id}'s notes:</h4>
+          <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
           <button onClick={addToStudyList} disabled={currentUser === undefined}>Add to study list</button>
           <h3>Comments:</h3>
