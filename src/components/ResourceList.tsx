@@ -3,16 +3,18 @@ import { IResourceResponse } from "../utils/types";
 import { useState, useEffect } from "react";
 import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
+import filterBySearchTerm from "../utils/filterBySearchTerm";
 
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  searchTerm: string;
 }
 
 export default function ResourceList({
-  currentUserManager,
+  currentUserManager, searchTerm
 }: IProps): JSX.Element {
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   useEffect(() => {
@@ -20,13 +22,15 @@ export default function ResourceList({
   }, []);
   return (
     <div>
-      {resourceList.map((resource) => (
-        <IndividualResource
-          key={resource.resource_id}
-          resourceData={resource}
-          currentUserManager={currentUserManager}
-        />
-      ))}
+      {resourceList
+        .filter((resource) => filterBySearchTerm(searchTerm, resource))
+        .map((resource) => (
+          <IndividualResource
+            key={resource.resource_id}
+            resourceData={resource}
+            currentUserManager={currentUserManager}
+          />
+        ))}
     </div>
   );
 }

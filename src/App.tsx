@@ -12,12 +12,17 @@ export interface IUserResponse {
 
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   return (
     <div>
-      <NavigationBar currentUserManager={currentUserManager} />
+      <NavigationBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        currentUserManager={currentUserManager}
+      />
       <CreateNewResource currentUserManager={currentUserManager} />
-      <ResourceList currentUserManager={currentUserManager} />
+      <ResourceList searchTerm={searchTerm} currentUserManager={currentUserManager} />
     </div>
   );
 }
