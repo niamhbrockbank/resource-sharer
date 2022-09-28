@@ -1,4 +1,5 @@
-import { IUserResponse } from "./App";
+
+import { IUserResponse } from "../App";
 import SearchBar from "./SearchBar";
 import SignIn from "./SignIn";
 

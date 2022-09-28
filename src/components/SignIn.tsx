@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IUserResponse } from "./App";
+import { IUserResponse } from "../App";
 
 interface IProps {
   currentUserManager: [

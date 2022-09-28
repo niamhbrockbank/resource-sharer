@@ -2,7 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CreateNewResource from "./components/CreateNewResource";
 import ResourceList from "./components/ResourceList";
 import { useState } from "react";
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "./components/NavigationBar";
+
 
 export interface IUserResponse {
   user_id: number;
@@ -16,8 +17,8 @@ function App(): JSX.Element {
   return (
     <div>
       <NavigationBar currentUserManager={currentUserManager} />
-      <CreateNewResource />
-      <ResourceList />
+      <CreateNewResource/>
+      <ResourceList/>
     </div>
   );
 }
