@@ -7,12 +7,13 @@ export interface IResourceRequest {
   build_stage: string;
   opinion: string;
   opinion_reason: string;
-  user_id: number;
+  user_id: number | undefined;
 }
 
 export interface IResourceResponse extends IResourceRequest {
   resource_id: number;
   time_date: string;
+  user_name: string;
 }
 
 export interface IComment {

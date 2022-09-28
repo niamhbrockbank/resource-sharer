@@ -2,15 +2,21 @@ import getResourcesFromServer from "../utils/getResourcesFromServer";
 import { IResourceResponse } from "../utils/types";
 import { useState, useEffect } from "react";
 import IndividualResource from "./IndividualResource";
+import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
 
-interface IResourceListProps {
+interface IProps {
+  currentUserManager: [
+    IUserResponse | undefined,
+    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
+  ];
   searchTerm: string;
 }
 
 export default function ResourceList({
+  currentUserManager,
   searchTerm,
-}: IResourceListProps): JSX.Element {
+}: IProps): JSX.Element {
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -23,6 +29,7 @@ export default function ResourceList({
           <IndividualResource
             key={resource.resource_id}
             resourceData={resource}
+            currentUserManager={currentUserManager}
           />
         ))}
     </div>

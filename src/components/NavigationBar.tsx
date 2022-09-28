@@ -1,5 +1,6 @@
-import { IUserResponse } from "./App";
-import SearchBar from "./components/SearchBar";
+import { IUserResponse } from "../App";
+import SearchBar from "./SearchBar";
+
 import SignIn from "./SignIn";
 
 interface IProps {

@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CreateNewResource from "./components/CreateNewResource";
 import ResourceList from "./components/ResourceList";
 import { useState } from "react";
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "./components/NavigationBar";
 
 export interface IUserResponse {
   user_id: number;
@@ -21,8 +21,11 @@ function App(): JSX.Element {
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
       />
-      <CreateNewResource />
-      <ResourceList searchTerm={searchTerm} />
+      <CreateNewResource currentUserManager={currentUserManager} />
+      <ResourceList
+        searchTerm={searchTerm}
+        currentUserManager={currentUserManager}
+      />
     </div>
   );
 }
