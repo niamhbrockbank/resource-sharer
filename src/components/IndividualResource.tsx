@@ -16,11 +16,12 @@ interface IProps {
 }
 
 export default function IndividualResource({
-  resourceData, currentUserManager
+  resourceData,
+  currentUserManager,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
-  const currentUser = currentUserManager[0]
-  const currentUserId = currentUser ? currentUser.user_id : undefined
+  const currentUser = currentUserManager[0];
+  const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const handleClose = () => setShowResource(false);
   const { description, build_stage, opinion_reason, user_name, resource_id } =
@@ -53,7 +54,9 @@ export default function IndividualResource({
           <p>{description}</p>
           <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
-          <button onClick={addToStudyList} disabled={currentUser === undefined}>Add to study list</button>
+          <button onClick={addToStudyList} disabled={currentUser === undefined}>
+            Add to study list
+          </button>
           <h3>Comments:</h3>
           <Comments resource_id={resource_id} />
         </Modal.Body>

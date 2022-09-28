@@ -13,11 +13,13 @@ interface IProps {
   ];
 }
 
-export default function CreateNewResource({currentUserManager} : IProps): JSX.Element {
+export default function CreateNewResource({
+  currentUserManager,
+}: IProps): JSX.Element {
   const [show, setShow] = useState(false);
 
-  const currentUser = currentUserManager[0]
-  const currentUserId = currentUser ? currentUser.user_id : undefined
+  const currentUser = currentUserManager[0];
+  const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const templateResourceRequest = {
     resource_name: "",
@@ -88,7 +90,11 @@ export default function CreateNewResource({currentUserManager} : IProps): JSX.El
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} disabled={currentUser === undefined}>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        disabled={currentUser === undefined}
+      >
         Create Resource
       </Button>
 

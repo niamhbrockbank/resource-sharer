@@ -11,7 +11,9 @@ interface IProps {
   ];
 }
 
-export default function ResourceList({ currentUserManager }: IProps): JSX.Element {
+export default function ResourceList({
+  currentUserManager,
+}: IProps): JSX.Element {
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   useEffect(() => {
     getResourcesFromServer(setResourceList);

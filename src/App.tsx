@@ -4,7 +4,6 @@ import ResourceList from "./components/ResourceList";
 import { useState } from "react";
 import NavigationBar from "./components/NavigationBar";
 
-
 export interface IUserResponse {
   user_id: number;
   name: string;
@@ -17,8 +16,8 @@ function App(): JSX.Element {
   return (
     <div>
       <NavigationBar currentUserManager={currentUserManager} />
-      <CreateNewResource currentUserManager={currentUserManager}/>
-      <ResourceList currentUserManager={currentUserManager}/>
+      <CreateNewResource currentUserManager={currentUserManager} />
+      <ResourceList currentUserManager={currentUserManager} />
     </div>
   );
 }
