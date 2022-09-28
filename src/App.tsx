@@ -1,7 +1,16 @@
-import { greet } from "./utils/greet";
+import { useState } from "react";
+import NavigationBar from "./NavigationBar";
+
+export interface IUserResponse {
+  user_id: number;
+  name: string;
+  is_faculty: boolean;
+}
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  const currentUserManager = useState<IUserResponse | undefined>(undefined);
+
+  return <NavigationBar currentUserManager={currentUserManager} />;
 }
 
 export default App;
