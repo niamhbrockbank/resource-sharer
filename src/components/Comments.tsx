@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { baseUrl } from "../utils/baseUrl";
-import { IComment } from "../utils/types";
+import { ICommentResponse } from "../utils/types";
 
 interface IProps {
   resource_id: number;
@@ -12,11 +12,13 @@ export default function Comments({
   resource_id,
   currentUserId,
 }: IProps): JSX.Element {
-  const [comments, setComments] = useState<IComment[]>([]);
+  const [comments, setComments] = useState<ICommentResponse[]>([]);
   const [commentInput, setCommentInput] = useState<string>("");
+  const [idOfCommentToEdit, setIdOfCommentToEdit] = useState<number>(NaN); // Equal to NaN when not editing a comment, else equal to id of comment being edited
+  const [editCommentInput, setEditCommentInput] = useState<string>("");
 
   const getComments = useCallback(async () => {
-    const serverResponse: IComment[] = (
+    const serverResponse: ICommentResponse[] = (
       await axios.get(`${baseUrl}/resources/${resource_id}/comments`)
     ).data;
     setComments(serverResponse);
@@ -54,6 +56,25 @@ export default function Comments({
     }
   }
 
+  function handleEditCommentClick(comment: ICommentResponse): void {
+    const { comment_id, comment_body } = comment;
+    setIdOfCommentToEdit(comment_id);
+    setEditCommentInput(comment_body);
+  }
+
+  async function handleSubmitEdit(): Promise<void> {
+    try {
+      await axios.put(`${baseUrl}/resources/comments/${idOfCommentToEdit}`, {
+        comment_body: editCommentInput,
+      });
+      getComments();
+      setIdOfCommentToEdit(NaN);
+      setEditCommentInput("");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div>
       {currentUserId && (
@@ -67,14 +88,40 @@ export default function Comments({
           <button onClick={submitComment}>Add comment</button>
         </div>
       )}
-      {comments.map((comment) => (
-        <div key={comment.comment_id}>
-          <p>{comment.comment_body}</p>
-          <button onClick={() => handleDeleteComment(comment.comment_id)}>
-            Delete
-          </button>
-        </div>
-      ))}
+      {comments.map((comment) => {
+        const { comment_body, comment_id, user_name, user_id } = comment;
+        return (
+          <div key={comment_id}>
+            <h4>{user_name}</h4>
+            {idOfCommentToEdit === comment_id ? (
+              <div>
+                <input
+                  value={editCommentInput}
+                  onChange={(e) => setEditCommentInput(e.target.value)}
+                />
+                <button onClick={handleSubmitEdit}>Submit</button>
+              </div>
+            ) : (
+              <div>
+                <p>{comment_body}</p>
+                <button
+                  disabled={currentUserId !== user_id}
+                  onClick={() => handleEditCommentClick(comment)}
+                >
+                  Edit
+                </button>
+              </div>
+            )}
+
+            <button
+              disabled={currentUserId !== user_id}
+              onClick={() => handleDeleteComment(comment_id)}
+            >
+              Delete
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }
