@@ -13,12 +13,15 @@ export interface IUserResponse {
 
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
+  const [searchTags, setSearchTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
 
   return (
     <div>
       <NavigationBar
+        searchTags={searchTags}
+        setSearchTags={setSearchTags}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
@@ -28,6 +31,7 @@ function App(): JSX.Element {
         setResourceList={setResourceList}
       />
       <ResourceList
+        searchTags={searchTags}
         searchTerm={searchTerm}
         currentUserManager={currentUserManager}
         resourceList={resourceList}

@@ -4,12 +4,14 @@ import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
 import { IResourceResponse } from "../utils/types";
+import { filterBySearchTags } from "../utils/filterBySearchTags";
 
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  searchTags: string[];
   searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
@@ -17,6 +19,7 @@ interface IProps {
 
 export default function ResourceList({
   currentUserManager,
+  searchTags,
   searchTerm,
   resourceList,
   setResourceList,
@@ -27,6 +30,7 @@ export default function ResourceList({
   return (
     <div>
       {resourceList
+        .filter((resource) => filterBySearchTags(searchTags, resource))
         .filter((resource) => filterBySearchTerm(searchTerm, resource))
         .map((resource) => (
           <IndividualResource
