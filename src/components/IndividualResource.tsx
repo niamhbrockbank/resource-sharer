@@ -58,7 +58,7 @@ export default function IndividualResource({
             Add to study list
           </button>
           <h3>Comments:</h3>
-          <Comments resource_id={resource_id} />
+          <Comments resource_id={resource_id} currentUserId={currentUserId} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
