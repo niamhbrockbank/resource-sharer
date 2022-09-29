@@ -17,11 +17,12 @@ export interface IResourceResponse extends IResourceRequest {
   tag_array: string[];
 }
 
-export interface IComment {
+export interface ICommentResponse {
   comment_id: number;
   resource_id: number;
   comment_body: string;
   user_id: number;
+  user_name: string
 }
 
 export interface MainComponentProps {

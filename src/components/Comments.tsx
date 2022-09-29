@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { baseUrl } from "../utils/baseUrl";
-import { IComment } from "../utils/types";
+import { ICommentResponse } from "../utils/types";
 
 interface IProps {
   resource_id: number;
@@ -12,11 +12,11 @@ export default function Comments({
   resource_id,
   currentUserId,
 }: IProps): JSX.Element {
-  const [comments, setComments] = useState<IComment[]>([]);
+  const [comments, setComments] = useState<ICommentResponse[]>([]);
   const [commentInput, setCommentInput] = useState<string>("");
 
   const getComments = useCallback(async () => {
-    const serverResponse: IComment[] = (
+    const serverResponse: ICommentResponse[] = (
       await axios.get(`${baseUrl}/resources/${resource_id}/comments`)
     ).data;
     setComments(serverResponse);
@@ -67,14 +67,18 @@ export default function Comments({
           <button onClick={submitComment}>Add comment</button>
         </div>
       )}
-      {comments.map((comment) => (
-        <div key={comment.comment_id}>
-          <p>{comment.comment_body}</p>
-          <button onClick={() => handleDeleteComment(comment.comment_id)}>
-            Delete
-          </button>
-        </div>
-      ))}
+      {comments.map((comment) => {
+        const {comment_body, comment_id, user_name} = comment;
+        return (
+          <div key={comment_id}>
+            <h4>{user_name}</h4>
+            <p>{comment_body}</p>
+            <button onClick={() => handleDeleteComment(comment_id)}>
+              Delete
+            </button>
+          </div>
+        )
+        })}
     </div>
   );
 }
