@@ -1,9 +1,13 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { IResourceRequest } from "../utils/types";
+import { IResourceResponse } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../utils/inputsValid";
+
+import getResourcesFromServer from "../utils/getResourcesFromServer";
+
 import { IUserResponse } from "../App";
 
 interface IProps {
@@ -11,9 +15,11 @@ interface IProps {
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
 export default function CreateNewResource({
+  setResourceList,
   currentUserManager,
 }: IProps): JSX.Element {
   const [show, setShow] = useState(false);
@@ -71,19 +77,26 @@ export default function CreateNewResource({
 
   const handleClose = () => {
     setNewResourceData(templateResourceRequest);
+    setSelectedTags([]);
     setShow(false);
   };
+
   const handleShow = () => setShow(true);
+
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
       try {
-        axios.post(dbURL + "/resources", {
+        await axios.post(dbURL + "/resources", {
           ...newResourceData,
           tag_array: selectedTags,
         });
+
+        await getResourcesFromServer(setResourceList);
+
         handleClose();
       } catch (error) {
         console.error(error);
+        alert("Something went wrong. Try changing some of your inputs.");
       }
     }
   };

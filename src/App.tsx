@@ -1,8 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
 import CreateNewResource from "./components/CreateNewResource";
 import ResourceList from "./components/ResourceList";
-import { useState } from "react";
 import NavigationBar from "./components/NavigationBar";
+import { IResourceResponse } from "./utils/types";
 
 export interface IUserResponse {
   user_id: number;
@@ -13,6 +14,7 @@ export interface IUserResponse {
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
 
   return (
     <div>
@@ -21,10 +23,15 @@ function App(): JSX.Element {
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
       />
-      <CreateNewResource currentUserManager={currentUserManager} />
+      <CreateNewResource
+        currentUserManager={currentUserManager}
+        setResourceList={setResourceList}
+      />
       <ResourceList
         searchTerm={searchTerm}
         currentUserManager={currentUserManager}
+        resourceList={resourceList}
+        setResourceList={setResourceList}
       />
     </div>
   );
