@@ -5,6 +5,7 @@ import { IResourceResponse } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../utils/inputsValid";
+import { baseUrl } from "../utils/baseUrl";
 
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 
@@ -57,15 +58,15 @@ export default function CreateNewResource({
     { stage_name: string }[]
   >([]);
 
-  const dbURL = "http://localhost:4000";
-
   useEffect(() => {
     const getOptions = async () => {
       try {
-        const opinionsResponse = await axios.get(dbURL + "/opinions");
+        const opinionsResponse = await axios.get(baseUrl + "/opinions");
         setOpinions(opinionsResponse.data);
 
-        const buildStageNamesResponse = await axios.get(dbURL + "/stage_names");
+        const buildStageNamesResponse = await axios.get(
+          baseUrl + "/stage_names"
+        );
         setBuildStageNames(buildStageNamesResponse.data);
       } catch (error) {
         console.error(error);
@@ -85,7 +86,7 @@ export default function CreateNewResource({
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
       try {
-        await axios.post(dbURL + "/resources", {
+        await axios.post(baseUrl + "/resources", {
           ...newResourceData,
           user_id: currentUser?.user_id,
           tag_array: selectedTags,

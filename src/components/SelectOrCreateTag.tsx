@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { baseUrl } from "../utils/baseUrl";
 
 interface SelectOrCreateTagProps {
   selectedTags: { tag_name: string }[];
@@ -16,15 +17,13 @@ export function SelectOrCreateTag({
   selectedTags,
   setSelectedTags,
 }: SelectOrCreateTagProps): JSX.Element {
-  const dbURL = "http://localhost:4000";
-
   const [currentTag, setCurrentTag] = useState<string>("");
   const [allTags, setAllTags] = useState<{ tag_name: string }[]>([]);
 
   useEffect(() => {
     const getTags = async () => {
       try {
-        const tagsResponse = await axios.get(dbURL + "/tags");
+        const tagsResponse = await axios.get(baseUrl + "/tags");
         setAllTags(tagsResponse.data);
       } catch (error) {
         console.error(error);
