@@ -24,8 +24,14 @@ export default function IndividualResource({
   const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const handleClose = () => setShowResource(false);
-  const { description, build_stage, opinion_reason, user_name, resource_id } =
-    resourceData;
+  const {
+    description,
+    build_stage,
+    opinion_reason,
+    user_name,
+    resource_id,
+    tag_array,
+  } = resourceData;
 
   async function addToStudyList(): Promise<void> {
     await axios.post(`${baseUrl}/users/${currentUserId}/study_list`, {
@@ -54,6 +60,12 @@ export default function IndividualResource({
           <p>{description}</p>
           <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
+          <div className="tag-cloud">
+            Tags:
+            {tag_array.map((tag, i) => (
+              <button key={i}>{tag}</button>
+            ))}
+          </div>
           <button onClick={addToStudyList} disabled={currentUser === undefined}>
             Add to study list
           </button>

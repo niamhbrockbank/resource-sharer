@@ -14,6 +14,7 @@ export interface IResourceResponse extends IResourceRequest {
   resource_id: number;
   time_date: string;
   user_name: string;
+  tag_array: string[];
 }
 
 export interface IComment {
