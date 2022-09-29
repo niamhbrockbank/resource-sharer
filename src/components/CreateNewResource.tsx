@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { IResourceRequest } from "../utils/types";
-import { IResourceResponse } from "./utils/types";
+import { IResourceResponse } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../utils/inputsValid";
@@ -9,7 +9,6 @@ import { inputsValid } from "../utils/inputsValid";
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 
 import { IUserResponse } from "../App";
-
 
 interface IProps {
   currentUserManager: [

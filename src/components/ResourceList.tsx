@@ -4,7 +4,6 @@ import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
 
-
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
@@ -21,7 +20,6 @@ export default function ResourceList({
   resourceList,
   setResourceList,
 }: IProps): JSX.Element {
- 
   useEffect(() => {
     getResourcesFromServer(setResourceList);
   }, [setResourceList]);

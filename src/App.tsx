@@ -11,7 +11,6 @@ export interface IUserResponse {
   is_faculty: boolean;
 }
 
-
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -24,8 +23,10 @@ function App(): JSX.Element {
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
       />
-      <CreateNewResource currentUserManager={currentUserManager}
-        setResourceList={setResourceList} />
+      <CreateNewResource
+        currentUserManager={currentUserManager}
+        setResourceList={setResourceList}
+      />
       <ResourceList
         searchTerm={searchTerm}
         currentUserManager={currentUserManager}
