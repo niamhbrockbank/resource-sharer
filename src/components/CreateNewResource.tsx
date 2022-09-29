@@ -25,7 +25,6 @@ export default function CreateNewResource({
   const [show, setShow] = useState(false);
 
   const currentUser = currentUserManager[0];
-  const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const templateResourceRequest = {
     resource_name: "",
@@ -36,7 +35,7 @@ export default function CreateNewResource({
     build_stage: "",
     opinion: "",
     opinion_reason: "",
-    user_id: currentUserId,
+    user_id: currentUser?.user_id,
   };
 
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
@@ -88,6 +87,7 @@ export default function CreateNewResource({
       try {
         await axios.post(dbURL + "/resources", {
           ...newResourceData,
+          user_id: currentUser?.user_id,
           tag_array: selectedTags,
         });
 
