@@ -24,7 +24,7 @@ function App(): JSX.Element {
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
       />
-      <CreateNewResource currentUserManager={currentUserManager} resourceList={resourceList}
+      <CreateNewResource currentUserManager={currentUserManager}
         setResourceList={setResourceList} />
       <ResourceList
         searchTerm={searchTerm}
