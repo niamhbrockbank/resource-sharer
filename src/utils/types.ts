@@ -15,6 +15,10 @@ export interface IResourceResponse extends IResourceRequest {
   time_date: string;
   user_name: string;
   tag_array: string[];
+  num_likes: number;
+  num_dislikes: number;
+  liking_users_array: null | number[];
+  disliking_users_array: null | number[];
 }
 
 export interface ICommentResponse {

@@ -6,6 +6,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import Comments from "./Comments";
 import { IUserResponse } from "../App";
+import LikeResource from "./LikeResource";
 
 interface IProps {
   resourceData: IResourceResponse;
@@ -46,7 +47,7 @@ export default function IndividualResource({
         resourceData={resourceData}
       />
       {/* <button>Add to study list</button> */}
-      {/* <Likes /> */}
+      <LikeResource resourceData={resourceData} />
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
@@ -60,6 +61,7 @@ export default function IndividualResource({
           <p>{description}</p>
           <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
+          <LikeResource resourceData={resourceData} />
           <div className="tag-cloud">
             Tags:
             {tag_array.map((tag, i) => (
