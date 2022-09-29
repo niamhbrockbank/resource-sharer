@@ -22,7 +22,7 @@ export interface ICommentResponse {
   resource_id: number;
   comment_body: string;
   user_id: number;
-  user_name: string
+  user_name: string;
 }
 
 export interface MainComponentProps {
