@@ -1,27 +1,44 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { IResourceRequest, MainComponentProps } from "../utils/types";
+import { IResourceRequest } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../utils/inputsValid";
+
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 
-const templateResourceRequest = {
-  resource_name: "",
-  author_name: "",
-  url: "",
-  description: "",
-  content_type: "",
-  build_stage: "",
-  opinion: "",
-  opinion_reason: "",
-  user_id: 2,
-};
+import { IUserResponse } from "../App";
+
+
+interface IProps {
+  currentUserManager: [
+    IUserResponse | undefined,
+    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
+  ];
+  setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+}
 
 export default function CreateNewResource({
   setResourceList,
-}: MainComponentProps): JSX.Element {
+  currentUserManager,
+}: IProps): JSX.Element {
   const [show, setShow] = useState(false);
+
+  const currentUser = currentUserManager[0];
+  const currentUserId = currentUser ? currentUser.user_id : undefined;
+
+  const templateResourceRequest = {
+    resource_name: "",
+    author_name: "",
+    url: "",
+    description: "",
+    content_type: "",
+    build_stage: "",
+    opinion: "",
+    opinion_reason: "",
+    user_id: currentUserId,
+  };
+
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
     templateResourceRequest
   );
@@ -86,7 +103,11 @@ export default function CreateNewResource({
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        disabled={currentUser === undefined}
+      >
         Create Resource
       </Button>
 
