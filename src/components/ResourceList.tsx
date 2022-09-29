@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
+import { IResourceResponse } from "../utils/types";
 
 interface IProps {
   currentUserManager: [
