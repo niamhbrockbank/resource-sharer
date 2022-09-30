@@ -16,6 +16,10 @@ function App(): JSX.Element {
   const [searchTags, setSearchTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
+  const [userStudylist, setUserStudylist] = useState<number[] | null>(null);
+  const [listMode, setListMode] = useState<"resource list" | "study list">(
+    "resource list"
+  );
 
   return (
     <div>
@@ -25,6 +29,9 @@ function App(): JSX.Element {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
+        listMode={listMode}
+        setListMode={setListMode}
+        setUserStudylist={setUserStudylist}
       />
       <CreateNewResource
         currentUserManager={currentUserManager}
@@ -36,6 +43,9 @@ function App(): JSX.Element {
         currentUserManager={currentUserManager}
         resourceList={resourceList}
         setResourceList={setResourceList}
+        userStudylist={userStudylist}
+        setUserStudylist={setUserStudylist}
+        listMode={listMode}
       />
     </div>
   );
