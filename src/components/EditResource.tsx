@@ -1,62 +1,71 @@
-import { Button, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { IResourceRequest } from "../utils/types";
-import { IResourceResponse } from "../utils/types";
-import { SelectOrCreateTag } from "./SelectOrCreateTag";
+import { Modal, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { IResourceRequest, IResourceResponse } from "../utils/types";
+import { templateResourceRequest } from "./CreateNewResource";
 import axios from "axios";
-import { inputsValid } from "../utils/inputsValid";
 import { baseUrl } from "../utils/baseUrl";
-
 import getResourcesFromServer from "../utils/getResourcesFromServer";
+import { SelectOrCreateTag } from "./SelectOrCreateTag";
 
-import { IUserResponse } from "../App";
-
-interface IProps {
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
+interface IEditResourceProps {
+  currentUserId: number;
+  resource_id: number;
+  resource_data: IResourceResponse;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
-export const templateResourceRequest = {
-  resource_name: "",
-  author_name: "",
-  url: "",
-  description: "",
-  content_type: "",
-  build_stage: "",
-  opinion: "",
-  opinion_reason: "",
-  user_id: NaN,
-};
-
-export default function CreateNewResource({
+export default function EditResource({
+  currentUserId,
+  resource_id,
+  resource_data,
   setResourceList,
-  currentUserManager,
-}: IProps): JSX.Element {
-  const [show, setShow] = useState(false);
-
-  const currentUser = currentUserManager[0];
-
-  const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
-    templateResourceRequest
-  );
-
+}: IEditResourceProps): JSX.Element {
   const {
     resource_name,
-    url,
     author_name,
-    content_type,
-    opinion_reason,
+    url,
     description,
-  } = newResourceData;
+    content_type,
+    build_stage,
+    opinion,
+    opinion_reason,
+    user_id,
+  } = resource_data;
+
+  const [show, setShow] = useState(false);
+  const [editData, setEditData] = useState<IResourceRequest>(
+    templateResourceRequest
+  );
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [buildStageNames, setBuildStageNames] = useState<
     { stage_name: string }[]
   >([]);
+
+  useEffect(() => {
+    setEditData({
+      resource_name: resource_name,
+      author_name: author_name,
+      url: url,
+      description: description,
+      content_type: content_type,
+      build_stage: build_stage,
+      opinion: opinion,
+      opinion_reason: opinion_reason,
+      user_id: user_id,
+    });
+  }, [
+    resource_name,
+    author_name,
+    url,
+    description,
+    content_type,
+    build_stage,
+    opinion,
+    opinion_reason,
+    user_id,
+  ]);
 
   useEffect(() => {
     const getOptions = async () => {
@@ -75,111 +84,92 @@ export default function CreateNewResource({
     getOptions();
   }, []);
 
-  const handleClose = () => {
-    setNewResourceData(templateResourceRequest);
-    setSelectedTags([]);
+  async function handleSubmit(): Promise<void> {
+    await axios.put(`${baseUrl}/resources/${resource_id}`, {
+      ...editData,
+      user_id: currentUserId,
+      tag_array: selectedTags,
+    });
+    getResourcesFromServer(setResourceList);
     setShow(false);
-  };
-
-  const handleShow = () => setShow(true);
-
-  const handleSubmit = async () => {
-    if (inputsValid(newResourceData)) {
-      try {
-        await axios.post(baseUrl + "/resources", {
-          ...newResourceData,
-          user_id: currentUser?.user_id,
-          tag_array: selectedTags,
-        });
-
-        await getResourcesFromServer(setResourceList);
-
-        handleClose();
-      } catch (error) {
-        console.error(error);
-        alert("Something went wrong. Try changing some of your inputs.");
-      }
-    }
-  };
+  }
 
   return (
     <>
       <Button
         variant="primary"
-        onClick={handleShow}
-        disabled={currentUser === undefined}
+        onClick={() => setShow(true)}
+        disabled={currentUserId !== resource_id}
       >
-        Create Resource
+        Edit Resource
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Create New Resource</Modal.Title>
+          <Modal.Title>Edit Resource</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label htmlFor="resource-name-input">resource name: </label>
+          <label htmlFor="resource-name-edit">resource name: </label>
           <input
-            id="resource-name-input"
-            value={resource_name}
+            id="resource-name-edit"
+            value={editData.resource_name}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 resource_name: e.target.value,
               })
             }
             placeholder="start typing"
           />
-          <label htmlFor="author-name-input">author name: </label>
+          <label htmlFor="author-name-edit">author name: </label>
           <input
-            value={author_name}
+            id="author-name-edit"
+            value={editData.author_name}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 author_name: e.target.value,
               })
             }
             placeholder="start typing"
           />
-          <label htmlFor="url-input">URL: </label>
+          <label htmlFor="url-edit">URL: </label>
           <input
-            id="url-input"
-            value={url}
-            onChange={(e) =>
-              setNewResourceData({ ...newResourceData, url: e.target.value })
-            }
+            id="url-edit"
+            value={editData.url}
+            onChange={(e) => setEditData({ ...editData, url: e.target.value })}
             placeholder="paste here"
           />
-          <label htmlFor="content-type-input">content type: </label>
+          <label htmlFor="content-type-edit">content type: </label>
           <input
-            id="content-type-input"
-            value={content_type}
+            id="content-type-edit"
+            value={editData.content_type}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 content_type: e.target.value,
               })
             }
             placeholder="start typing"
           />
-          <label htmlFor="description-input">description: </label>
+          <label htmlFor="description-edit">description: </label>
           <input
-            id="description-input"
-            value={description}
+            id="description-edit"
+            value={editData.description}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 description: e.target.value,
               })
             }
             placeholder="start typing"
           />
-          <label htmlFor="opinion-select">opinion:</label>
+          <label htmlFor="opinion-select-edit">opinion:</label>
           <select
-            id="opinion-select"
+            id="opinion-select-edit"
             defaultValue={"nothing selected"}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 opinion: e.target.value,
               })
             }
@@ -192,10 +182,10 @@ export default function CreateNewResource({
           <label htmlFor="opinion-reason-input">opinion-reason: </label>
           <input
             id="opinion-reason-input"
-            value={opinion_reason}
+            value={editData.opinion_reason}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 opinion_reason: e.target.value,
               })
             }
@@ -206,8 +196,8 @@ export default function CreateNewResource({
             id="buildStageName-select"
             defaultValue={"nothing selected"}
             onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
+              setEditData({
+                ...editData,
                 build_stage: e.target.value,
               })
             }
@@ -223,7 +213,7 @@ export default function CreateNewResource({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => setShow(false)}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>

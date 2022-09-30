@@ -7,6 +7,8 @@ import { baseUrl } from "../utils/baseUrl";
 import Comments from "./Comments";
 import { IUserResponse } from "../App";
 import LikeResource from "./LikeResource";
+import getResourcesFromServer from "../utils/getResourcesFromServer";
+import EditResource from "./EditResource";
 
 interface IProps {
   resourceData: IResourceResponse;
@@ -14,13 +16,16 @@ interface IProps {
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
 export default function IndividualResource({
   resourceData,
   currentUserManager,
+  setResourceList,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
+
   const currentUser = currentUserManager[0];
   const currentUserId = currentUser ? currentUser.user_id : undefined;
 
@@ -38,6 +43,11 @@ export default function IndividualResource({
     await axios.post(`${baseUrl}/users/${currentUserId}/study_list`, {
       resource_id: resource_id,
     });
+  }
+
+  async function handleDelete(): Promise<void> {
+    await axios.delete(`${baseUrl}/resources/${resource_id}`);
+    getResourcesFromServer(setResourceList);
   }
 
   return (
@@ -71,6 +81,7 @@ export default function IndividualResource({
           <button onClick={addToStudyList} disabled={currentUser === undefined}>
             Add to study list
           </button>
+          <button onClick={handleDelete}>Delete</button>
           <h3>Comments:</h3>
           <Comments resource_id={resource_id} currentUserId={currentUserId} />
         </Modal.Body>
@@ -80,6 +91,12 @@ export default function IndividualResource({
           </Button>
         </Modal.Footer>
       </Modal>
+      <EditResource
+        currentUserId={currentUserId ?? NaN}
+        resource_id={resource_id}
+        resource_data={resourceData}
+        setResourceList={setResourceList}
+      />
     </div>
   );
 }

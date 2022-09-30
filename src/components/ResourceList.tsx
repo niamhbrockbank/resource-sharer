@@ -37,6 +37,7 @@ export default function ResourceList({
             key={resource.resource_id}
             resourceData={resource}
             currentUserManager={currentUserManager}
+            setResourceList={setResourceList}
           />
         ))}
     </div>
