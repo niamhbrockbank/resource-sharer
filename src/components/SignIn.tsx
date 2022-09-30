@@ -34,7 +34,7 @@ export default function SignIn({ currentUserManager }: IProps): JSX.Element {
   }
 
   return (
-    <select onChange={(e) => handleSelectUser(e.target.value)}>
+    <select id="select-user" onChange={(e) => handleSelectUser(e.target.value)}>
       <option value={undefined}>Not signed in</option>
       {userList.map((user, i) => (
         <option key={i} value={user.user_id}>

@@ -9,6 +9,7 @@ export default function SearchBar({
 }: ISearchBarProps): JSX.Element {
   return (
     <input
+      id="search-bar"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
       placeholder="Search..."
