@@ -25,6 +25,7 @@ export default function IndividualResource({
   setResourceList,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   const currentUser = currentUserManager[0];
   const currentUserId = currentUser ? currentUser.user_id : undefined;
@@ -81,6 +82,16 @@ export default function IndividualResource({
           <button onClick={addToStudyList} disabled={currentUser === undefined}>
             Add to study list
           </button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setShowEdit(true);
+              setShowResource(false);
+            }}
+            disabled={currentUserId !== resource_id}
+          >
+            Edit Resource
+          </Button>
           <button onClick={handleDelete}>Delete</button>
           <h3>Comments:</h3>
           <Comments resource_id={resource_id} currentUserId={currentUserId} />
@@ -96,6 +107,8 @@ export default function IndividualResource({
         resource_id={resource_id}
         resource_data={resourceData}
         setResourceList={setResourceList}
+        showEdit={showEdit}
+        setShowEdit={setShowEdit}
       />
     </div>
   );

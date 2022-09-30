@@ -12,6 +12,8 @@ interface IEditResourceProps {
   resource_id: number;
   resource_data: IResourceResponse;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  showEdit: boolean;
+  setShowEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function EditResource({
@@ -19,6 +21,8 @@ export default function EditResource({
   resource_id,
   resource_data,
   setResourceList,
+  showEdit,
+  setShowEdit,
 }: IEditResourceProps): JSX.Element {
   const {
     resource_name,
@@ -32,7 +36,6 @@ export default function EditResource({
     user_id,
   } = resource_data;
 
-  const [show, setShow] = useState(false);
   const [editData, setEditData] = useState<IResourceRequest>(
     templateResourceRequest
   );
@@ -91,19 +94,12 @@ export default function EditResource({
       tag_array: selectedTags,
     });
     getResourcesFromServer(setResourceList);
-    setShow(false);
+    setShowEdit(false);
   }
 
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={() => setShow(true)}
-        disabled={currentUserId !== resource_id}
-      >
-        Edit Resource
-      </Button>
-      <Modal show={show} onHide={() => setShow(false)}>
+      <Modal show={showEdit} onHide={() => setShowEdit(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Resource</Modal.Title>
         </Modal.Header>
@@ -213,7 +209,7 @@ export default function EditResource({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
+          <Button variant="secondary" onClick={() => setShowEdit(false)}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
