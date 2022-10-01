@@ -1,4 +1,5 @@
 import { IUserResponse } from "../App";
+import { ILikedResourcesResponse } from "../utils/types";
 import SearchBar from "./SearchBar";
 
 import SignIn from "./SignIn";
@@ -13,6 +14,9 @@ interface IProps {
   setSearchTags: React.Dispatch<React.SetStateAction<string[]>>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  setResourcesLikedByUser: React.Dispatch<
+    React.SetStateAction<ILikedResourcesResponse | null>
+  >;
 }
 
 export default function NavigationBar({
@@ -21,12 +25,16 @@ export default function NavigationBar({
   setSearchTags,
   searchTerm,
   setSearchTerm,
+  setResourcesLikedByUser,
 }: IProps): JSX.Element {
   return (
     <>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
-      <SignIn currentUserManager={currentUserManager} />
+      <SignIn
+        currentUserManager={currentUserManager}
+        setResourcesLikedByUser={setResourcesLikedByUser}
+      />
     </>
   );
 }

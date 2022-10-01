@@ -8,12 +8,16 @@ import { ILikedResourcesResponse, IResourceResponse } from "../utils/types";
 interface IProps {
   resourceData: IResourceResponse;
   resourcesLikedByUser: ILikedResourcesResponse | null;
+  setResourcesLikedByUser: React.Dispatch<
+    React.SetStateAction<ILikedResourcesResponse | null>
+  >;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
 export default function LikeResource({
   resourceData,
   resourcesLikedByUser,
+  setResourcesLikedByUser,
   setResourceList,
 }: IProps): JSX.Element {
   const { user_id, resource_id, num_likes, num_dislikes } = resourceData;
@@ -28,6 +32,7 @@ export default function LikeResource({
             resource_id,
             user_id,
             resourcesLikedByUser,
+            setResourcesLikedByUser,
             setResourceList
           )
         }
@@ -48,6 +53,7 @@ export default function LikeResource({
             resource_id,
             user_id,
             resourcesLikedByUser,
+            setResourcesLikedByUser,
             setResourceList
           )
         }

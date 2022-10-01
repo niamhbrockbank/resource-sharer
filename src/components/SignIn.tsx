@@ -2,15 +2,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IUserResponse } from "../App";
 import { baseUrl } from "../utils/baseUrl";
+import { getLikedResourcesFromServer } from "../utils/getLikedResourcesFromServer";
+import { ILikedResourcesResponse } from "../utils/types";
 
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  setResourcesLikedByUser: React.Dispatch<
+    React.SetStateAction<ILikedResourcesResponse | null>
+  >;
 }
 
-export default function SignIn({ currentUserManager }: IProps): JSX.Element {
+export default function SignIn({
+  currentUserManager,
+  setResourcesLikedByUser,
+}: IProps): JSX.Element {
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
 
@@ -26,11 +34,15 @@ export default function SignIn({ currentUserManager }: IProps): JSX.Element {
     getUsers();
   }, []);
 
-  function handleSelectUser(selectedId: string): void {
+  async function handleSelectUser(selectedId: string): Promise<void> {
     const futureCurrentUser = userList.find(
       (user) => parseInt(selectedId) === user.user_id
     );
     setCurrentUser(futureCurrentUser);
+    await getLikedResourcesFromServer(
+      futureCurrentUser?.user_id,
+      setResourcesLikedByUser
+    );
   }
 
   return (

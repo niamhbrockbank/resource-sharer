@@ -1,5 +1,5 @@
 import getResourcesFromServer from "../utils/getResourcesFromServer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
@@ -16,6 +16,10 @@ interface IProps {
   searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  resourcesLikedByUser: ILikedResourcesResponse | null;
+  setResourcesLikedByUser: React.Dispatch<
+    React.SetStateAction<ILikedResourcesResponse | null>
+  >;
 }
 
 export default function ResourceList({
@@ -24,10 +28,9 @@ export default function ResourceList({
   searchTerm,
   resourceList,
   setResourceList,
+  resourcesLikedByUser,
+  setResourcesLikedByUser,
 }: IProps): JSX.Element {
-  const [resourcesLikedByUser, setResourcesLikedByUser] =
-    useState<ILikedResourcesResponse | null>(null);
-
   useEffect(() => {
     getResourcesFromServer(setResourceList);
     getLikedResourcesFromServer(
@@ -47,6 +50,7 @@ export default function ResourceList({
             resourceData={resource}
             currentUserManager={currentUserManager}
             resourcesLikedByUser={resourcesLikedByUser}
+            setResourcesLikedByUser={setResourcesLikedByUser}
             setResourceList={setResourceList}
           />
         ))}

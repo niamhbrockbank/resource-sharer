@@ -15,6 +15,9 @@ interface IProps {
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
   resourcesLikedByUser: ILikedResourcesResponse | null;
+  setResourcesLikedByUser: React.Dispatch<
+    React.SetStateAction<ILikedResourcesResponse | null>
+  >;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
@@ -22,6 +25,7 @@ export default function IndividualResource({
   resourceData,
   currentUserManager,
   resourcesLikedByUser,
+  setResourcesLikedByUser,
   setResourceList,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
@@ -54,6 +58,7 @@ export default function IndividualResource({
       <LikeResource
         resourceData={resourceData}
         resourcesLikedByUser={resourcesLikedByUser}
+        setResourcesLikedByUser={setResourcesLikedByUser}
         setResourceList={setResourceList}
       />
       <Modal show={showResource} onHide={handleClose}>
@@ -72,6 +77,7 @@ export default function IndividualResource({
           <LikeResource
             resourceData={resourceData}
             resourcesLikedByUser={resourcesLikedByUser}
+            setResourcesLikedByUser={setResourcesLikedByUser}
             setResourceList={setResourceList}
           />
           <div className="tag-cloud">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import CreateNewResource from "./components/CreateNewResource";
 import ResourceList from "./components/ResourceList";
 import NavigationBar from "./components/NavigationBar";
-import { IResourceResponse } from "./utils/types";
+import { ILikedResourcesResponse, IResourceResponse } from "./utils/types";
 
 export interface IUserResponse {
   user_id: number;
@@ -16,6 +16,8 @@ function App(): JSX.Element {
   const [searchTags, setSearchTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
+  const [resourcesLikedByUser, setResourcesLikedByUser] =
+    useState<ILikedResourcesResponse | null>(null);
 
   return (
     <div>
@@ -25,6 +27,7 @@ function App(): JSX.Element {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
+        setResourcesLikedByUser={setResourcesLikedByUser}
       />
       <CreateNewResource
         currentUserManager={currentUserManager}
@@ -36,6 +39,8 @@ function App(): JSX.Element {
         currentUserManager={currentUserManager}
         resourceList={resourceList}
         setResourceList={setResourceList}
+        resourcesLikedByUser={resourcesLikedByUser}
+        setResourcesLikedByUser={setResourcesLikedByUser}
       />
     </div>
   );
