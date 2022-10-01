@@ -10,10 +10,7 @@ import LikeResource from "./LikeResource";
 
 interface IProps {
   resourceData: IResourceResponse;
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
+  currentUser: IUserResponse | undefined;
   resourcesLikedByUser: ILikedResourcesResponse | null;
   setResourcesLikedByUser: React.Dispatch<
     React.SetStateAction<ILikedResourcesResponse | null>
@@ -23,14 +20,12 @@ interface IProps {
 
 export default function IndividualResource({
   resourceData,
-  currentUserManager,
+  currentUser,
   resourcesLikedByUser,
   setResourcesLikedByUser,
   setResourceList,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
-  const currentUser = currentUserManager[0];
-  const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const handleClose = () => setShowResource(false);
   const {
@@ -43,7 +38,10 @@ export default function IndividualResource({
   } = resourceData;
 
   async function addToStudyList(): Promise<void> {
-    await axios.post(`${baseUrl}/users/${currentUserId}/study_list`, {
+    if (currentUser === undefined) {
+      return;
+    }
+    await axios.post(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
       resource_id: resource_id,
     });
   }
@@ -56,6 +54,7 @@ export default function IndividualResource({
       />
       {/* <button>Add to study list</button> */}
       <LikeResource
+        currentUser={currentUser}
         resourceData={resourceData}
         resourcesLikedByUser={resourcesLikedByUser}
         setResourcesLikedByUser={setResourcesLikedByUser}
@@ -75,6 +74,7 @@ export default function IndividualResource({
           <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
           <LikeResource
+            currentUser={currentUser}
             resourceData={resourceData}
             resourcesLikedByUser={resourcesLikedByUser}
             setResourcesLikedByUser={setResourcesLikedByUser}
@@ -90,7 +90,10 @@ export default function IndividualResource({
             Add to study list
           </button>
           <h3>Comments:</h3>
-          <Comments resource_id={resource_id} currentUserId={currentUserId} />
+          <Comments
+            resource_id={resource_id}
+            currentUserId={currentUser?.user_id}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

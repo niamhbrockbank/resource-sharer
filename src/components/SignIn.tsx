@@ -40,7 +40,7 @@ export default function SignIn({
     );
     setCurrentUser(futureCurrentUser);
     await getLikedResourcesFromServer(
-      futureCurrentUser?.user_id,
+      futureCurrentUser,
       setResourcesLikedByUser
     );
   }

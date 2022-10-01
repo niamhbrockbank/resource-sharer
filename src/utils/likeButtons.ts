@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IUserResponse } from "../App";
 import { baseUrl } from "./baseUrl";
 import { getLikedResourcesFromServer } from "./getLikedResourcesFromServer";
 import getResourcesFromServer from "./getResourcesFromServer";
@@ -6,35 +7,33 @@ import { ILikedResourcesResponse, IResourceResponse } from "./types";
 
 export async function handleLikeButtons(
   like_or_dislike: string,
+  likedStatus: "has liked" | "has disliked" | null,
   resource_id: number,
-  user_id: number | undefined,
-  resourcesLikedByUser: ILikedResourcesResponse | null,
+  currentUser: IUserResponse | undefined,
   setResourcesLikedByUser: React.Dispatch<
     React.SetStateAction<ILikedResourcesResponse | null>
   >,
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>
 ): Promise<void> {
-  const isUnliking: boolean =
-    like_or_dislike === "like" &&
-    userHasLiked(resource_id, resourcesLikedByUser);
+  const isDeletingLike: boolean =
+    like_or_dislike === "like" && likedStatus === "has liked";
 
-  const isUndisliking: boolean =
-    like_or_dislike === "dislike" &&
-    userHasDisliked(resource_id, resourcesLikedByUser);
+  const isDeletingDislike: boolean =
+    like_or_dislike === "dislike" && likedStatus === "has disliked";
 
-  console.log(resourcesLikedByUser);
-
-  if (user_id === undefined) {
+  if (currentUser === undefined) {
     return;
   }
 
-  if (isUnliking || isUndisliking) {
+  if (isDeletingLike || isDeletingDislike) {
     try {
       await axios.delete(
-        baseUrl + `/resources/${resource_id}/${user_id}/likes`
+        baseUrl + `/resources/${resource_id}/${currentUser.user_id}/likes`
       );
+
+      await getLikedResourcesFromServer(currentUser, setResourcesLikedByUser);
       await getResourcesFromServer(setResourceList);
-      await getLikedResourcesFromServer(user_id, setResourcesLikedByUser);
+
       return;
     } catch (error) {
       console.error(error);
@@ -44,38 +43,16 @@ export async function handleLikeButtons(
 
   try {
     axios.post(baseUrl + `/resources/${resource_id}/likes`, {
-      user_id: user_id,
+      user_id: currentUser.user_id,
       like_or_dislike: like_or_dislike,
     });
+
+    await getLikedResourcesFromServer(currentUser, setResourcesLikedByUser);
     await getResourcesFromServer(setResourceList);
-    await getLikedResourcesFromServer(user_id, setResourcesLikedByUser);
+
     return;
   } catch (error) {
     console.error(error);
     return;
   }
-}
-
-export function userHasLiked(
-  resource_id: number,
-  resourcesLikedByUser: ILikedResourcesResponse | null
-): boolean {
-  if (resourcesLikedByUser === null) {
-    return false;
-  } else if (resourcesLikedByUser.liked_resources === null) {
-    return false;
-  }
-  return resourcesLikedByUser.liked_resources.includes(resource_id);
-}
-
-export function userHasDisliked(
-  resource_id: number,
-  resourcesLikedByUser: ILikedResourcesResponse | null
-): boolean {
-  if (resourcesLikedByUser === null) {
-    return false;
-  } else if (resourcesLikedByUser.disliked_resources === null) {
-    return false;
-  }
-  return resourcesLikedByUser.disliked_resources.includes(resource_id);
 }

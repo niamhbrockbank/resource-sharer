@@ -1,11 +1,11 @@
-import {
-  handleLikeButtons,
-  userHasDisliked,
-  userHasLiked,
-} from "../utils/likeButtons";
+import { useEffect, useState } from "react";
+import { handleLikeButtons } from "../utils/likeButtons";
+import { userHasLiked, userHasDisliked } from "../utils/userHasLikedOrDisliked";
 import { ILikedResourcesResponse, IResourceResponse } from "../utils/types";
+import { IUserResponse } from "../App";
 
 interface IProps {
+  currentUser: IUserResponse | undefined;
   resourceData: IResourceResponse;
   resourcesLikedByUser: ILikedResourcesResponse | null;
   setResourcesLikedByUser: React.Dispatch<
@@ -15,12 +15,27 @@ interface IProps {
 }
 
 export default function LikeResource({
+  currentUser,
   resourceData,
   resourcesLikedByUser,
   setResourcesLikedByUser,
   setResourceList,
 }: IProps): JSX.Element {
   const { user_id, resource_id, num_likes, num_dislikes } = resourceData;
+
+  const [likedStatus, setLikedStatus] = useState<
+    "has liked" | "has disliked" | null
+  >(null);
+
+  useEffect(() => {
+    if (userHasLiked(resource_id, resourcesLikedByUser)) {
+      setLikedStatus("has liked");
+    } else if (userHasDisliked(resource_id, resourcesLikedByUser)) {
+      setLikedStatus("has disliked");
+    } else {
+      setLikedStatus(null);
+    }
+  }, [resourcesLikedByUser, resource_id]);
 
   return (
     <>
@@ -29,20 +44,19 @@ export default function LikeResource({
         onClick={() =>
           handleLikeButtons(
             "like",
+            likedStatus,
             resource_id,
-            user_id,
-            resourcesLikedByUser,
+            currentUser,
             setResourcesLikedByUser,
             setResourceList
           )
         }
         disabled={user_id === undefined}
+        style={{
+          backgroundColor: likedStatus === "has liked" ? "green" : "grey",
+        }}
       >
-        {userHasLiked(resource_id, resourcesLikedByUser) ? (
-          <h1>👍</h1>
-        ) : (
-          <p>👍</p>
-        )}
+        👍
       </button>
       <p>{num_likes}</p>
       <button
@@ -50,20 +64,19 @@ export default function LikeResource({
         onClick={() =>
           handleLikeButtons(
             "dislike",
+            likedStatus,
             resource_id,
-            user_id,
-            resourcesLikedByUser,
+            currentUser,
             setResourcesLikedByUser,
             setResourceList
           )
         }
         disabled={user_id === undefined}
+        style={{
+          backgroundColor: likedStatus === "has disliked" ? "red" : "grey",
+        }}
       >
-        {userHasDisliked(resource_id, resourcesLikedByUser) ? (
-          <h1>👎</h1>
-        ) : (
-          <p>👎</p>
-        )}
+        👎
       </button>
       <p>{num_dislikes}</p>
     </>

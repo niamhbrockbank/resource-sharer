@@ -36,7 +36,7 @@ function App(): JSX.Element {
       <ResourceList
         searchTags={searchTags}
         searchTerm={searchTerm}
-        currentUserManager={currentUserManager}
+        currentUser={currentUserManager[0]}
         resourceList={resourceList}
         setResourceList={setResourceList}
         resourcesLikedByUser={resourcesLikedByUser}

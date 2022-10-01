@@ -1,5 +1,5 @@
 import getResourcesFromServer from "../utils/getResourcesFromServer";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
@@ -8,10 +8,7 @@ import { filterBySearchTags } from "../utils/filterBySearchTags";
 import { getLikedResourcesFromServer } from "../utils/getLikedResourcesFromServer";
 
 interface IProps {
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
+  currentUser: IUserResponse | undefined;
   searchTags: string[];
   searchTerm: string;
   resourceList: IResourceResponse[];
@@ -23,7 +20,7 @@ interface IProps {
 }
 
 export default function ResourceList({
-  currentUserManager,
+  currentUser,
   searchTags,
   searchTerm,
   resourceList,
@@ -31,13 +28,15 @@ export default function ResourceList({
   resourcesLikedByUser,
   setResourcesLikedByUser,
 }: IProps): JSX.Element {
-  useEffect(() => {
+  const getResourcesAndLikes = useCallback(async () => {
     getResourcesFromServer(setResourceList);
-    getLikedResourcesFromServer(
-      currentUserManager[0]?.user_id,
-      setResourcesLikedByUser
-    );
-  }, [setResourceList, currentUserManager[0]?.user_id]);
+    getLikedResourcesFromServer(currentUser, setResourcesLikedByUser);
+  }, [setResourceList, setResourcesLikedByUser, currentUser]);
+
+  useEffect(() => {
+    getResourcesAndLikes();
+    console.log("running useEffect");
+  }, [getResourcesAndLikes]);
 
   return (
     <div>
@@ -48,7 +47,7 @@ export default function ResourceList({
           <IndividualResource
             key={resource.resource_id}
             resourceData={resource}
-            currentUserManager={currentUserManager}
+            currentUser={currentUser}
             resourcesLikedByUser={resourcesLikedByUser}
             setResourcesLikedByUser={setResourcesLikedByUser}
             setResourceList={setResourceList}
