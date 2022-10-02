@@ -1,11 +1,10 @@
 import getResourcesFromServer from "../utils/getResourcesFromServer";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import IndividualResource from "./IndividualResource";
 import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
-import { ILikedResourcesResponse, IResourceResponse } from "../utils/types";
+import { IResourceResponse } from "../utils/types";
 import { filterBySearchTags } from "../utils/filterBySearchTags";
-import { getLikedResourcesFromServer } from "../utils/getLikedResourcesFromServer";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
@@ -13,10 +12,6 @@ interface IProps {
   searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  resourcesLikedByUser: ILikedResourcesResponse | null;
-  setResourcesLikedByUser: React.Dispatch<
-    React.SetStateAction<ILikedResourcesResponse | null>
-  >;
 }
 
 export default function ResourceList({
@@ -25,18 +20,10 @@ export default function ResourceList({
   searchTerm,
   resourceList,
   setResourceList,
-  resourcesLikedByUser,
-  setResourcesLikedByUser,
 }: IProps): JSX.Element {
-  const getResourcesAndLikes = useCallback(async () => {
-    getResourcesFromServer(setResourceList);
-    getLikedResourcesFromServer(currentUser, setResourcesLikedByUser);
-  }, [setResourceList, setResourcesLikedByUser, currentUser]);
-
   useEffect(() => {
-    getResourcesAndLikes();
-    console.log("running useEffect");
-  }, [getResourcesAndLikes]);
+    getResourcesFromServer(setResourceList);
+  }, [setResourceList]);
 
   return (
     <div>
@@ -48,8 +35,6 @@ export default function ResourceList({
             key={resource.resource_id}
             resourceData={resource}
             currentUser={currentUser}
-            resourcesLikedByUser={resourcesLikedByUser}
-            setResourcesLikedByUser={setResourcesLikedByUser}
             setResourceList={setResourceList}
           />
         ))}

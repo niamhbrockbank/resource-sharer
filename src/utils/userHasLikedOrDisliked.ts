@@ -1,25 +1,12 @@
-import { ILikedResourcesResponse } from "./types";
+import { IUserResponse } from "../App";
 
-export function userHasLiked(
-  resource_id: number,
-  resourcesLikedByUser: ILikedResourcesResponse | null
+export function userHasLikedOrDisliked(
+  currentUser: IUserResponse | undefined,
+  likingOrDislikingUsers: number[] | null
 ): boolean {
-  if (resourcesLikedByUser === null) {
-    return false;
-  } else if (resourcesLikedByUser.liked_resources === null) {
+  if (currentUser === undefined || likingOrDislikingUsers === null) {
     return false;
   }
-  return resourcesLikedByUser.liked_resources.includes(resource_id);
-}
 
-export function userHasDisliked(
-  resource_id: number,
-  resourcesLikedByUser: ILikedResourcesResponse | null
-): boolean {
-  if (resourcesLikedByUser === null) {
-    return false;
-  } else if (resourcesLikedByUser.disliked_resources === null) {
-    return false;
-  }
-  return resourcesLikedByUser.disliked_resources.includes(resource_id);
+  return likingOrDislikingUsers.includes(currentUser.user_id);
 }

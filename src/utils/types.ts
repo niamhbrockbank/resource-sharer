@@ -33,8 +33,3 @@ export interface MainComponentProps {
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
-
-export interface ILikedResourcesResponse {
-  liked_resources: number[] | null;
-  disliked_resources: number[] | null;
-}

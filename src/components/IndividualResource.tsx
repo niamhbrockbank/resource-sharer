@@ -1,4 +1,4 @@
-import { ILikedResourcesResponse, IResourceResponse } from "../utils/types";
+import { IResourceResponse } from "../utils/types";
 import ResourceHeader from "./ResourceHeader";
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
@@ -11,18 +11,12 @@ import LikeResource from "./LikeResource";
 interface IProps {
   resourceData: IResourceResponse;
   currentUser: IUserResponse | undefined;
-  resourcesLikedByUser: ILikedResourcesResponse | null;
-  setResourcesLikedByUser: React.Dispatch<
-    React.SetStateAction<ILikedResourcesResponse | null>
-  >;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
 
 export default function IndividualResource({
   resourceData,
   currentUser,
-  resourcesLikedByUser,
-  setResourcesLikedByUser,
   setResourceList,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
@@ -56,8 +50,6 @@ export default function IndividualResource({
       <LikeResource
         currentUser={currentUser}
         resourceData={resourceData}
-        resourcesLikedByUser={resourcesLikedByUser}
-        setResourcesLikedByUser={setResourcesLikedByUser}
         setResourceList={setResourceList}
       />
       <Modal show={showResource} onHide={handleClose}>
@@ -76,8 +68,6 @@ export default function IndividualResource({
           <LikeResource
             currentUser={currentUser}
             resourceData={resourceData}
-            resourcesLikedByUser={resourcesLikedByUser}
-            setResourcesLikedByUser={setResourcesLikedByUser}
             setResourceList={setResourceList}
           />
           <div className="tag-cloud">
