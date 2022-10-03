@@ -99,7 +99,7 @@ export default function IndividualResource({
             {tag_array.map((tag, i) => (
               <button key={i}>{tag}</button>
             ))}
-          </div>        
+          </div>
           <Button
             variant="primary"
             onClick={() => {
