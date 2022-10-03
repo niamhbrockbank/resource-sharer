@@ -22,9 +22,11 @@ export default function IndividualResource({
   currentUser,
   setResourceList,
   userStudylist,
-  setUserStudylist
+  setUserStudylist,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
+
+  const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const handleClose = () => setShowResource(false);
   const {
@@ -47,10 +49,12 @@ export default function IndividualResource({
   }
 
   async function removeFromStudyList(): Promise<void> {
-    await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
-      data: { resource_id: resource_id },
-    });
-    await getStudylistFromServer(currentUser.user_id, setUserStudylist);
+    if (currentUser !== undefined) {
+      await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
+        data: { resource_id: resource_id },
+      });
+      await getStudylistFromServer(currentUser.user_id, setUserStudylist);
+    }
   }
 
   return (
@@ -103,10 +107,7 @@ export default function IndividualResource({
           )}
 
           <h3>Comments:</h3>
-          <Comments
-            resource_id={resource_id}
-            currentUserId={currentUser?.user_id}
-          />
+          <Comments resource_id={resource_id} currentUserId={currentUserId} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
