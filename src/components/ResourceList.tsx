@@ -5,6 +5,7 @@ import { IUserResponse } from "../App";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
 import { IResourceResponse } from "../utils/types";
 import { filterBySearchTags } from "../utils/filterBySearchTags";
+import filterByListMode from "../utils/filterByListMode";
 
 interface IProps {
   currentUserManager: [
@@ -15,6 +16,9 @@ interface IProps {
   searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  userStudylist: number[] | null;
+  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
+  listMode: "resource list" | "study list";
 }
 
 export default function ResourceList({
@@ -23,6 +27,9 @@ export default function ResourceList({
   searchTerm,
   resourceList,
   setResourceList,
+  userStudylist,
+  setUserStudylist,
+  listMode,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -32,11 +39,16 @@ export default function ResourceList({
       {resourceList
         .filter((resource) => filterBySearchTags(searchTags, resource))
         .filter((resource) => filterBySearchTerm(searchTerm, resource))
+        .filter((resource) =>
+          filterByListMode(listMode, userStudylist, resource)
+        )
         .map((resource) => (
           <IndividualResource
             key={resource.resource_id}
             resourceData={resource}
             currentUserManager={currentUserManager}
+            userStudylist={userStudylist}
+            setUserStudylist={setUserStudylist}
           />
         ))}
     </div>
