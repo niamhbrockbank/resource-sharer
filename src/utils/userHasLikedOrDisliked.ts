@@ -1,4 +1,4 @@
-import { IUserResponse } from "../App";
+import { IUserResponse } from "./types";
 
 export function userHasLikedOrDisliked(
   currentUser: IUserResponse | undefined,

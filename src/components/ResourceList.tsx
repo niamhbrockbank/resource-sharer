@@ -1,7 +1,7 @@
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 import { useEffect } from "react";
 import IndividualResource from "./IndividualResource";
-import { IUserResponse } from "../App";
+import { IUserResponse } from "../utils/types";
 import filterBySearchTerm from "../utils/filterBySearchTerm";
 import { IResourceResponse } from "../utils/types";
 import { filterBySearchTags } from "../utils/filterBySearchTags";
