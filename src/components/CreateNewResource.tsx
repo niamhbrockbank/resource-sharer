@@ -116,6 +116,8 @@ export default function CreateNewResource({
           <Modal.Title>Create New Resource</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <ul id='create_new_resource'>
+          <li>
           <label htmlFor="resource-name-input">resource name: </label>
           <input
             id="resource-name-input"
@@ -127,8 +129,8 @@ export default function CreateNewResource({
               })
             }
             placeholder="start typing"
-          />
-          <label htmlFor="author-name-input">author name: </label>
+          /></li>
+          <li><label htmlFor="author-name-input">author name: </label>
           <input
             value={author_name}
             onChange={(e) =>
@@ -138,7 +140,8 @@ export default function CreateNewResource({
               })
             }
             placeholder="start typing"
-          />
+          /></li>
+          <li>
           <label htmlFor="url-input">URL: </label>
           <input
             id="url-input"
@@ -147,7 +150,8 @@ export default function CreateNewResource({
               setNewResourceData({ ...newResourceData, url: e.target.value })
             }
             placeholder="paste here"
-          />
+          /></li>
+          <li>
           <label htmlFor="content-type-input">content type: </label>
           <input
             id="content-type-input"
@@ -159,7 +163,8 @@ export default function CreateNewResource({
               })
             }
             placeholder="start typing"
-          />
+          /></li>
+          <li>
           <label htmlFor="description-input">description: </label>
           <input
             id="description-input"
@@ -171,7 +176,8 @@ export default function CreateNewResource({
               })
             }
             placeholder="start typing"
-          />
+          /></li>
+          <li>
           <label htmlFor="opinion-select">opinion:</label>
           <select
             id="opinion-select"
@@ -188,6 +194,8 @@ export default function CreateNewResource({
               <option key={i}>{option.opinion}</option>
             ))}
           </select>
+          </li>
+          <li>
           <label htmlFor="opinion-reason-input">opinion-reason: </label>
           <input
             id="opinion-reason-input"
@@ -199,7 +207,8 @@ export default function CreateNewResource({
               })
             }
             placeholder="start typing"
-          />
+          /></li>
+          <li>
           <label htmlFor="buildStageName-select">stage: </label>
           <select
             id="buildStageName-select"
@@ -216,6 +225,8 @@ export default function CreateNewResource({
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
+          </li>
+          </ul>
           <SelectOrCreateTag
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}

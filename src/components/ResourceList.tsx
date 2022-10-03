@@ -33,7 +33,7 @@ export default function ResourceList({
   }, [setResourceList]);
 
   return (
-    <div>
+    <div id='resource_list'>
       {resourceList
         .filter((resource) => filterBySearchTags(searchTags, resource))
         .filter((resource) => filterBySearchTerm(searchTerm, resource))

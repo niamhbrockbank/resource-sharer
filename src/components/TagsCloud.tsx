@@ -38,14 +38,14 @@ export function TagsCloud({
         {allTags
           .filter((tag) => !searchTags.includes(tag))
           .map((tag, i) => (
-            <button key={i} onClick={() => handleAddToSearchTags(tag)}>
+            <button className='tag' key={i} onClick={() => handleAddToSearchTags(tag)}>
               {tag}
             </button>
           ))}
       </div>
       <div className="tag-cloud">
         {searchTags.map((tag, i) => (
-          <button key={i} onClick={() => handleRemoveFromSearchTags(tag)}>
+          <button className='tag selected_tag' key={i} onClick={() => handleRemoveFromSearchTags(tag)}>
             {tag} x
           </button>
         ))}

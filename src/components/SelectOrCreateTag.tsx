@@ -67,6 +67,7 @@ export function SelectOrCreateTag({
       <div className="tag-cloud">
         {allTags.filter(filterTags).map((tag, i) => (
           <button
+            className="tag"
             key={i}
             onClick={() => setSelectedTags([...selectedTags, tag])}
           >
@@ -76,7 +77,7 @@ export function SelectOrCreateTag({
       </div>
       <div className="selected-selectedTags">
         {selectedTags.map((tag, i) => (
-          <button key={i} onClick={() => handleRemoveTag(tag)}>
+          <button className="tag selected_tag" key={i} onClick={() => handleRemoveTag(tag)}>
             {tag.tag_name} x
           </button>
         ))}

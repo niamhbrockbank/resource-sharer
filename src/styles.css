@@ -1,0 +1,51 @@
+#create_new_resource{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#create_new_resource li {
+    margin: 3px;
+}
+
+#create_new_resource label{
+    padding-right: 5px;
+}
+
+.tag{
+    margin: 5px 2px;
+    border-radius: 4px;
+    background-color: rgb(240, 249, 255);
+    border: 1px solid rgb(207, 217, 223)
+}
+
+.selected_tag{
+    border : 1px solid black
+}
+
+#resource_list{
+    margin: 40px 10px;
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw 20vw;
+    row-gap: 20px;
+}
+
+.resource{
+    box-shadow: -10px 0px 5px rgb(0 0 0 / 0.2);
+}
+
+.likes_area{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.likes{
+    margin : 10px 10px 0px 0px;
+}
+
+.likes p{
+    margin : 0px
+}
+
+
+

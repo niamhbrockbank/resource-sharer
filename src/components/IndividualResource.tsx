@@ -1,6 +1,6 @@
 import { IResourceResponse } from "../utils/types";
 import ResourceHeader from "./ResourceHeader";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
@@ -38,6 +38,7 @@ export default function IndividualResource({
     user_name,
     resource_id,
     tag_array,
+    user_id
   } = resourceData;
 
   async function addToStudyList(): Promise<void> {
@@ -66,16 +67,22 @@ export default function IndividualResource({
 
   return (
     <div>
-      <ResourceHeader
-        setShowResource={setShowResource}
-        resourceData={resourceData}
-      />
-      {/* <button>Add to study list</button> */}
-      <LikeResource
-        currentUser={currentUser}
-        resourceData={resourceData}
-        setResourceList={setResourceList}
-      />
+      <Card style={{ width: '18rem' }} className='resource'>
+      <Card.Body>
+        <ResourceHeader
+          setShowResource={setShowResource}
+          resourceData={resourceData}
+        />
+        {/* <button>Add to study list</button> */}
+        <LikeResource
+          currentUser={currentUser}
+          resourceData={resourceData}
+          setResourceList={setResourceList}
+        />
+      </Card.Body>
+    </Card>
+
+      
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
@@ -106,7 +113,7 @@ export default function IndividualResource({
               setShowEdit(true);
               setShowResource(false);
             }}
-            disabled={currentUserId !== resource_id}
+            disabled={currentUserId !== user_id}
           >
             Edit Resource
           </Button>
