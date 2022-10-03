@@ -96,8 +96,7 @@ export default function CreateNewResource({
 
         handleClose();
       } catch (error) {
-        console.error(error);
-        alert("Something went wrong. Try changing some of your inputs.");
+        window.alert("That url is already taken");
       }
     }
   };
