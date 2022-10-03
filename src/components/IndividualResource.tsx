@@ -7,17 +7,22 @@ import { baseUrl } from "../utils/baseUrl";
 import Comments from "./Comments";
 import { IUserResponse } from "../App";
 import LikeResource from "./LikeResource";
+import getStudylistFromServer from "../utils/getStudylistFromServer";
 
 interface IProps {
   resourceData: IResourceResponse;
   currentUser: IUserResponse | undefined;
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  userStudylist: number[] | null;
+  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
 export default function IndividualResource({
   resourceData,
   currentUser,
   setResourceList,
+  userStudylist,
+  setUserStudylist
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
 
@@ -38,6 +43,14 @@ export default function IndividualResource({
     await axios.post(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
       resource_id: resource_id,
     });
+    await getStudylistFromServer(currentUserId, setUserStudylist);
+  }
+
+  async function removeFromStudyList(): Promise<void> {
+    await axios.delete(`${baseUrl}/users/${currentUserId}/study-list`, {
+      data: { resource_id: resource_id },
+    });
+    await getStudylistFromServer(currentUserId, setUserStudylist);
   }
 
   return (
@@ -76,9 +89,19 @@ export default function IndividualResource({
               <button key={i}>{tag}</button>
             ))}
           </div>
-          <button onClick={addToStudyList} disabled={currentUser === undefined}>
-            Add to study list
-          </button>
+          {userStudylist && userStudylist.includes(resource_id) ? (
+            <button onClick={removeFromStudyList}>
+              Remove from study list
+            </button>
+          ) : (
+            <button
+              onClick={addToStudyList}
+              disabled={currentUser === undefined}
+            >
+              Add to study list
+            </button>
+          )}
+
           <h3>Comments:</h3>
           <Comments
             resource_id={resource_id}
