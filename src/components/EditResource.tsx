@@ -6,6 +6,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
+import { inputsValid } from "../utils/inputsValid";
 
 interface IEditResourceProps {
   currentUserId: number;
@@ -88,13 +89,20 @@ export default function EditResource({
   }, []);
 
   async function handleSubmit(): Promise<void> {
-    await axios.put(`${baseUrl}/resources/${resource_id}`, {
-      ...editData,
-      user_id: currentUserId,
-      tag_array: selectedTags,
-    });
-    getResourcesFromServer(setResourceList);
-    setShowEdit(false);
+    try {
+      if (inputsValid(editData)) {
+        await axios.put(`${baseUrl}/resources/${resource_id}`, {
+          ...editData,
+          user_id: currentUserId,
+          tag_array: selectedTags,
+        });
+        getResourcesFromServer(setResourceList);
+        setShowEdit(false);
+      }
+    } catch (error) {
+      console.error(error);
+      window.alert("That url has already been submitted");
+    }
   }
 
   return (
