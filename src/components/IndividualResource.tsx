@@ -11,22 +11,21 @@ import getStudylistFromServer from "../utils/getStudylistFromServer";
 
 interface IProps {
   resourceData: IResourceResponse;
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
+  currentUser: IUserResponse | undefined;
+  setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
 export default function IndividualResource({
   resourceData,
-  currentUserManager,
+  currentUser,
+  setResourceList,
   userStudylist,
   setUserStudylist,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
-  const currentUser = currentUserManager[0];
+
   const currentUserId = currentUser ? currentUser.user_id : undefined;
 
   const handleClose = () => setShowResource(false);
@@ -40,17 +39,22 @@ export default function IndividualResource({
   } = resourceData;
 
   async function addToStudyList(): Promise<void> {
-    await axios.post(`${baseUrl}/users/${currentUserId}/study_list`, {
+    if (currentUser === undefined) {
+      return;
+    }
+    await axios.post(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
       resource_id: resource_id,
     });
-    await getStudylistFromServer(currentUserId, setUserStudylist);
+    await getStudylistFromServer(currentUser.user_id, setUserStudylist);
   }
 
   async function removeFromStudyList(): Promise<void> {
-    await axios.delete(`${baseUrl}/users/${currentUserId}/study-list`, {
-      data: { resource_id: resource_id },
-    });
-    await getStudylistFromServer(currentUserId, setUserStudylist);
+    if (currentUser !== undefined) {
+      await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
+        data: { resource_id: resource_id },
+      });
+      await getStudylistFromServer(currentUser.user_id, setUserStudylist);
+    }
   }
 
   return (
@@ -60,7 +64,11 @@ export default function IndividualResource({
         resourceData={resourceData}
       />
       {/* <button>Add to study list</button> */}
-      <LikeResource resourceData={resourceData} />
+      <LikeResource
+        currentUser={currentUser}
+        resourceData={resourceData}
+        setResourceList={setResourceList}
+      />
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
@@ -74,7 +82,11 @@ export default function IndividualResource({
           <p>{description}</p>
           <h4>{user_name}'s notes:</h4>
           <p>{opinion_reason}</p>
-          <LikeResource resourceData={resourceData} />
+          <LikeResource
+            currentUser={currentUser}
+            resourceData={resourceData}
+            setResourceList={setResourceList}
+          />
           <div className="tag-cloud">
             Tags:
             {tag_array.map((tag, i) => (

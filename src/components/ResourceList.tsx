@@ -8,10 +8,7 @@ import { filterBySearchTags } from "../utils/filterBySearchTags";
 import filterByListMode from "../utils/filterByListMode";
 
 interface IProps {
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
+  currentUser: IUserResponse | undefined;
   searchTags: string[];
   searchTerm: string;
   resourceList: IResourceResponse[];
@@ -22,7 +19,7 @@ interface IProps {
 }
 
 export default function ResourceList({
-  currentUserManager,
+  currentUser,
   searchTags,
   searchTerm,
   resourceList,
@@ -34,6 +31,7 @@ export default function ResourceList({
   useEffect(() => {
     getResourcesFromServer(setResourceList);
   }, [setResourceList]);
+
   return (
     <div>
       {resourceList
@@ -46,7 +44,8 @@ export default function ResourceList({
           <IndividualResource
             key={resource.resource_id}
             resourceData={resource}
-            currentUserManager={currentUserManager}
+            currentUser={currentUser}
+            setResourceList={setResourceList}
             userStudylist={userStudylist}
             setUserStudylist={setUserStudylist}
           />

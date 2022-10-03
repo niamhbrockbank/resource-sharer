@@ -18,10 +18,14 @@ export default function Comments({
   const [editCommentInput, setEditCommentInput] = useState<string>("");
 
   const getComments = useCallback(async () => {
-    const serverResponse: ICommentResponse[] = (
-      await axios.get(`${baseUrl}/resources/${resource_id}/comments`)
-    ).data;
-    setComments(serverResponse);
+    try {
+      const serverResponse: ICommentResponse[] = (
+        await axios.get(`${baseUrl}/resources/${resource_id}/comments`)
+      ).data;
+      setComments(serverResponse);
+    } catch (error) {
+      console.error(error);
+    }
   }, [resource_id]);
 
   useEffect(() => {

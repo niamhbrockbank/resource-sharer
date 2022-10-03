@@ -31,7 +31,7 @@ export default function SignIn({
     getUsers();
   }, []);
 
-  function handleSelectUser(selectedId: string): void {
+  async function handleSelectUser(selectedId: string): Promise<void> {
     const futureCurrentUser = userList.find(
       (user) => parseInt(selectedId) === user.user_id
     );
