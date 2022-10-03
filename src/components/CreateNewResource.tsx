@@ -9,7 +9,7 @@ import { baseUrl } from "../utils/baseUrl";
 
 import getResourcesFromServer from "../utils/getResourcesFromServer";
 
-import { IUserResponse } from "../App";
+import { IUserResponse } from "../utils/types";
 
 interface IProps {
   currentUserManager: [

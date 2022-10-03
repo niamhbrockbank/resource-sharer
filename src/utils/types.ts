@@ -33,3 +33,9 @@ export interface MainComponentProps {
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
 }
+
+export interface IUserResponse {
+  user_id: number;
+  name: string;
+  is_faculty: boolean;
+}

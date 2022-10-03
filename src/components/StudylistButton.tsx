@@ -1,4 +1,4 @@
-import { IUserResponse } from "../App";
+import { IUserResponse } from "../utils/types";
 
 interface IProps {
   currentUserManager: [

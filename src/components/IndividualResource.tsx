@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import Comments from "./Comments";
-import { IUserResponse } from "../App";
+import { IUserResponse } from "../utils/types";
 import LikeResource from "./LikeResource";
 import getStudylistFromServer from "../utils/getStudylistFromServer";
 import getResourcesFromServer from "../utils/getResourcesFromServer";

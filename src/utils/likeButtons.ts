@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IUserResponse } from "../App";
+import { IUserResponse } from "../utils/types";
 import { baseUrl } from "./baseUrl";
 import getResourcesFromServer from "./getResourcesFromServer";
 import { IResourceResponse } from "./types";
