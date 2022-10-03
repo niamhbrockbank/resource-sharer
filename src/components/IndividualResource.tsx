@@ -43,14 +43,14 @@ export default function IndividualResource({
     await axios.post(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
       resource_id: resource_id,
     });
-    await getStudylistFromServer(currentUserId, setUserStudylist);
+    await getStudylistFromServer(currentUser.user_id, setUserStudylist);
   }
 
   async function removeFromStudyList(): Promise<void> {
-    await axios.delete(`${baseUrl}/users/${currentUserId}/study-list`, {
+    await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
       data: { resource_id: resource_id },
     });
-    await getStudylistFromServer(currentUserId, setUserStudylist);
+    await getStudylistFromServer(currentUser.user_id, setUserStudylist);
   }
 
   return (
