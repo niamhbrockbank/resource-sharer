@@ -2,15 +2,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IUserResponse } from "../App";
 import { baseUrl } from "../utils/baseUrl";
+import getStudylistFromServer from "../utils/getStudylistFromServer";
 
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
-export default function SignIn({ currentUserManager }: IProps): JSX.Element {
+export default function SignIn({
+  currentUserManager,
+  setUserStudylist,
+}: IProps): JSX.Element {
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
 
@@ -26,10 +31,15 @@ export default function SignIn({ currentUserManager }: IProps): JSX.Element {
     getUsers();
   }, []);
 
-  function handleSelectUser(selectedId: string): void {
+  async function handleSelectUser(selectedId: string): Promise<void> {
     const futureCurrentUser = userList.find(
       (user) => parseInt(selectedId) === user.user_id
     );
+    if (futureCurrentUser) {
+      getStudylistFromServer(parseInt(selectedId), setUserStudylist);
+    } else {
+      setUserStudylist(null);
+    }
     setCurrentUser(futureCurrentUser);
   }
 
