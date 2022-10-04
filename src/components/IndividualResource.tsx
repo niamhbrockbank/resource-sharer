@@ -17,6 +17,12 @@ interface IProps {
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
+  opinions: {
+    opinion: string;
+  }[];
+  buildStageNames: {
+    stage_name: string;
+  }[];
 }
 
 export default function IndividualResource({
@@ -25,6 +31,8 @@ export default function IndividualResource({
   setResourceList,
   userStudylist,
   setUserStudylist,
+  opinions,
+  buildStageNames,
 }: IProps): JSX.Element {
   const [showResource, setShowResource] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -151,6 +159,8 @@ export default function IndividualResource({
         setResourceList={setResourceList}
         showEdit={showEdit}
         setShowEdit={setShowEdit}
+        opinions={opinions}
+        buildStageNames={buildStageNames}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IResourceRequest } from "../utils/types";
 import { IResourceResponse } from "../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
@@ -17,6 +17,12 @@ interface IProps {
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  opinions: {
+    opinion: string;
+  }[];
+  buildStageNames: {
+    stage_name: string;
+  }[];
 }
 
 export const templateResourceRequest = {
@@ -34,6 +40,8 @@ export const templateResourceRequest = {
 export default function CreateNewResource({
   setResourceList,
   currentUserManager,
+  opinions,
+  buildStageNames,
 }: IProps): JSX.Element {
   const [show, setShow] = useState(false);
 
@@ -52,28 +60,6 @@ export default function CreateNewResource({
     description,
   } = newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
-
-  const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
-  const [buildStageNames, setBuildStageNames] = useState<
-    { stage_name: string }[]
-  >([]);
-
-  useEffect(() => {
-    const getOptions = async () => {
-      try {
-        const opinionsResponse = await axios.get(baseUrl + "/opinions");
-        setOpinions(opinionsResponse.data);
-
-        const buildStageNamesResponse = await axios.get(
-          baseUrl + "/stage_names"
-        );
-        setBuildStageNames(buildStageNamesResponse.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getOptions();
-  }, []);
 
   const handleClose = () => {
     setNewResourceData(templateResourceRequest);

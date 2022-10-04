@@ -20,6 +20,12 @@ interface IProps {
   setListMode: React.Dispatch<
     React.SetStateAction<"resource list" | "study list">
   >;
+  opinions: {
+    opinion: string;
+  }[];
+  buildStageNames: {
+    stage_name: string;
+  }[];
 }
 
 export default function ResourceList({
@@ -32,6 +38,8 @@ export default function ResourceList({
   setUserStudylist,
   listMode,
   setListMode,
+  opinions,
+  buildStageNames,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -65,6 +73,8 @@ export default function ResourceList({
                   setResourceList={setResourceList}
                   userStudylist={userStudylist}
                   setUserStudylist={setUserStudylist}
+                  opinions={opinions}
+                  buildStageNames={buildStageNames}
                 />
               ))}
           </div>
@@ -85,6 +95,8 @@ export default function ResourceList({
                   setResourceList={setResourceList}
                   userStudylist={userStudylist}
                   setUserStudylist={setUserStudylist}
+                  opinions={opinions}
+                  buildStageNames={buildStageNames}
                 />
               ))}
           </div>

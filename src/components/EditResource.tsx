@@ -15,6 +15,12 @@ interface IEditResourceProps {
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   showEdit: boolean;
   setShowEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  opinions: {
+    opinion: string;
+  }[];
+  buildStageNames: {
+    stage_name: string;
+  }[];
 }
 
 export default function EditResource({
@@ -24,6 +30,8 @@ export default function EditResource({
   setResourceList,
   showEdit,
   setShowEdit,
+  opinions,
+  buildStageNames,
 }: IEditResourceProps): JSX.Element {
   const {
     resource_name,
@@ -41,11 +49,6 @@ export default function EditResource({
     templateResourceRequest
   );
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
-
-  const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
-  const [buildStageNames, setBuildStageNames] = useState<
-    { stage_name: string }[]
-  >([]);
 
   useEffect(() => {
     setEditData({
@@ -70,23 +73,6 @@ export default function EditResource({
     opinion_reason,
     user_id,
   ]);
-
-  useEffect(() => {
-    const getOptions = async () => {
-      try {
-        const opinionsResponse = await axios.get(baseUrl + "/opinions");
-        setOpinions(opinionsResponse.data);
-
-        const buildStageNamesResponse = await axios.get(
-          baseUrl + "/stage_names"
-        );
-        setBuildStageNames(buildStageNamesResponse.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getOptions();
-  }, []);
 
   async function handleSubmit(): Promise<void> {
     try {
