@@ -4,6 +4,7 @@ import CreateNewResource from "./components/CreateNewResource";
 import ResourceList from "./components/ResourceList";
 import NavigationBar from "./components/NavigationBar";
 import { IResourceResponse } from "./utils/types";
+import "./styles.css";
 
 export interface IUserResponse {
   user_id: number;
@@ -46,6 +47,7 @@ function App(): JSX.Element {
         userStudylist={userStudylist}
         setUserStudylist={setUserStudylist}
         listMode={listMode}
+        setListMode={setListMode}
       />
     </div>
   );

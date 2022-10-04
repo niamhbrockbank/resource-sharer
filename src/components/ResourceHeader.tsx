@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Card } from "react-bootstrap";
 import { IResourceResponse } from "../utils/types";
 
 interface IProps {
@@ -22,13 +23,15 @@ export default function ResourceHeader({
 
   return (
     <div onClick={() => setShowResource(true)}>
-      <h1>{resource_name}</h1>
-      <p>Author: {author_name}</p>
-      <p>Added by: {user_name}</p>
-      <p>Content type: {content_type}</p>
-      <p>{url}</p>
-      <p>Date created: {moment(time_date).format("Do MMM YYYY")}</p>
-      <p>{opinion}</p>
+      <Card.Title>{resource_name}</Card.Title>
+      <Card.Subtitle>Added by: {user_name}</Card.Subtitle>
+      <Card.Text>
+        <p>Author: {author_name}</p>
+        <p>Content type: {content_type}</p>
+        <p>{opinion}</p>
+        <Card.Link href={url}>{url}</Card.Link>
+        <p>Date created: {moment(time_date).format("Do MMM YYYY")}</p>
+      </Card.Text>
     </div>
   );
 }

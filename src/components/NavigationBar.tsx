@@ -1,8 +1,6 @@
 import { IUserResponse } from "../utils/types";
 import SearchBar from "./SearchBar";
-
 import SignIn from "./SignIn";
-import StudylistButton from "./StudylistButton";
 import { TagsCloud } from "./TagsCloud";
 
 interface IProps {
@@ -33,17 +31,16 @@ export default function NavigationBar({
 }: IProps): JSX.Element {
   return (
     <>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
-      <SignIn
-        currentUserManager={currentUserManager}
-        setUserStudylist={setUserStudylist}
-      />
-      <StudylistButton
-        currentUserManager={currentUserManager}
-        listMode={listMode}
-        setListMode={setListMode}
-      />
+      <div id="filter_area">
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
+      </div>
+      <div id="sigin_area">
+        <SignIn
+          currentUserManager={currentUserManager}
+          setUserStudylist={setUserStudylist}
+        />
+      </div>
     </>
   );
 }

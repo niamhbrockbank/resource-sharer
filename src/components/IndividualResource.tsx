@@ -1,6 +1,6 @@
 import { IResourceResponse } from "../utils/types";
 import ResourceHeader from "./ResourceHeader";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
@@ -38,6 +38,7 @@ export default function IndividualResource({
     user_name,
     resource_id,
     tag_array,
+    user_id,
   } = resourceData;
 
   async function addToStudyList(): Promise<void> {
@@ -66,16 +67,21 @@ export default function IndividualResource({
 
   return (
     <div>
-      <ResourceHeader
-        setShowResource={setShowResource}
-        resourceData={resourceData}
-      />
-      {/* <button>Add to study list</button> */}
-      <LikeResource
-        currentUser={currentUser}
-        resourceData={resourceData}
-        setResourceList={setResourceList}
-      />
+      <Card style={{ width: "18rem" }} className="resource">
+        <Card.Body>
+          <ResourceHeader
+            setShowResource={setShowResource}
+            resourceData={resourceData}
+          />
+          {/* <button>Add to study list</button> */}
+          <LikeResource
+            currentUser={currentUser}
+            resourceData={resourceData}
+            setResourceList={setResourceList}
+          />
+        </Card.Body>
+      </Card>
+
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
@@ -96,32 +102,37 @@ export default function IndividualResource({
           />
           <div className="tag-cloud">
             Tags:
-            {tag_array.map((tag, i) => (
-              <button key={i}>{tag}</button>
-            ))}
+            {tag_array.length > 0 &&
+              tag_array.map((tag, i) => (
+                <button className="tag" key={i}>
+                  {tag}
+                </button>
+              ))}
           </div>
           <Button
-            variant="primary"
+            variant="secondary"
             onClick={() => {
               setShowEdit(true);
               setShowResource(false);
             }}
-            disabled={currentUserId !== resource_id}
+            disabled={currentUserId !== user_id}
           >
             Edit Resource
           </Button>
-          <button onClick={handleDelete}>Delete Resource</button>
+          <Button variant="outline-secondary" onClick={handleDelete}>
+            Delete Resource
+          </Button>
           {userStudylist && userStudylist.includes(resource_id) ? (
-            <button onClick={removeFromStudyList}>
+            <Button onClick={removeFromStudyList}>
               Remove from study list
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
               onClick={addToStudyList}
               disabled={currentUser === undefined}
             >
               Add to study list
-            </button>
+            </Button>
           )}
 
           <h3>Comments:</h3>
