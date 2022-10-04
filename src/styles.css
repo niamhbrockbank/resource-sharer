@@ -7,7 +7,7 @@ Button{
 }
 
 #select-user{
-    width : 300px;
+    width : 200px;
     margin-right: 15px;
     height: 30px;
 }
@@ -21,10 +21,6 @@ Button{
     width: 300px;
     margin: 2px 2px;
     padding: 2px;
-}
-
-.filter_tags {
-    /* border : 1px red solid; */
 }
 
 #create_new_resource_button{
@@ -56,6 +52,11 @@ Button{
 
 .selected_tag{
     border : 1px solid black
+}
+
+#list-title{
+    margin: 40px 30px;
+    font-size: 20pt;
 }
 
 #resource_list{

@@ -33,6 +33,10 @@ export default function ResourceList({
   }, [setResourceList]);
 
   return (
+    <>
+    {/* <div id='list-title'>
+    {listMode === "study list" ? <p>Study List</p> : <p>Resources</p>}
+    </div> */}
     <div id='resource_list'>
       {resourceList
         .filter((resource) => filterBySearchTags(searchTags, resource))
@@ -51,5 +55,6 @@ export default function ResourceList({
           />
         ))}
     </div>
+    </>
   );
 }
