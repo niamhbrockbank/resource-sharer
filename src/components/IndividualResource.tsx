@@ -103,7 +103,8 @@ export default function IndividualResource({
           />
           <div className="tag-cloud">
             Tags:
-            {tag_array.map((tag, i) => (
+            {tag_array.length > 0 &&
+            tag_array.map((tag, i) => (
               <button className='tag' key={i}>{tag}</button>
             ))}
           </div>

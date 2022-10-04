@@ -42,11 +42,11 @@ export default function NavigationBar({
         currentUserManager={currentUserManager}
         setUserStudylist={setUserStudylist}
       />
-      <StudylistButton
+      {/* <StudylistButton
         currentUserManager={currentUserManager}
         listMode={listMode}
         setListMode={setListMode}
-      />
+      /> */}
       </div>
       
     </>
