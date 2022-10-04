@@ -47,6 +47,7 @@ function App(): JSX.Element {
         userStudylist={userStudylist}
         setUserStudylist={setUserStudylist}
         listMode={listMode}
+        setListMode={setListMode}
       />
     </div>
   );
