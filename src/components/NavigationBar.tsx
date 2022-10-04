@@ -2,7 +2,6 @@ import { IUserResponse } from "../App";
 import SearchBar from "./SearchBar";
 
 import SignIn from "./SignIn";
-// import StudylistButton from "./StudylistButton";
 import { TagsCloud } from "./TagsCloud";
 
 interface IProps {
@@ -42,11 +41,6 @@ export default function NavigationBar({
           currentUserManager={currentUserManager}
           setUserStudylist={setUserStudylist}
         />
-        {/* <StudylistButton
-        currentUserManager={currentUserManager}
-        listMode={listMode}
-        setListMode={setListMode}
-      /> */}
       </div>
     </>
   );
