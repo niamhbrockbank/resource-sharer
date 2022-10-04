@@ -60,7 +60,7 @@ export function SelectOrCreateTag({
   return (
     <>
       <input
-      id='new-tag-input'
+        id="new-tag-input"
         value={currentTag}
         onChange={(e) => setCurrentTag(e.target.value)}
         placeholder="create or search tag"
