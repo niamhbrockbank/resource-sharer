@@ -103,14 +103,14 @@ export default function CreateNewResource({
 
   return (
     <>
-      <Button
+    {currentUser && <Button
         variant="primary"
         onClick={handleShow}
         disabled={currentUser === undefined}
         id='create_new_resource_button'
       >
         Create Resource
-      </Button>
+      </Button>}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
