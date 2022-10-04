@@ -84,6 +84,7 @@ export default function Comments({
       {currentUserId && (
         <div>
           <input
+            id="comment-input"
             onKeyDown={(e) => handleKeyDown(e.key)}
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
