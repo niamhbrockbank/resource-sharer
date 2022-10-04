@@ -43,6 +43,7 @@ export default function LikeResource({
       <div className="likes">
         <button
           type="button"
+          className='like-button'
           onClick={() =>
             handleLikeButtons(
               "like",
@@ -74,6 +75,7 @@ export default function LikeResource({
 
       <div className="likes">
         <button
+        className='dislike-button'
           type="button"
           onClick={() =>
             handleLikeButtons(

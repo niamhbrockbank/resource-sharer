@@ -137,6 +137,7 @@ export default function CreateNewResource({
             <li>
               <label htmlFor="author-name-input">author name: </label>
               <input
+              id='author-name-input'
                 value={author_name}
                 onChange={(e) =>
                   setNewResourceData({
