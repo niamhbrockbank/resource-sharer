@@ -104,11 +104,11 @@ export default function IndividualResource({
           <div className="tag-cloud">
             Tags:
             {tag_array.map((tag, i) => (
-              <button key={i}>{tag}</button>
+              <button className='tag' key={i}>{tag}</button>
             ))}
           </div>
           <Button
-            variant="primary"
+            variant="secondary"
             onClick={() => {
               setShowEdit(true);
               setShowResource(false);
@@ -117,18 +117,18 @@ export default function IndividualResource({
           >
             Edit Resource
           </Button>
-          <button onClick={handleDelete}>Delete Resource</button>
+          <Button variant='outline-secondary' onClick={handleDelete}>Delete Resource</Button>
           {userStudylist && userStudylist.includes(resource_id) ? (
-            <button onClick={removeFromStudyList}>
+            <Button onClick={removeFromStudyList}>
               Remove from study list
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
               onClick={addToStudyList}
               disabled={currentUser === undefined}
             >
               Add to study list
-            </button>
+            </Button>
           )}
 
           <h3>Comments:</h3>

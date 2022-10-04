@@ -112,6 +112,8 @@ export default function EditResource({
           <Modal.Title>Edit Resource</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <ul className='resource_modal'>
+          <li>
           <label htmlFor="resource-name-edit">resource name: </label>
           <input
             id="resource-name-edit"
@@ -124,6 +126,8 @@ export default function EditResource({
             }
             placeholder="start typing"
           />
+          </li>
+          <li>
           <label htmlFor="author-name-edit">author name: </label>
           <input
             id="author-name-edit"
@@ -136,6 +140,8 @@ export default function EditResource({
             }
             placeholder="start typing"
           />
+          </li>
+          <li>
           <label htmlFor="url-edit">URL: </label>
           <input
             id="url-edit"
@@ -143,6 +149,8 @@ export default function EditResource({
             onChange={(e) => setEditData({ ...editData, url: e.target.value })}
             placeholder="paste here"
           />
+          </li>
+          <li>
           <label htmlFor="content-type-edit">content type: </label>
           <input
             id="content-type-edit"
@@ -155,6 +163,8 @@ export default function EditResource({
             }
             placeholder="start typing"
           />
+          </li>
+          <li>
           <label htmlFor="description-edit">description: </label>
           <input
             id="description-edit"
@@ -167,6 +177,8 @@ export default function EditResource({
             }
             placeholder="start typing"
           />
+          </li>
+          <li>
           <label htmlFor="opinion-select-edit">opinion:</label>
           <select
             id="opinion-select-edit"
@@ -183,6 +195,8 @@ export default function EditResource({
               <option key={i}>{option.opinion}</option>
             ))}
           </select>
+          </li>
+          <li>
           <label htmlFor="opinion-reason-input">opinion-reason: </label>
           <input
             id="opinion-reason-input"
@@ -195,6 +209,8 @@ export default function EditResource({
             }
             placeholder="start typing"
           />
+          </li>
+          <li>
           <label htmlFor="buildStageName-select">stage: </label>
           <select
             id="buildStageName-select"
@@ -211,6 +227,8 @@ export default function EditResource({
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
+          </li>
+          </ul>
           <SelectOrCreateTag
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}

@@ -1,13 +1,49 @@
-#create_new_resource{
+Button{
+    margin : 2px 5px;
+}
+
+#sigin_area{
+    margin: 15px 10px 5px 30px;
+}
+
+#select-user{
+    width : 300px;
+    margin-right: 15px;
+    height: 30px;
+}
+
+#filter_area{
+    margin: 15px 10px 5px 30px;
+    height: 130px;
+}
+
+#search-bar{
+    width: 300px;
+    margin: 2px 2px;
+    padding: 2px;
+}
+
+.filter_tags {
+    /* border : 1px red solid; */
+}
+
+#create_new_resource_button{
+    /* position: absolute;
+    right: max(20px, 5vw);
+    top : 150px; */
+    margin-left : 30px;
+}
+
+.resource_modal{
     list-style-type: none;
     padding-left: 0;
 }
 
-#create_new_resource li {
+.resource_modal li {
     margin: 3px;
 }
 
-#create_new_resource label{
+.resource_modal label{
     padding-right: 5px;
 }
 
@@ -27,6 +63,7 @@
     display: grid;
     grid-template-columns: 20vw 20vw 20vw 20vw;
     row-gap: 20px;
+    justify-content: center;
 }
 
 .resource{

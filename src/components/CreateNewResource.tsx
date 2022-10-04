@@ -107,6 +107,7 @@ export default function CreateNewResource({
         variant="primary"
         onClick={handleShow}
         disabled={currentUser === undefined}
+        id='create_new_resource_button'
       >
         Create Resource
       </Button>
@@ -116,7 +117,7 @@ export default function CreateNewResource({
           <Modal.Title>Create New Resource</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ul id='create_new_resource'>
+          <ul className='resource_modal'>
           <li>
           <label htmlFor="resource-name-input">resource name: </label>
           <input

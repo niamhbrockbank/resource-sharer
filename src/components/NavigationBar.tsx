@@ -33,8 +33,7 @@ export default function NavigationBar({
 }: IProps): JSX.Element {
   return (
     <>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
+      <div id='sigin_area'>
       <SignIn
         currentUserManager={currentUserManager}
         setUserStudylist={setUserStudylist}
@@ -44,6 +43,12 @@ export default function NavigationBar({
         listMode={listMode}
         setListMode={setListMode}
       />
+      </div>
+      <div id="filter_area">
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
+      </div>
+      
     </>
   );
 }

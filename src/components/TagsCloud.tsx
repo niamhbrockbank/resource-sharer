@@ -34,7 +34,7 @@ export function TagsCloud({
 
   return (
     <>
-      <div className="tag-cloud">
+      <div className="tag-cloud filter_tags">
         {allTags
           .filter((tag) => !searchTags.includes(tag))
           .map((tag, i) => (

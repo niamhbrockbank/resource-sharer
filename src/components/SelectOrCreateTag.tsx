@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { baseUrl } from "../utils/baseUrl";
 
 interface SelectOrCreateTagProps {
@@ -63,7 +64,7 @@ export function SelectOrCreateTag({
         onChange={(e) => setCurrentTag(e.target.value)}
         placeholder="create or search tag"
       />
-      <button onClick={handleCreateNewTag}>Add new tag</button>
+      <Button onClick={handleCreateNewTag}>Add new tag</Button>
       <div className="tag-cloud">
         {allTags.filter(filterTags).map((tag, i) => (
           <button
