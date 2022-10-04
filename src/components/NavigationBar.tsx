@@ -2,7 +2,7 @@ import { IUserResponse } from "../App";
 import SearchBar from "./SearchBar";
 
 import SignIn from "./SignIn";
-import StudylistButton from "./StudylistButton";
+// import StudylistButton from "./StudylistButton";
 import { TagsCloud } from "./TagsCloud";
 
 interface IProps {
@@ -37,18 +37,17 @@ export default function NavigationBar({
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
       </div>
-      <div id='sigin_area'>
-      <SignIn
-        currentUserManager={currentUserManager}
-        setUserStudylist={setUserStudylist}
-      />
-      {/* <StudylistButton
+      <div id="sigin_area">
+        <SignIn
+          currentUserManager={currentUserManager}
+          setUserStudylist={setUserStudylist}
+        />
+        {/* <StudylistButton
         currentUserManager={currentUserManager}
         listMode={listMode}
         setListMode={setListMode}
       /> */}
       </div>
-      
     </>
   );
 }

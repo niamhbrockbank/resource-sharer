@@ -78,7 +78,11 @@ export function SelectOrCreateTag({
       </div>
       <div className="selected-selectedTags">
         {selectedTags.map((tag, i) => (
-          <button className="tag selected_tag" key={i} onClick={() => handleRemoveTag(tag)}>
+          <button
+            className="tag selected_tag"
+            key={i}
+            onClick={() => handleRemoveTag(tag)}
+          >
             {tag.tag_name} x
           </button>
         ))}

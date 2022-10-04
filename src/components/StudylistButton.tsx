@@ -21,13 +21,17 @@ export default function StudylistButton({
   return (
     <>
       {listMode === "study list" ? (
-        <Button variant='secondary' type="button" onClick={() => setListMode("resource list")}>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={() => setListMode("resource list")}
+        >
           View resource list
         </Button>
       ) : (
         <Button
           type="button"
-          variant='secondary'
+          variant="secondary"
           disabled={currentUser === undefined}
           onClick={() => setListMode("study list")}
         >

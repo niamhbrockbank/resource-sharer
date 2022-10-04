@@ -38,7 +38,7 @@ export default function IndividualResource({
     user_name,
     resource_id,
     tag_array,
-    user_id
+    user_id,
   } = resourceData;
 
   async function addToStudyList(): Promise<void> {
@@ -67,22 +67,21 @@ export default function IndividualResource({
 
   return (
     <div>
-      <Card style={{ width: '18rem' }} className='resource'>
-      <Card.Body>
-        <ResourceHeader
-          setShowResource={setShowResource}
-          resourceData={resourceData}
-        />
-        {/* <button>Add to study list</button> */}
-        <LikeResource
-          currentUser={currentUser}
-          resourceData={resourceData}
-          setResourceList={setResourceList}
-        />
-      </Card.Body>
-    </Card>
+      <Card style={{ width: "18rem" }} className="resource">
+        <Card.Body>
+          <ResourceHeader
+            setShowResource={setShowResource}
+            resourceData={resourceData}
+          />
+          {/* <button>Add to study list</button> */}
+          <LikeResource
+            currentUser={currentUser}
+            resourceData={resourceData}
+            setResourceList={setResourceList}
+          />
+        </Card.Body>
+      </Card>
 
-      
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
@@ -104,9 +103,11 @@ export default function IndividualResource({
           <div className="tag-cloud">
             Tags:
             {tag_array.length > 0 &&
-            tag_array.map((tag, i) => (
-              <button className='tag' key={i}>{tag}</button>
-            ))}
+              tag_array.map((tag, i) => (
+                <button className="tag" key={i}>
+                  {tag}
+                </button>
+              ))}
           </div>
           <Button
             variant="secondary"
@@ -118,7 +119,9 @@ export default function IndividualResource({
           >
             Edit Resource
           </Button>
-          <Button variant='outline-secondary' onClick={handleDelete}>Delete Resource</Button>
+          <Button variant="outline-secondary" onClick={handleDelete}>
+            Delete Resource
+          </Button>
           {userStudylist && userStudylist.includes(resource_id) ? (
             <Button onClick={removeFromStudyList}>
               Remove from study list

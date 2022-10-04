@@ -17,7 +17,9 @@ interface IProps {
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
   listMode: "resource list" | "study list";
-  setListMode: React.Dispatch<React.SetStateAction<"resource list" | "study list">>
+  setListMode: React.Dispatch<
+    React.SetStateAction<"resource list" | "study list">
+  >;
 }
 
 export default function ResourceList({
@@ -29,7 +31,7 @@ export default function ResourceList({
   userStudylist,
   setUserStudylist,
   listMode,
-  setListMode
+  setListMode,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -37,53 +39,57 @@ export default function ResourceList({
 
   return (
     <>
-    <Tabs
-      activeKey={listMode}
-      onSelect={(mode) => mode === "study list" ? setListMode("study list") : setListMode("resource list")}
-      className="mb-3"
-      style={{margin: '30px'}}
-    >
-      <Tab eventKey="resource list" title="Resource List">
-      <div id='resource_list'>
-      {resourceList
-        .filter((resource) => filterBySearchTags(searchTags, resource))
-        .filter((resource) => filterBySearchTerm(searchTerm, resource))
-        .filter((resource) =>
-          filterByListMode(listMode, userStudylist, resource)
-        )
-        .map((resource) => (
-          <IndividualResource
-            key={resource.resource_id}
-            resourceData={resource}
-            currentUser={currentUser}
-            setResourceList={setResourceList}
-            userStudylist={userStudylist}
-            setUserStudylist={setUserStudylist}
-          />
-        ))}
-    </div>
-    </Tab>
-      <Tab eventKey="study list" title="Study List" disabled={!currentUser}>
-        <div id='resource_list'>
-        {resourceList
-          .filter((resource) => filterBySearchTags(searchTags, resource))
-          .filter((resource) => filterBySearchTerm(searchTerm, resource))
-          .filter((resource) =>
-            filterByListMode(listMode, userStudylist, resource)
-          )
-          .map((resource) => (
-            <IndividualResource
-              key={resource.resource_id}
-              resourceData={resource}
-              currentUser={currentUser}
-              setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
-            />
-          ))}
-      </div>
-      </Tab>
-    </Tabs>
+      <Tabs
+        activeKey={listMode}
+        onSelect={(mode) =>
+          mode === "study list"
+            ? setListMode("study list")
+            : setListMode("resource list")
+        }
+        className="mb-3"
+        style={{ margin: "30px" }}
+      >
+        <Tab eventKey="resource list" title="Resource List">
+          <div id="resource_list">
+            {resourceList
+              .filter((resource) => filterBySearchTags(searchTags, resource))
+              .filter((resource) => filterBySearchTerm(searchTerm, resource))
+              .filter((resource) =>
+                filterByListMode(listMode, userStudylist, resource)
+              )
+              .map((resource) => (
+                <IndividualResource
+                  key={resource.resource_id}
+                  resourceData={resource}
+                  currentUser={currentUser}
+                  setResourceList={setResourceList}
+                  userStudylist={userStudylist}
+                  setUserStudylist={setUserStudylist}
+                />
+              ))}
+          </div>
+        </Tab>
+        <Tab eventKey="study list" title="Study List" disabled={!currentUser}>
+          <div id="resource_list">
+            {resourceList
+              .filter((resource) => filterBySearchTags(searchTags, resource))
+              .filter((resource) => filterBySearchTerm(searchTerm, resource))
+              .filter((resource) =>
+                filterByListMode(listMode, userStudylist, resource)
+              )
+              .map((resource) => (
+                <IndividualResource
+                  key={resource.resource_id}
+                  resourceData={resource}
+                  currentUser={currentUser}
+                  setResourceList={setResourceList}
+                  userStudylist={userStudylist}
+                  setUserStudylist={setUserStudylist}
+                />
+              ))}
+          </div>
+        </Tab>
+      </Tabs>
     </>
   );
 }
