@@ -41,6 +41,7 @@ export default function ResourceList({
       activeKey={listMode}
       onSelect={(mode) => mode === "study list" ? setListMode("study list") : setListMode("resource list")}
       className="mb-3"
+      style={{margin: '30px'}}
     >
       <Tab eventKey="resource list" title="Resource List">
       <div id='resource_list'>
