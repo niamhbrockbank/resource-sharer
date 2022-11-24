@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { baseUrl } from "../utils/baseUrl";
+import { baseUrl } from "../../utils/baseUrl";
 
 interface SelectOrCreateTagProps {
   selectedTags: { tag_name: string }[];

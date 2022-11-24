@@ -1,4 +1,4 @@
-import { IUserResponse } from "../utils/types";
+import { IUserResponse } from "../../utils/types";
 import SearchBar from "./SearchBar";
 import SignIn from "./SignIn";
 import { TagsCloud } from "./TagsCloud";

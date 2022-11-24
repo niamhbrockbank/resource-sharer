@@ -1,15 +1,15 @@
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
-import { IResourceRequest } from "../utils/types";
-import { IResourceResponse } from "../utils/types";
+import { IResourceRequest } from "../../utils/types";
+import { IResourceResponse } from "../../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
-import { inputsValid } from "../utils/inputsValid";
-import { baseUrl } from "../utils/baseUrl";
+import { inputsValid } from "../../utils/inputsValid";
+import { baseUrl } from "../../utils/baseUrl";
 
-import getResourcesFromServer from "../utils/getResourcesFromServer";
+import getResourcesFromServer from "../../utils/getResourcesFromServer";
 
-import { IUserResponse } from "../utils/types";
+import { IUserResponse } from "../../utils/types";
 
 interface IProps {
   currentUserManager: [

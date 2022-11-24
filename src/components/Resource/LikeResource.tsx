@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { handleLikeButtons } from "../utils/likeButtons";
-import { userHasLikedOrDisliked } from "../utils/userHasLikedOrDisliked";
-import { IResourceResponse } from "../utils/types";
-import { IUserResponse } from "../utils/types";
+import { handleLikeButtons } from "../../utils/likeButtons";
+import { userHasLikedOrDisliked } from "../../utils/userHasLikedOrDisliked";
+import { IResourceResponse } from "../../utils/types";
+import { IUserResponse } from "../../utils/types";
 
 interface IProps {
   currentUser: IUserResponse | undefined;

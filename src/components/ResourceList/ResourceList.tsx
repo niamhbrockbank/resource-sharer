@@ -1,11 +1,11 @@
-import getResourcesFromServer from "../utils/getResourcesFromServer";
+import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { useEffect } from "react";
-import IndividualResource from "./IndividualResource";
-import { IUserResponse } from "../utils/types";
-import filterBySearchTerm from "../utils/filterBySearchTerm";
-import { IResourceResponse } from "../utils/types";
-import { filterBySearchTags } from "../utils/filterBySearchTags";
-import filterByListMode from "../utils/filterByListMode";
+import IndividualResource from "../Resource/IndividualResource";
+import { IUserResponse } from "../../utils/types";
+import filterBySearchTerm from "../../utils/filterBySearchTerm";
+import { IResourceResponse } from "../../utils/types";
+import { filterBySearchTags } from "../../utils/filterBySearchTags";
+import filterByListMode from "../../utils/filterByListMode";
 import { Tab, Tabs } from "react-bootstrap";
 
 interface IProps {

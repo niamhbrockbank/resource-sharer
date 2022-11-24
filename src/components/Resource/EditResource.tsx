@@ -1,12 +1,12 @@
 import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { IResourceRequest, IResourceResponse } from "../utils/types";
-import { templateResourceRequest } from "./CreateNewResource";
+import { IResourceRequest, IResourceResponse } from "../../utils/types";
+import { templateResourceRequest } from "../NewResource/CreateNewResource";
 import axios from "axios";
-import { baseUrl } from "../utils/baseUrl";
-import getResourcesFromServer from "../utils/getResourcesFromServer";
-import { SelectOrCreateTag } from "./SelectOrCreateTag";
-import { inputsValid } from "../utils/inputsValid";
+import { baseUrl } from "../../utils/baseUrl";
+import getResourcesFromServer from "../../utils/getResourcesFromServer";
+import { SelectOrCreateTag } from "../NewResource/SelectOrCreateTag";
+import { inputsValid } from "../../utils/inputsValid";
 
 interface IEditResourceProps {
   currentUserId: number;

@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import CreateNewResource from "./components/CreateNewResource";
-import ResourceList from "./components/ResourceList";
-import NavigationBar from "./components/NavigationBar";
+import CreateNewResource from "./components/NewResource/CreateNewResource";
+import ResourceList from "./components/ResourceList/ResourceList";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";

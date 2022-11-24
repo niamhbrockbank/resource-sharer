@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
-import { baseUrl } from "../utils/baseUrl";
-import { ICommentResponse } from "../utils/types";
+import { baseUrl } from "../../utils/baseUrl";
+import { ICommentResponse } from "../../utils/types";
 
 interface IProps {
   resource_id: number;

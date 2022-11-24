@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Card } from "react-bootstrap";
-import { IResourceResponse } from "../utils/types";
+import { IResourceResponse } from "../../utils/types";
 
 interface IProps {
   resourceData: IResourceResponse;
