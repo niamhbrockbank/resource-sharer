@@ -16,6 +16,8 @@ export default function SignIn({
   currentUserManager,
   setUserStudylist,
 }: IProps): JSX.Element {
+  //TODO: If not signed in then show as sign in button
+  //TODO: If signed in show as avatar
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
 
