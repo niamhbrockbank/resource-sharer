@@ -1,7 +1,8 @@
 import { IUserResponse } from "../../utils/types";
 import SearchBar from "./SearchBar";
-import SignIn from "./SignIn";
+import SignIn from "./SignIn/SignIn";
 import { TagsCloud } from "./TagsCloud";
+import './NavigationBar.scss'
 
 interface IProps {
   currentUserManager: [
@@ -31,16 +32,21 @@ export default function NavigationBar({
 }: IProps): JSX.Element {
   return (
     <>
+      <div id='navigation_bar'>
+      <h1>Study Resources</h1>
+      <img src='./img/menu.svg' alt='menu list button'/>
+      <SignIn
+          currentUserManager={currentUserManager}
+          setUserStudylist={setUserStudylist}
+        />
+        </div>
+      
+      {/* TODO: Move filter area to its own component */}
       <div id="filter_area">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
       </div>
-      <div id="sigin_area">
-        <SignIn
-          currentUserManager={currentUserManager}
-          setUserStudylist={setUserStudylist}
-        />
-      </div>
+      
     </>
   );
 }

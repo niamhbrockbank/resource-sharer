@@ -1,31 +1,14 @@
+*{
+  font-family:'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: #EEF5DB;
+  margin: 24px;
+}
+
 Button {
   margin: 2px 5px;
-}
-
-#filter_area {
-  margin: 15px 10px 5px 30px;
-  height: 130px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#search-bar {
-  width: min(600px, 60vw);
-  margin: 2px 2px;
-  padding: 2px 4px;
-  border: 1px solid rgb(153, 161, 165);
-  border-radius: 2px;
-}
-
-#sigin_area {
-  margin: 0px 10px 5px 30px;
-}
-
-#select-user {
-  width: 200px;
-  margin-right: 15px;
-  height: 30px;
 }
 
 #create_new_resource_button {
@@ -51,8 +34,8 @@ Button {
 .tag {
   margin: 5px 2px;
   border-radius: 4px;
-  background-color: rgb(240, 249, 255);
-  border: 1px solid rgb(207, 217, 223);
+  background-color: rgb(178, 175, 235);
+  border: 1px solid rgb(54, 49, 12);
 }
 
 .selected_tag {
