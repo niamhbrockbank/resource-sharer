@@ -2,6 +2,10 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+a{
+  text-decoration: none;
+}
+
 body {
   background-color: #eef5db;
   color: #4f6367;
