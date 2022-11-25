@@ -7,6 +7,9 @@ import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home/Home";
+import NewResource from "./components/NewResource/NewResource";
 
 export interface IUserResponse {
   user_id: number;
@@ -49,7 +52,7 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div>
+    <>
       <NavigationBar
         searchTags={searchTags}
         setSearchTags={setSearchTags}
@@ -60,15 +63,9 @@ function App(): JSX.Element {
         setListMode={setListMode}
         setUserStudylist={setUserStudylist}
       />
-      {/* <TopResources /> */}
-      <CreateNewResource
-        currentUserManager={currentUserManager}
-        setResourceList={setResourceList}
-        opinions={opinions}
-        buildStageNames={buildStageNames}
-      />
-      <ResourceList
-        searchTags={searchTags}
+
+    <Routes>
+      <Route path='/' element={<Home searchTags={searchTags}
         searchTerm={searchTerm}
         currentUser={currentUserManager[0]}
         resourceList={resourceList}
@@ -79,8 +76,17 @@ function App(): JSX.Element {
         setListMode={setListMode}
         opinions={opinions}
         buildStageNames={buildStageNames}
-      />
-    </div>
+        setSearchTerm={setSearchTerm}
+        setSearchTags={setSearchTags}
+        />} />
+      <Route path='/new' element={<NewResource currentUserManager={currentUserManager}
+        setResourceList={setResourceList}
+        opinions={opinions}
+        buildStageNames={buildStageNames}/>} />
+      {/* TODO: use route params to get users study list */}
+      {/* <Route path='/studyList' element={<StudyList />} /> */}
+    </Routes>
+    </>
   );
 }
 

@@ -41,7 +41,6 @@ export default function NavigationBar({
         </div>
       
       {/* TODO: Move filter area to its own component */}
-      <SearchAndFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchTags={searchTags} setSearchTags={setSearchTags}/>
       
     </>
   );
