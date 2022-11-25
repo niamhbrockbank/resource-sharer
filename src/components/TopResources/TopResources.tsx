@@ -2,7 +2,7 @@ export default function TopResources():JSX.Element{
     return (
         <>
             <h1>TOP RESOURCES</h1>
-            <p>show top 10 resources here based on likes</p>
+            <p>COMING SOON: Top 10 Resources Voted for by YOU!</p>
             <br />
             <br />
             <br />
