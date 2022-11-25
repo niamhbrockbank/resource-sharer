@@ -47,6 +47,7 @@ export default function ResourceList({
 
   return (
     <>
+      <h1>RESOURCE LIST</h1>
       <Tabs
         activeKey={listMode}
         onSelect={(mode) =>
