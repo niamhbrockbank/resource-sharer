@@ -6,6 +6,7 @@ import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../../utils/inputsValid";
 import { baseUrl } from "../../utils/baseUrl";
+import './FormElement.scss'
 
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 
@@ -78,23 +79,24 @@ export default function CreateNewResource({
   return (
     <>
       <h1>Add New Resource</h1>
-      <ul className="resource_modal">
-        <li>
-          <label htmlFor="resource-name-input">resource name: </label>
-          <input
-            id="resource-name-input"
-            value={resource_name}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                resource_name: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="author-name-input">author name: </label>
+
+          <div className="form_element">
+            <label htmlFor="resource-name-input">Resource Name</label>
+            <input
+              id="resource-name-input"
+              value={resource_name}
+              onChange={(e) =>
+                setNewResourceData({
+                  ...newResourceData,
+                  resource_name: e.target.value,
+                })
+              }
+              placeholder="Resource Title"
+            />
+          </div>
+
+          <div className="form_element">
+          <label htmlFor="author-name-input">Author Name</label>
           <input
             id="author-name-input"
             value={author_name}
@@ -104,11 +106,12 @@ export default function CreateNewResource({
                 author_name: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Author"
           />
-        </li>
-        <li>
-          <label htmlFor="url-input">URL: </label>
+          </div>
+
+          <div className="form_element">
+          <label htmlFor="url-input">URL</label>
           <input
             id="url-input"
             value={url}
@@ -118,11 +121,10 @@ export default function CreateNewResource({
                 url: e.target.value,
               })
             }
-            placeholder="paste here"
+            placeholder="URL"
           />
-        </li>
-        <li>
-          <label htmlFor="content-type-input">content type: </label>
+          </div><div className="form_element">
+          <label htmlFor="content-type-input">Content Type</label>
           <input
             id="content-type-input"
             value={content_type}
@@ -132,11 +134,10 @@ export default function CreateNewResource({
                 content_type: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Content Type"
           />
-        </li>
-        <li>
-          <label htmlFor="description-input">description: </label>
+    </div><div className="form_element">
+          <label htmlFor="description-input">Description</label>
           <input
             id="description-input"
             value={description}
@@ -146,11 +147,10 @@ export default function CreateNewResource({
                 description: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Description"
           />
-        </li>
-        <li>
-          <label htmlFor="opinion-select">opinion:</label>
+</div><div className="form_element">
+          <label htmlFor="opinion-select">Opinion</label>
           <select
             id="opinion-select"
             defaultValue={"nothing selected"}
@@ -161,14 +161,13 @@ export default function CreateNewResource({
               })
             }
           >
-            <option disabled>nothing selected</option>
+            <option disabled>Nothing Selected</option>
             {opinions.map((option, i) => (
               <option key={i}>{option.opinion}</option>
             ))}
           </select>
-        </li>
-        <li>
-          <label htmlFor="opinion-reason-input">opinion-reason: </label>
+</div><div className="form_element">
+          <label htmlFor="opinion-reason-input">Opinion Explanation</label>
           <input
             id="opinion-reason-input"
             value={opinion_reason}
@@ -178,14 +177,13 @@ export default function CreateNewResource({
                 opinion_reason: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Explanation"
           />
-        </li>
-        <li>
-          <label htmlFor="buildStageName-select">stage: </label>
+</div><div className="form_element">
+          <label htmlFor="buildStageName-select">Stage</label>
           <select
             id="buildStageName-select"
-            defaultValue={"nothing selected"}
+            defaultValue={"Nothing Selected"}
             onChange={(e) =>
               setNewResourceData({
                 ...newResourceData,
@@ -193,13 +191,12 @@ export default function CreateNewResource({
               })
             }
           >
-            <option disabled>nothing selected</option>
+            <option disabled>Nothing Selected</option>
             {buildStageNames.map((stage, i) => (
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
-        </li>
-      </ul>
+</div>
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}

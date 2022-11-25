@@ -1,6 +1,6 @@
 import { IResourceResponse, IUserResponse } from "../../utils/types";
 import CreateNewResource from "./CreateNewResource";
-import FormElement from "./FormElement";
+import './NewResource.scss'
 
 interface IProps {
   currentUserManager: [
@@ -23,14 +23,13 @@ export default function NewResource({
   buildStageNames,
 }: IProps): JSX.Element {
   return (
-    <>
+    <div id='new_resource'>
     <CreateNewResource
       currentUserManager={currentUserManager}
       setResourceList={setResourceList}
       opinions={opinions}
       buildStageNames={buildStageNames}
     />
-    <FormElement labelText={'Report Title'} placeholderText={'Report Title'}/>
-    </>
+    </div>
   );
 }
