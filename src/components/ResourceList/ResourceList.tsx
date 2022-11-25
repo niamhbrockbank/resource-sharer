@@ -6,7 +6,7 @@ import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
 import { filterBySearchTags } from "../../utils/filterBySearchTags";
 import filterByListMode from "../../utils/filterByListMode";
-import './ResourceList.scss'
+import "./ResourceList.scss";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
@@ -48,26 +48,26 @@ export default function ResourceList({
   return (
     <>
       <h1>RESOURCE LIST</h1>
-          <div id="resource_list">
-            {resourceList
-              .filter((resource) => filterBySearchTags(searchTags, resource))
-              .filter((resource) => filterBySearchTerm(searchTerm, resource))
-              .filter((resource) =>
-                filterByListMode(listMode, userStudylist, resource)
-              )
-              .map((resource) => (
-                <IndividualResource
-                  key={resource.resource_id}
-                  resourceData={resource}
-                  currentUser={currentUser}
-                  setResourceList={setResourceList}
-                  userStudylist={userStudylist}
-                  setUserStudylist={setUserStudylist}
-                  opinions={opinions}
-                  buildStageNames={buildStageNames}
-                />
-              ))}
-          </div>
+      <div id="resource_list">
+        {resourceList
+          .filter((resource) => filterBySearchTags(searchTags, resource))
+          .filter((resource) => filterBySearchTerm(searchTerm, resource))
+          .filter((resource) =>
+            filterByListMode(listMode, userStudylist, resource)
+          )
+          .map((resource) => (
+            <IndividualResource
+              key={resource.resource_id}
+              resourceData={resource}
+              currentUser={currentUser}
+              setResourceList={setResourceList}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+            />
+          ))}
+      </div>
     </>
   );
 }

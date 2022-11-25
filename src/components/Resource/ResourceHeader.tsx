@@ -27,13 +27,13 @@ export default function ResourceHeader({
       <Card.Subtitle>Added by: {user_name}</Card.Subtitle>
       <Card.Text>
         Author: {author_name}
-        <br/>
+        <br />
         Content type: {content_type}
-        <br/>
+        <br />
         {opinion}
-        <br/>
+        <br />
         <Card.Link href={url}>{url}</Card.Link>
-        <br/>
+        <br />
         Date created: {moment(time_date).format("Do MMM YYYY")}
       </Card.Text>
     </div>

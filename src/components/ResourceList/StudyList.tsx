@@ -46,27 +46,27 @@ export default function StudyList({
 
   return (
     <>
-          <div id="resource_list">
-          <h1>study list</h1>
-            {resourceList
-              .filter((resource) => filterBySearchTags(searchTags, resource))
-              .filter((resource) => filterBySearchTerm(searchTerm, resource))
-              .filter((resource) =>
-                filterByListMode(listMode, userStudylist, resource)
-              )
-              .map((resource) => (
-                <IndividualResource
-                  key={resource.resource_id}
-                  resourceData={resource}
-                  currentUser={currentUser}
-                  setResourceList={setResourceList}
-                  userStudylist={userStudylist}
-                  setUserStudylist={setUserStudylist}
-                  opinions={opinions}
-                  buildStageNames={buildStageNames}
-                />
-              ))}
-          </div>
+      <div id="resource_list">
+        <h1>study list</h1>
+        {resourceList
+          .filter((resource) => filterBySearchTags(searchTags, resource))
+          .filter((resource) => filterBySearchTerm(searchTerm, resource))
+          .filter((resource) =>
+            filterByListMode(listMode, userStudylist, resource)
+          )
+          .map((resource) => (
+            <IndividualResource
+              key={resource.resource_id}
+              resourceData={resource}
+              currentUser={currentUser}
+              setResourceList={setResourceList}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+            />
+          ))}
+      </div>
     </>
   );
 }

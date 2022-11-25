@@ -1,6 +1,6 @@
 import { IUserResponse } from "../../utils/types";
 import SignIn from "./SignIn/SignIn";
-import './NavigationBar.scss'
+import "./NavigationBar.scss";
 import SearchAndFilter from "../SearchAndFilter/SearchAndFilter";
 
 interface IProps {
@@ -31,17 +31,16 @@ export default function NavigationBar({
 }: IProps): JSX.Element {
   return (
     <>
-      <div id='navigation_bar'>
-      <h1>Study Resources</h1>
-      <img src='./img/menu.svg' alt='menu list button'/>
-      <SignIn
+      <div id="navigation_bar">
+        <h1>Study Resources</h1>
+        <img src="./img/menu.svg" alt="menu list button" />
+        <SignIn
           currentUserManager={currentUserManager}
           setUserStudylist={setUserStudylist}
         />
-        </div>
-      
+      </div>
+
       {/* TODO: Move filter area to its own component */}
-      
     </>
   );
 }

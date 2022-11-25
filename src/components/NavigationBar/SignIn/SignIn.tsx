@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IUserResponse } from "../../../utils/types";
 import { baseUrl } from "../../../utils/baseUrl";
 import getStudylistFromServer from "../../../utils/getStudylistFromServer";
-import './SignIn.scss'
+import "./SignIn.scss";
 
 interface IProps {
   currentUserManager: [

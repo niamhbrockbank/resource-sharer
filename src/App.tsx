@@ -64,28 +64,41 @@ function App(): JSX.Element {
         setUserStudylist={setUserStudylist}
       />
 
-    <Routes>
-      <Route path='/' element={<Home searchTags={searchTags}
-        searchTerm={searchTerm}
-        currentUser={currentUserManager[0]}
-        resourceList={resourceList}
-        setResourceList={setResourceList}
-        userStudylist={userStudylist}
-        setUserStudylist={setUserStudylist}
-        listMode={listMode}
-        setListMode={setListMode}
-        opinions={opinions}
-        buildStageNames={buildStageNames}
-        setSearchTerm={setSearchTerm}
-        setSearchTags={setSearchTags}
-        />} />
-      <Route path='/new' element={<NewResource currentUserManager={currentUserManager}
-        setResourceList={setResourceList}
-        opinions={opinions}
-        buildStageNames={buildStageNames}/>} />
-      {/* TODO: use route params to get users study list */}
-      {/* <Route path='/studyList' element={<StudyList />} /> */}
-    </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              searchTags={searchTags}
+              searchTerm={searchTerm}
+              currentUser={currentUserManager[0]}
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
+              listMode={listMode}
+              setListMode={setListMode}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+              setSearchTerm={setSearchTerm}
+              setSearchTags={setSearchTags}
+            />
+          }
+        />
+        <Route
+          path="/new"
+          element={
+            <NewResource
+              currentUserManager={currentUserManager}
+              setResourceList={setResourceList}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+            />
+          }
+        />
+        {/* TODO: use route params to get users study list */}
+        {/* <Route path='/studyList' element={<StudyList />} /> */}
+      </Routes>
     </>
   );
 }

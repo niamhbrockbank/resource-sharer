@@ -1,10 +1,10 @@
-*{
-  font-family:'Courier New', Courier, monospace;
+* {
+  font-family: "Courier New", Courier, monospace;
 }
 
 body {
-  background-color: #EEF5DB;
-  color: #4F6367;
+  background-color: #eef5db;
+  color: #4f6367;
   margin: 24px;
 }
 
@@ -31,4 +31,3 @@ Button {
 .resource_modal label {
   padding-right: 5px;
 }
-

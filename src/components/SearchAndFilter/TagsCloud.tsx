@@ -32,7 +32,7 @@ export function TagsCloud({
     setSearchTags([...searchTags, tag]);
   const handleRemoveFromSearchTags = (tag: string) =>
     setSearchTags(searchTags.filter((searchTag: string) => searchTag !== tag));
-  
+
   return (
     <>
       <div className="tag_cloud filter_tags">
