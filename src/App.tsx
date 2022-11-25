@@ -50,10 +50,6 @@ function App(): JSX.Element {
   return (
     <>
       <NavigationBar
-        searchTags={searchTags}
-        setSearchTags={setSearchTags}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
         setUserStudylist={setUserStudylist}
       />
