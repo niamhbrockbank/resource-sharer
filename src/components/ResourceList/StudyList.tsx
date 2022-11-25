@@ -40,8 +40,8 @@ export default function StudyList({
 
   return (
     <>
+      <h1>{currentUser && `${currentUser.name.toUpperCase()}'s`} STUDY LIST</h1>
       <div id="resource_list">
-        <h1>study list</h1>
         {resourceList
           .filter((resource) => filterBySearchTags(searchTags, resource))
           .filter((resource) => filterBySearchTerm(searchTerm, resource))
