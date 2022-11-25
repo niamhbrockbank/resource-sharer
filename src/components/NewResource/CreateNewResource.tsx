@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { IResourceRequest } from "../../utils/types";
 import { IResourceResponse } from "../../utils/types";
@@ -78,7 +77,7 @@ export default function CreateNewResource({
 
   return (
     <>
-      <h1>Add New Resource</h1>
+      <h1>ADD NEW RESOURCE</h1>
 
           <div className="form_element">
             <label htmlFor="resource-name-input">Resource Name</label>
@@ -197,13 +196,15 @@ export default function CreateNewResource({
             ))}
           </select>
 </div>
+<div className="tags_input">
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
       />
-      <Button variant="primary" onClick={handleSubmit}>
+      </div>
+      <button onClick={handleSubmit}>
         Submit
-      </Button>
+      </button>
     </>
   );
 }
