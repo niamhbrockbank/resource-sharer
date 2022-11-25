@@ -8,11 +8,16 @@ export default function SearchBar({
   setSearchTerm,
 }: ISearchBarProps): JSX.Element {
   return (
+    <>
     <input
-      id="search-bar"
+      id="search_bar"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      placeholder="Search..."
+      placeholder="Search"
     />
+    {/* TODO: Add search bar magnifying glass icon to RHS */}
+    {/* <img src='./img/search.svg' alt='search button'/> */}
+    {/* TODO: When search move the results up the page/ hide the top resources */}
+    </>
   );
 }

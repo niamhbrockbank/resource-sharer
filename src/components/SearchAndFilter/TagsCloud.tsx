@@ -33,6 +33,8 @@ export function TagsCloud({
   const handleRemoveFromSearchTags = (tag: string) =>
     setSearchTags(searchTags.filter((searchTag: string) => searchTag !== tag));
 
+  const tagColours : string[] = ['#B8D8D8', '#7A9E9F', '#4F6367']
+  
   return (
     <>
       <div className="tag_cloud filter_tags">
@@ -43,6 +45,8 @@ export function TagsCloud({
               className="tag"
               key={i}
               onClick={() => handleAddToSearchTags(tag)}
+              // TODO: Use selectRandElement but prevent colour change on rerender
+              style={{backgroundColor : `${tagColours[1]}`}}
             >
               {tag}
             </button>
@@ -54,6 +58,7 @@ export function TagsCloud({
             className="tag selected_tag"
             key={i}
             onClick={() => handleRemoveFromSearchTags(tag)}
+            style={{backgroundColor : `${tagColours[2]}`}}
           >
             {tag} x
           </button>

@@ -31,17 +31,6 @@ Button {
   padding-right: 5px;
 }
 
-.tag {
-  margin: 5px 2px;
-  border-radius: 4px;
-  background-color: rgb(178, 175, 235);
-  border: 1px solid rgb(54, 49, 12);
-}
-
-.selected_tag {
-  border: 1px solid black;
-}
-
 #resource_list {
   margin: 40px 10px;
   display: grid;
