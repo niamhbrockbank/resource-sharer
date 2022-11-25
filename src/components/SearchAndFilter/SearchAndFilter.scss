@@ -1,0 +1,46 @@
+#search_filter {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search_bar {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #7a9e9f;
+  border-radius: 10em;
+}
+
+#search_bar:focus {
+  border-color: #fe5f55;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tag_cloud {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 700px) {
+  .tag_cloud {
+    width: max(50%, 650px);
+    //TODO: If over certain width then have two columns of tags (like on wireframe)
+  }
+}
+
+.tag {
+  margin: 5px 2px;
+  border-radius: 4px;
+  padding: 0 10px;
+  border: none;
+  color: white;
+  background-color: #7a9e9f;
+}
+
+.selected_tag {
+  background-color: #4f6367;
+}

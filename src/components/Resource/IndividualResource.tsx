@@ -1,14 +1,14 @@
-import { IResourceResponse } from "../utils/types";
+import { IResourceResponse } from "../../utils/types";
 import ResourceHeader from "./ResourceHeader";
 import { Modal, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../utils/baseUrl";
+import { baseUrl } from "../../utils/baseUrl";
 import Comments from "./Comments";
-import { IUserResponse } from "../utils/types";
+import { IUserResponse } from "../../utils/types";
 import LikeResource from "./LikeResource";
-import getStudylistFromServer from "../utils/getStudylistFromServer";
-import getResourcesFromServer from "../utils/getResourcesFromServer";
+import getStudylistFromServer from "../../utils/getStudylistFromServer";
+import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import EditResource from "./EditResource";
 
 interface IProps {
