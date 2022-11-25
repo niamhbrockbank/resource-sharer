@@ -46,7 +46,6 @@ export function TagsCloud({
               key={i}
               onClick={() => handleAddToSearchTags(tag)}
               // TODO: Use selectRandElement but prevent colour change on rerender
-              style={{backgroundColor : `${tagColours[1]}`}}
             >
               {tag}
             </button>
@@ -58,7 +57,6 @@ export function TagsCloud({
             className="tag selected_tag"
             key={i}
             onClick={() => handleRemoveFromSearchTags(tag)}
-            style={{backgroundColor : `${tagColours[2]}`}}
           >
             {tag} x
           </button>
