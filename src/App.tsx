@@ -7,7 +7,6 @@ import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
-import TopResources from "./components/TopResources/TopResources";
 
 export interface IUserResponse {
   user_id: number;
@@ -17,6 +16,7 @@ export interface IUserResponse {
 
 //TODO: Simplify App component
 //TODO: Add react router
+//TODO: use useReducer
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
   const [searchTags, setSearchTags] = useState<string[]>([]);
