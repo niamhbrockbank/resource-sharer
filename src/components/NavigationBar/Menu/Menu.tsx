@@ -8,6 +8,7 @@ interface MenuOption {
 export default function Menu():JSX.Element{
     const menuOptions : MenuOption[] = [{name : 'Home', route : '/'}, {name: 'Study List', route:'/study'}, {name : 'Add New Resource', route: '/new'}]
     //TODO: Make add new resource a button
+    //TODO: Only show study list button if signed in - show sign in button instead
 
     return (
         <ul id="menu">  
