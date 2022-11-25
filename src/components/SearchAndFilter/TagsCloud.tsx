@@ -32,8 +32,6 @@ export function TagsCloud({
     setSearchTags([...searchTags, tag]);
   const handleRemoveFromSearchTags = (tag: string) =>
     setSearchTags(searchTags.filter((searchTag: string) => searchTag !== tag));
-
-  const tagColours : string[] = ['#B8D8D8', '#7A9E9F', '#4F6367']
   
   return (
     <>
