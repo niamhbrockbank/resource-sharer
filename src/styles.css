@@ -32,28 +32,3 @@ Button {
   padding-right: 5px;
 }
 
-#resource_list {
-  margin: 40px 10px;
-  display: grid;
-  grid-template-columns: 20vw 20vw 20vw 20vw;
-  row-gap: 20px;
-  justify-content: center;
-}
-
-.resource {
-  box-shadow: -5px 0px 5px rgb(0 0 0 / 0.2);
-}
-
-.likes_area {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-}
-
-.likes {
-  margin: 10px 10px 0px 0px;
-}
-
-.likes p {
-  margin: 0px;
-}
