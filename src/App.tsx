@@ -15,6 +15,8 @@ export interface IUserResponse {
   is_faculty: boolean;
 }
 
+//TODO: Simplify App component
+//TODO: Add react router
 function App(): JSX.Element {
   const currentUserManager = useState<IUserResponse | undefined>(undefined);
   const [searchTags, setSearchTags] = useState<string[]>([]);
