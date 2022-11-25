@@ -5,7 +5,6 @@ import { IUserResponse } from "../../utils/types";
 import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
 import { filterBySearchTags } from "../../utils/filterBySearchTags";
-import filterByListMode from "../../utils/filterByListMode";
 import "./ResourceList.scss";
 
 interface IProps {
