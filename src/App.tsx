@@ -60,7 +60,7 @@ function App(): JSX.Element {
         setListMode={setListMode}
         setUserStudylist={setUserStudylist}
       />
-      <TopResources />
+      {/* <TopResources /> */}
       <CreateNewResource
         currentUserManager={currentUserManager}
         setResourceList={setResourceList}
