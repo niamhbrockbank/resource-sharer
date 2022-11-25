@@ -1,7 +1,6 @@
 import { IUserResponse } from "../../utils/types";
 import SignIn from "./SignIn/SignIn";
 import "./NavigationBar.scss";
-import SearchAndFilter from "../SearchAndFilter/SearchAndFilter";
 
 interface IProps {
   currentUserManager: [
