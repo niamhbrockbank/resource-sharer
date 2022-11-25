@@ -1,5 +1,6 @@
 import SearchBar from "./SearchBar";
 import { TagsCloud } from "./TagsCloud";
+import './SearchAndFilter.scss'
 
 interface IProps {
     searchTags: string[];
@@ -11,10 +12,10 @@ interface IProps {
 export default function SearchAndFilter({searchTerm, setSearchTerm, searchTags, setSearchTags} : IProps):JSX.Element{
     return(
         <>
-            <div id="filter_area">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
-      </div>
+            <div id="search_filter">
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
+            </div>
         </>
     )
 }

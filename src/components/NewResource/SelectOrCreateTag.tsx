@@ -66,7 +66,7 @@ export function SelectOrCreateTag({
         placeholder="create or search tag"
       />
       <Button onClick={handleCreateNewTag}>Add new tag</Button>
-      <div className="tag-cloud tags-to-select">
+      <div className="tag_cloud tags-to-select">
         {allTags.filter(filterTags).map((tag, i) => (
           <button
             className="tag"
