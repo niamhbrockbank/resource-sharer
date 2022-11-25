@@ -1,29 +1,28 @@
-#menu{
-    //TODO: render in front of page content (so page content doesnt move down)
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    position: sticky;
-    top: 80px;
+#menu {
+  //TODO: render in front of page content (so page content doesnt move down)
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: sticky;
+  top: 80px;
 
-    padding: 8px 24px 8px 24px;
-    margin-left: -24px;
-    margin-right: -24px;
+  padding: 8px 24px 8px 24px;
+  margin-left: -24px;
+  margin-right: -24px;
 
-    background-color: #EEF5DB ;
+  background-color: #eef5db;
 
-    list-style-type: none;
+  list-style-type: none;
 
-    .option{
-        color: inherit;
-        width:fit-content;
-        border-bottom: 1px solid transparent;
-        cursor: pointer;
-        padding-top: 8px;
-    }
-    
-    .option:hover{
-        border-bottom: 1px solid #4F6367;
-    }
+  .option {
+    color: inherit;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    padding-top: 8px;
+  }
+
+  .option:hover {
+    border-bottom: 1px solid #4f6367;
+  }
 }
-

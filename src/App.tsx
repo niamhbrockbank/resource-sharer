@@ -86,7 +86,11 @@ function App(): JSX.Element {
           }
         />
         {/* TODO: use route params to get users study list */}
-        <Route path='/study' element={<StudyList searchTags={searchTags}
+        <Route
+          path="/study"
+          element={
+            <StudyList
+              searchTags={searchTags}
               searchTerm={searchTerm}
               currentUser={currentUserManager[0]}
               resourceList={resourceList}
@@ -94,7 +98,10 @@ function App(): JSX.Element {
               userStudylist={userStudylist}
               setUserStudylist={setUserStudylist}
               opinions={opinions}
-              buildStageNames={buildStageNames}/>} />
+              buildStageNames={buildStageNames}
+            />
+          }
+        />
       </Routes>
     </>
   );

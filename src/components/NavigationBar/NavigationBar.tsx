@@ -16,20 +16,24 @@ export default function NavigationBar({
   currentUserManager,
   setUserStudylist,
 }: IProps): JSX.Element {
-  const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
       <div id="navigation_bar">
         <h1>Study Resources</h1>
-        <img src="./img/menu.svg" alt="menu list button" onClick={() => setShowMenu(!showMenu)}/>
+        <img
+          src="./img/menu.svg"
+          alt="menu list button"
+          onClick={() => setShowMenu(!showMenu)}
+        />
         <SignIn
           currentUserManager={currentUserManager}
           setUserStudylist={setUserStudylist}
         />
       </div>
 
-      {showMenu && <Menu setShowMenu={setShowMenu}/>}
+      {showMenu && <Menu setShowMenu={setShowMenu} />}
 
       {/* TODO: Move filter area to its own component */}
     </>

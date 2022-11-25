@@ -46,7 +46,7 @@ export default function StudyList({
           .filter((resource) => filterBySearchTags(searchTags, resource))
           .filter((resource) => filterBySearchTerm(searchTerm, resource))
           .filter((resource) =>
-            filterByListMode('study list', userStudylist, resource)
+            filterByListMode("study list", userStudylist, resource)
           )
           .map((resource) => (
             <IndividualResource
