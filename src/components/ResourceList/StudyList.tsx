@@ -27,7 +27,7 @@ interface IProps {
   }[];
 }
 
-export default function ResourceList({
+export default function StudyList({
   currentUser,
   searchTags,
   searchTerm,
@@ -46,8 +46,8 @@ export default function ResourceList({
 
   return (
     <>
-      <h1>RESOURCE LIST</h1>
           <div id="resource_list">
+          <h1>study list</h1>
             {resourceList
               .filter((resource) => filterBySearchTags(searchTags, resource))
               .filter((resource) => filterBySearchTerm(searchTerm, resource))
