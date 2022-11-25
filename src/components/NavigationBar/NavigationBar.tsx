@@ -1,8 +1,7 @@
 import { IUserResponse } from "../../utils/types";
-import SearchBar from "./SearchBar";
 import SignIn from "./SignIn/SignIn";
-import { TagsCloud } from "./TagsCloud";
 import './NavigationBar.scss'
+import SearchAndFilter from "../SearchAndFilter/SearchAndFilter";
 
 interface IProps {
   currentUserManager: [
@@ -42,10 +41,7 @@ export default function NavigationBar({
         </div>
       
       {/* TODO: Move filter area to its own component */}
-      <div id="filter_area">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TagsCloud searchTags={searchTags} setSearchTags={setSearchTags} />
-      </div>
+      <SearchAndFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchTags={searchTags} setSearchTags={setSearchTags}/>
       
     </>
   );
