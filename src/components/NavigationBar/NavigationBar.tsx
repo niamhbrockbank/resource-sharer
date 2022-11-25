@@ -11,10 +11,6 @@ interface IProps {
   setSearchTags: React.Dispatch<React.SetStateAction<string[]>>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  listMode: "resource list" | "study list";
-  setListMode: React.Dispatch<
-    React.SetStateAction<"resource list" | "study list">
-  >;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
@@ -24,8 +20,6 @@ export default function NavigationBar({
   setSearchTags,
   searchTerm,
   setSearchTerm,
-  listMode,
-  setListMode,
   setUserStudylist,
 }: IProps): JSX.Element {
   return (

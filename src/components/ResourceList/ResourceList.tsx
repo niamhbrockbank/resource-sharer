@@ -16,10 +16,6 @@ interface IProps {
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
-  listMode: "resource list" | "study list";
-  setListMode: React.Dispatch<
-    React.SetStateAction<"resource list" | "study list">
-  >;
   opinions: {
     opinion: string;
   }[];
@@ -36,8 +32,6 @@ export default function ResourceList({
   setResourceList,
   userStudylist,
   setUserStudylist,
-  listMode,
-  setListMode,
   opinions,
   buildStageNames,
 }: IProps): JSX.Element {
@@ -52,9 +46,6 @@ export default function ResourceList({
         {resourceList
           .filter((resource) => filterBySearchTags(searchTags, resource))
           .filter((resource) => filterBySearchTerm(searchTerm, resource))
-          .filter((resource) =>
-            filterByListMode(listMode, userStudylist, resource)
-          )
           .map((resource) => (
             <IndividualResource
               key={resource.resource_id}

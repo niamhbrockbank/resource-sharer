@@ -8,6 +8,7 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import NewResource from "./components/NewResource/NewResource";
+import StudyList from "./components/ResourceList/StudyList";
 
 export interface IUserResponse {
   user_id: number;
@@ -24,9 +25,6 @@ function App(): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   const [userStudylist, setUserStudylist] = useState<number[] | null>(null);
-  const [listMode, setListMode] = useState<"resource list" | "study list">(
-    "resource list"
-  );
   const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
   const [buildStageNames, setBuildStageNames] = useState<
     { stage_name: string }[]
@@ -57,8 +55,6 @@ function App(): JSX.Element {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentUserManager={currentUserManager}
-        listMode={listMode}
-        setListMode={setListMode}
         setUserStudylist={setUserStudylist}
       />
 
@@ -74,8 +70,6 @@ function App(): JSX.Element {
               setResourceList={setResourceList}
               userStudylist={userStudylist}
               setUserStudylist={setUserStudylist}
-              listMode={listMode}
-              setListMode={setListMode}
               opinions={opinions}
               buildStageNames={buildStageNames}
               setSearchTerm={setSearchTerm}
@@ -95,7 +89,15 @@ function App(): JSX.Element {
           }
         />
         {/* TODO: use route params to get users study list */}
-        {/* <Route path='/studyList' element={<StudyList />} /> */}
+        <Route path='/study' element={<StudyList searchTags={searchTags}
+              searchTerm={searchTerm}
+              currentUser={currentUserManager[0]}
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
+              opinions={opinions}
+              buildStageNames={buildStageNames}/>} />
       </Routes>
     </>
   );
