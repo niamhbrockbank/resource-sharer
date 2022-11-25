@@ -73,6 +73,7 @@ function App(): JSX.Element {
             />
           }
         />
+        {/* TODO: If not logged in and try to access new, redirect to sign in page */}
         <Route
           path="/new"
           element={

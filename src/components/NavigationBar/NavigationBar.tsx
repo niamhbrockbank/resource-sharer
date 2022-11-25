@@ -29,7 +29,7 @@ export default function NavigationBar({
         />
       </div>
 
-      {showMenu && <Menu />}
+      {showMenu && <Menu setShowMenu={setShowMenu}/>}
 
       {/* TODO: Move filter area to its own component */}
     </>
