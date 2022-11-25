@@ -43,8 +43,6 @@ export default function CreateNewResource({
   opinions,
   buildStageNames,
 }: IProps): JSX.Element {
-  const [show, setShow] = useState(false);
-
   const currentUser = currentUserManager[0];
 
   const [newResourceData, setNewResourceData] = useState<IResourceRequest>(
@@ -61,14 +59,6 @@ export default function CreateNewResource({
   } = newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
-  const handleClose = () => {
-    setNewResourceData(templateResourceRequest);
-    setSelectedTags([]);
-    setShow(false);
-  };
-
-  const handleShow = () => setShow(true);
-
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
       try {
@@ -80,7 +70,6 @@ export default function CreateNewResource({
 
         await getResourcesFromServer(setResourceList);
 
-        handleClose();
       } catch (error) {
         window.alert("That url is already taken");
       }
@@ -89,22 +78,7 @@ export default function CreateNewResource({
 
   return (
     <>
-      {currentUser && (
-        <Button
-          variant="primary"
-          onClick={handleShow}
-          disabled={currentUser === undefined}
-          id="create_new_resource_button"
-        >
-          Create Resource
-        </Button>
-      )}
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create New Resource</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+          <h1>Add New Resource</h1>
           <ul className="resource_modal">
             <li>
               <label htmlFor="resource-name-input">resource name: </label>
@@ -231,16 +205,9 @@ export default function CreateNewResource({
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
           />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 }
