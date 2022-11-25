@@ -7,6 +7,7 @@ import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
+import TopResources from "./components/TopResources/TopResources";
 
 export interface IUserResponse {
   user_id: number;
@@ -57,6 +58,7 @@ function App(): JSX.Element {
         setListMode={setListMode}
         setUserStudylist={setUserStudylist}
       />
+      <TopResources />
       <CreateNewResource
         currentUserManager={currentUserManager}
         setResourceList={setResourceList}
