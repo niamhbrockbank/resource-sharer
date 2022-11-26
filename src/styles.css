@@ -6,6 +6,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 1.5em;
+}
+
 body {
   background-color: #eef5db;
   color: #4f6367;
