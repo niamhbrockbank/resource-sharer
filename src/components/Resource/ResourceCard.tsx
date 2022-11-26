@@ -1,7 +1,5 @@
 import moment from "moment";
-import { Card } from "react-bootstrap";
 import { IResourceResponse } from "../../utils/types";
-import LikeResource from "./LikeResource";
 
 interface IProps {
   resourceData: IResourceResponse;
@@ -24,19 +22,18 @@ export default function ResourceCard({
 
   return (
     <div className='resource_card' onClick={() => setShowResource(true)}>
-      <Card.Title>{resource_name}</Card.Title>
-      <Card.Subtitle>Added by: {user_name}</Card.Subtitle>
-      <Card.Text>
-        Author: {author_name}
-        <br />
-        Content type: {content_type}
-        <br />
-        {opinion}
-        <br />
-        <Card.Link href={url}>{url}</Card.Link>
-        <br />
-        Date created: {moment(time_date).format("Do MMM YYYY")}
-      </Card.Text>
+      <h2>{resource_name}</h2>
+      <p>by {author_name}</p>
+      <img className='link' src='./img/link.svg' onClick={() =>
+                    window.open(url, "_blank")
+                  } alt='link to resource'/>
+      <p>{content_type}</p>
+      {/* TODO: Convert this to a traffic light system */}
+      <p>{opinion}</p>
+      <div className="added_details">
+        <p>added by {user_name}</p>
+        <p>created {moment(time_date).format("Do MMM YYYY")}</p>
+      </div>
     </div>
   );
 }

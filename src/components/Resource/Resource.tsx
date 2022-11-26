@@ -1,6 +1,6 @@
 import { IResourceResponse } from "../../utils/types";
 import ResourceCard from "./ResourceCard";
-import { Modal, Button, Card } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";

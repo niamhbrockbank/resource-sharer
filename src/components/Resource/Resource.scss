@@ -4,6 +4,21 @@
     width: 25em;
     padding: 16px;
     border-radius: 10px;
+    // background-image: url('/public/img/semi_circles.png');
+    // background-size: cover;
+
+    h2{
+        font-size: 1.3em;
+        height: 2.4em;
+    }
+
+    .added_details{
+        color: #7A9E9F;
+    }
+
+    .link{
+        cursor: pointer;
+    }
 }
 
 .resource {
