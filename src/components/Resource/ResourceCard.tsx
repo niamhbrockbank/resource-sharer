@@ -1,4 +1,5 @@
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import selectRandElement from "../../utils/selectRandElement";
 import { IResourceResponse } from "../../utils/types";
 
@@ -9,7 +10,10 @@ interface IProps {
 export default function ResourceCard({
   resourceData
 }: IProps): JSX.Element {
+  const navigate = useNavigate()
+
   const {
+    resource_id,
     resource_name,
     author_name,
     user_name,
@@ -23,7 +27,7 @@ export default function ResourceCard({
 
   return (
     // TODO: OnClick navigate to resource page
-    <div className="resource_card" onClick={() => console.log('this will bring you to full resource soon')}
+    <div className="resource_card" onClick={() => navigate(`/resource/${resource_id}`)}
       style={{backgroundImage : `url(/img/${backgroundImage})`}}
     > 
     <div className='card_details'>

@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
 import LogIn from "./components/LogIn";
+import ResourcePage from "./components/Resource/ResourcePage";
 
 export interface IUserResponse {
   user_id: number;
@@ -61,13 +62,8 @@ function App(): JSX.Element {
             <Home
               searchTags={searchTags}
               searchTerm={searchTerm}
-              currentUser={currentUserManager[0]}
               resourceList={resourceList}
               setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
               setSearchTerm={setSearchTerm}
               setSearchTags={setSearchTags}
             />
@@ -103,6 +99,7 @@ function App(): JSX.Element {
             />
           }
         />
+        <Route path='/resource/:id' element={<ResourcePage resourceList={resourceList}/>} />
       </Routes>
     </>
   );
