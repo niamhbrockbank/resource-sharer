@@ -1,11 +1,11 @@
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { useEffect } from "react";
-import Resource from "../Resource/Resource";
 import { IUserResponse } from "../../utils/types";
 import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
 import { filterBySearchTags } from "../../utils/filterBySearchTags";
 import filterByListMode from "../../utils/filterByListMode";
+import ResourceCard from "../Resource/ResourceCard";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
@@ -48,16 +48,10 @@ export default function StudyList({
           .filter((resource) =>
             filterByListMode("study list", userStudylist, resource)
           )
-          .map((resource) => (
-            <Resource
-              key={resource.resource_id}
+          .map((resource, i) => (
+            <ResourceCard
+              key={i}
               resourceData={resource}
-              currentUser={currentUser}
-              setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
             />
           ))}
       </div>
