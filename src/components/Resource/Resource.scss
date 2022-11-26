@@ -4,8 +4,12 @@
   width: 25em;
   padding: 16px;
   border-radius: 10px;
-  // background-image: url('/public/img/semi_circles.png');
-  // background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   h2 {
     font-size: 1.3em;
@@ -14,10 +18,19 @@
 
   .added_details {
     color: #7a9e9f;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+
+    p{
+      padding: 0px;
+      margin: 0px;
+    }
   }
 
   .link {
     cursor: pointer;
+    margin-right: 8px;
   }
 }
 
