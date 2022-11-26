@@ -10,6 +10,7 @@ import LikeResource from "./LikeResource";
 import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import EditResource from "./EditResource";
+import './Resource.scss'
 
 interface IProps {
   resourceData: IResourceResponse;
