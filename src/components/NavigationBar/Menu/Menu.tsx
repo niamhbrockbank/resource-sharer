@@ -19,7 +19,7 @@ export default function Menu({ setShowMenu }: IProps): JSX.Element {
   //TODO: Make add new resource a button
   //TODO: Only show study list button if signed in - show sign in button instead
   //TODO: Underline current page
-  
+
   return (
     <ul id="menu">
       {menuOptions.map((option, i) => {

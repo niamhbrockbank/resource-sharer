@@ -1,20 +1,19 @@
 .resource {
-    height: 25em;
-    border: none;
-    background-color: white;
-  }
-  
-  .likes_area {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-  }
-  
-  .likes {
-    margin: 10px 10px 0px 0px;
-  }
-  
-  .likes p {
-    margin: 0px;
-  }
-  
+  height: 25em;
+  border: none;
+  background-color: white;
+}
+
+.likes_area {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.likes {
+  margin: 10px 10px 0px 0px;
+}
+
+.likes p {
+  margin: 0px;
+}
