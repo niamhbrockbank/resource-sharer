@@ -15,9 +15,10 @@ export default function Menu({ setShowMenu }: IProps): JSX.Element {
     { name: "Home", route: "/" },
     { name: "Study List", route: "/study" },
     { name: "Add New Resource", route: "/new" },
+    { name: "Log Out", route : "/login"}
   ];
   //TODO: Make add new resource a button
-  //TODO: Only show study list button if signed in - show sign in button instead
+  //TODO: Only show study list and logout options if signed in - show sign in button instead
   //TODO: Underline current page
 
   return (
