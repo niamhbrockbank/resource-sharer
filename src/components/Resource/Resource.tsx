@@ -1,5 +1,5 @@
 import { IResourceResponse } from "../../utils/types";
-import ResourceHeader from "./ResourceHeader";
+import ResourceCard from "./ResourceCard";
 import { Modal, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
@@ -76,27 +76,20 @@ export default function Resource({
 
   return (
     <div>
-      <Card style={{ width: "18rem" }} className="resource">
-        <Card.Body>
-          <ResourceHeader
+          <ResourceCard
             setShowResource={setShowResource}
             resourceData={resourceData}
           />
           {/* <button>Add to study list</button> */}
-          <LikeResource
-            currentUser={currentUser}
-            resourceData={resourceData}
-            setResourceList={setResourceList}
-          />
-        </Card.Body>
-      </Card>
+          
+
 
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ResourceHeader
+          <ResourceCard
             setShowResource={setShowResource}
             resourceData={resourceData}
           />
