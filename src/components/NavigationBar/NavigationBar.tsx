@@ -1,21 +1,16 @@
 import { IUserResponse } from "../../utils/types";
-import SignIn from "./SignIn/SignIn";
 import "./NavigationBar.scss";
 import { useState } from "react";
 import Menu from "./Menu/Menu";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface IProps {
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
-  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
+  currentUser:
+    IUserResponse | undefined;
 }
 
 export default function NavigationBar({
-  currentUserManager,
-  setUserStudylist,
+  currentUser
 }: IProps): JSX.Element {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation().pathname;
@@ -30,10 +25,8 @@ export default function NavigationBar({
           alt="menu list button"
           onClick={() => setShowMenu(!showMenu)}
         />
-        <SignIn
-          currentUserManager={currentUserManager}
-          setUserStudylist={setUserStudylist}
-        />
+        {currentUser ? <div id='avatar'></div>: <Link to='/login'><button>Sign in</button></Link>}
+        
       </div>
       {/* TODO: Deal with site name being half way scrolled to top on home page overlapping menu */}
       {showMenu && <Menu setShowMenu={setShowMenu} />}

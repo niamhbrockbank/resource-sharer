@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
+import LogIn from "./components/LogIn";
 
 export interface IUserResponse {
   user_id: number;
@@ -50,8 +51,7 @@ function App(): JSX.Element {
   return (
     <>
       <NavigationBar
-        currentUserManager={currentUserManager}
-        setUserStudylist={setUserStudylist}
+        currentUser={currentUserManager[0]}
       />
 
       <Routes>
@@ -73,6 +73,7 @@ function App(): JSX.Element {
             />
           }
         />
+        <Route path='/login' element={<LogIn currentUserManager={currentUserManager} setUserStudylist={setUserStudylist}/>}/>
         {/* TODO: If not logged in and try to access new, redirect to sign in page */}
         <Route
           path="/new"

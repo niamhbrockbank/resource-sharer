@@ -19,6 +19,10 @@
   img {
     padding-right: 15px;
   }
+
+  button{
+    width: 9em;
+  }
 }
 
 #home_name {
@@ -32,4 +36,13 @@
 .site_name{
   width: fit-content;
   font-size: 1.5em;
+}
+
+#avatar{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fe5f55;
+  color: #fe5f55;
 }
