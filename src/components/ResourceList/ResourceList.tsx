@@ -41,6 +41,7 @@ export default function ResourceList({
   return (
     <>
       <h1>RESOURCE LIST</h1>
+      {/* TODO: Format at smaller screen sizes */}
       <div id="resource_list">
         {resourceList
           .filter((resource) => filterBySearchTags(searchTags, resource))

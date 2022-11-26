@@ -41,6 +41,10 @@ export default function Resource({
 
   const handleClose = () => setShowResource(false);
   const {
+    resource_name,
+    author_name,
+    url,
+    time_date,
     description,
     build_stage,
     opinion_reason,
@@ -80,17 +84,13 @@ export default function Resource({
         setShowResource={setShowResource}
         resourceData={resourceData}
       />
-      {/* <button>Add to study list</button> */}
 
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ResourceCard
-            setShowResource={setShowResource}
-            resourceData={resourceData}
-          />
+          <p>{resource_name}{author_name}{url}{time_date}</p>
           <h4>{build_stage}</h4>
           <p>{description}</p>
           <h4>{user_name}'s notes:</h4>

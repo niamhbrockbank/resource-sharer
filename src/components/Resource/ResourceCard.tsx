@@ -19,10 +19,12 @@ export default function ResourceCard({
     time_date,
   } = resourceData;
 
+  //TODO: Change author_name to just author
   //TODO: Set this as a property of the resource when fetching so doesnt change on refresh page
   const backgroundImage = selectRandElement(['semi_circles.png', 'rects.png', 'two_curved_rects.png', 'circles.png'])
 
   return (
+    // TODO: OnClick navigate to resource page
     <div className="resource_card" onClick={() => setShowResource(true)}
       style={{backgroundImage : `url(/img/${backgroundImage})`}}
     > 
@@ -43,5 +45,6 @@ export default function ResourceCard({
       </div>
       </div> 
     </div>
+    // TODO: Add to study list button/ swipe?
   );
 }
