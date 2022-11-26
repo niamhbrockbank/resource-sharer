@@ -5,16 +5,13 @@ import Menu from "./Menu/Menu";
 import { Link, useLocation } from "react-router-dom";
 
 interface IProps {
-  currentUser:
-    IUserResponse | undefined;
+  currentUser: IUserResponse | undefined;
 }
 
-export default function NavigationBar({
-  currentUser
-}: IProps): JSX.Element {
+export default function NavigationBar({ currentUser }: IProps): JSX.Element {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation().pathname;
-  const siteName = 'Study Resources'
+  const siteName = "Study Resources";
 
   return (
     <>
@@ -25,12 +22,21 @@ export default function NavigationBar({
           alt="menu list button"
           onClick={() => setShowMenu(!showMenu)}
         />
-        {currentUser ? <div id='avatar'></div>: <Link to='/login'><button>Sign in</button></Link>}
-        
+        {currentUser ? (
+          <div id="avatar"></div>
+        ) : (
+          <Link to="/login">
+            <button>Sign in</button>
+          </Link>
+        )}
       </div>
       {/* TODO: Deal with site name being half way scrolled to top on home page overlapping menu */}
       {showMenu && <Menu setShowMenu={setShowMenu} />}
-      {location === "/" && <h1 id="home_name" className="site_name">{siteName}</h1>}
+      {location === "/" && (
+        <h1 id="home_name" className="site_name">
+          {siteName}
+        </h1>
+      )}
 
       {/* TODO: Move filter area to its own component */}
     </>

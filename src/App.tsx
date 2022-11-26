@@ -51,9 +51,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <NavigationBar
-        currentUser={currentUserManager[0]}
-      />
+      <NavigationBar currentUser={currentUserManager[0]} />
 
       <Routes>
         <Route
@@ -69,7 +67,15 @@ function App(): JSX.Element {
             />
           }
         />
-        <Route path='/login' element={<LogIn currentUserManager={currentUserManager} setUserStudylist={setUserStudylist}/>}/>
+        <Route
+          path="/login"
+          element={
+            <LogIn
+              currentUserManager={currentUserManager}
+              setUserStudylist={setUserStudylist}
+            />
+          }
+        />
         {/* TODO: If not logged in and try to access new, redirect to sign in page */}
         <Route
           path="/new"
@@ -99,7 +105,10 @@ function App(): JSX.Element {
             />
           }
         />
-        <Route path='/resource/:id' element={<ResourcePage resourceList={resourceList}/>} />
+        <Route
+          path="/resource/:id"
+          element={<ResourcePage resourceList={resourceList} />}
+        />
       </Routes>
     </>
   );

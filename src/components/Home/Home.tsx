@@ -17,7 +17,7 @@ export default function Home({
   setSearchTerm,
   setSearchTags,
   resourceList,
-  setResourceList
+  setResourceList,
 }: IProps): JSX.Element {
   return (
     <>

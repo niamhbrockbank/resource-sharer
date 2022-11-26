@@ -17,7 +17,7 @@ export default function ResourceList({
   searchTags,
   searchTerm,
   resourceList,
-  setResourceList
+  setResourceList,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -32,10 +32,7 @@ export default function ResourceList({
           .filter((resource) => filterBySearchTags(searchTags, resource))
           .filter((resource) => filterBySearchTerm(searchTerm, resource))
           .map((resource, i) => (
-            <ResourceCard
-              key={i}
-              resourceData={resource}
-            />
+            <ResourceCard key={i} resourceData={resource} />
           ))}
       </div>
     </>

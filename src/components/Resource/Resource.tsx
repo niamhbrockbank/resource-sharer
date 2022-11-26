@@ -33,7 +33,6 @@ export default function Resource({
   opinions,
   buildStageNames,
 }: IProps): JSX.Element {
-
   const [showEdit, setShowEdit] = useState(false);
   const currentUserId = currentUser ? currentUser.user_id : undefined;
 
@@ -77,52 +76,49 @@ export default function Resource({
 
   return (
     <div>
-
-          <p>{resource_name}{author_name}{url}{time_date}</p>
-          <h4>{build_stage}</h4>
-          <p>{description}</p>
-          <h4>{user_name}'s notes:</h4>
-          <p>{opinion_reason}</p>
-          <LikeResource
-            currentUser={currentUser}
-            resourceData={resourceData}
-            setResourceList={setResourceList}
-          />
-          <div className="tag-cloud">
-            Tags:
-            {tag_array.length > 0 &&
-              tag_array.map((tag, i) => (
-                <button className="tag" key={i}>
-                  {tag}
-                </button>
-              ))}
-          </div>
-          <button
-            onClick={() => {
-              setShowEdit(true);
-            }}
-            disabled={currentUserId !== user_id}
-          >
-            Edit Resource
-          </button>
-          <button onClick={handleDelete}>
-            Delete Resource
-          </button>
-          {userStudylist && userStudylist.includes(resource_id) ? (
-            <button onClick={removeFromStudyList}>
-              Remove from study list
+      <p>
+        {resource_name}
+        {author_name}
+        {url}
+        {time_date}
+      </p>
+      <h4>{build_stage}</h4>
+      <p>{description}</p>
+      <h4>{user_name}'s notes:</h4>
+      <p>{opinion_reason}</p>
+      <LikeResource
+        currentUser={currentUser}
+        resourceData={resourceData}
+        setResourceList={setResourceList}
+      />
+      <div className="tag_cloud">
+        Tags:
+        {tag_array.length > 0 &&
+          tag_array.map((tag, i) => (
+            <button className="tag" key={i}>
+              {tag}
             </button>
-          ) : (
-            <button
-              onClick={addToStudyList}
-              disabled={currentUser === undefined}
-            >
-              Add to study list
-            </button>
-          )}
+          ))}
+      </div>
+      <button
+        onClick={() => {
+          setShowEdit(true);
+        }}
+        disabled={currentUserId !== user_id}
+      >
+        Edit Resource
+      </button>
+      <button onClick={handleDelete}>Delete Resource</button>
+      {userStudylist && userStudylist.includes(resource_id) ? (
+        <button onClick={removeFromStudyList}>Remove from study list</button>
+      ) : (
+        <button onClick={addToStudyList} disabled={currentUser === undefined}>
+          Add to study list
+        </button>
+      )}
 
-          <h3>Comments:</h3>
-          <Comments resource_id={resource_id} currentUserId={currentUserId} />
+      <h3>Comments:</h3>
+      <Comments resource_id={resource_id} currentUserId={currentUserId} />
 
       <EditResource
         currentUserId={currentUserId ?? NaN}
