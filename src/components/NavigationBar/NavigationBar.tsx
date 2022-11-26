@@ -21,7 +21,6 @@ export default function NavigationBar({
   return (
     <>
       <div id="navigation_bar">
-        <h1>Study Resources</h1>
         <img
           src="./img/menu.svg"
           alt="menu list button"
@@ -32,7 +31,7 @@ export default function NavigationBar({
           setUserStudylist={setUserStudylist}
         />
       </div>
-
+      <h1 id='site_name'>Study Resources</h1>
       {showMenu && <Menu setShowMenu={setShowMenu} />}
 
       {/* TODO: Move filter area to its own component */}
