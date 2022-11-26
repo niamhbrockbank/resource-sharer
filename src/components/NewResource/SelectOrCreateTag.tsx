@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { baseUrl } from "../../utils/baseUrl";
+import "./FormElement.scss";
 
 interface SelectOrCreateTagProps {
   selectedTags: { tag_name: string }[];
@@ -59,13 +59,19 @@ export function SelectOrCreateTag({
 
   return (
     <>
-      <input
-        id="new-tag-input"
-        value={currentTag}
-        onChange={(e) => setCurrentTag(e.target.value)}
-        placeholder="create or search tag"
-      />
-      <Button onClick={handleCreateNewTag}>Add new tag</Button>
+      <div id="tags_input">
+        <div className="form_element">
+          <label htmlFor="new-tag-input">Tags</label>
+          <input
+            id="new-tag-input"
+            value={currentTag}
+            onChange={(e) => setCurrentTag(e.target.value)}
+            placeholder="Search Tags"
+          />
+        </div>
+        <button onClick={handleCreateNewTag}>Add new tag</button>
+      </div>
+
       <div className="tag_cloud tags-to-select">
         {allTags.filter(filterTags).map((tag, i) => (
           <button

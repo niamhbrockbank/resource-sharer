@@ -9,15 +9,40 @@
   height: 5em;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   h1 {
-    flex-basis: 85vw;
-    font-size: 1.5em;
+    width: 85vw;
   }
 
   img {
     padding-right: 15px;
   }
+
+  button {
+    width: 9em;
+  }
+}
+
+#home_name {
+  position: sticky;
+  top: 0px;
+
+  padding-top: 20px;
+  margin-top: 24vh;
+}
+
+.site_name {
+  width: fit-content;
+  font-size: 1.5em;
+}
+
+#avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fe5f55;
+  color: #fe5f55;
 }

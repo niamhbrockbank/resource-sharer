@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { IResourceRequest } from "../../utils/types";
 import { IResourceResponse } from "../../utils/types";
@@ -6,6 +5,7 @@ import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../../utils/inputsValid";
 import { baseUrl } from "../../utils/baseUrl";
+import "./FormElement.scss";
 
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 
@@ -77,136 +77,137 @@ export default function CreateNewResource({
 
   return (
     <>
-      <h1>Add New Resource</h1>
-      <ul className="resource_modal">
-        <li>
-          <label htmlFor="resource-name-input">resource name: </label>
-          <input
-            id="resource-name-input"
-            value={resource_name}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                resource_name: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="author-name-input">author name: </label>
-          <input
-            id="author-name-input"
-            value={author_name}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                author_name: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="url-input">URL: </label>
-          <input
-            id="url-input"
-            value={url}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                url: e.target.value,
-              })
-            }
-            placeholder="paste here"
-          />
-        </li>
-        <li>
-          <label htmlFor="content-type-input">content type: </label>
-          <input
-            id="content-type-input"
-            value={content_type}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                content_type: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="description-input">description: </label>
-          <input
-            id="description-input"
-            value={description}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                description: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="opinion-select">opinion:</label>
-          <select
-            id="opinion-select"
-            defaultValue={"nothing selected"}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                opinion: e.target.value,
-              })
-            }
-          >
-            <option disabled>nothing selected</option>
-            {opinions.map((option, i) => (
-              <option key={i}>{option.opinion}</option>
-            ))}
-          </select>
-        </li>
-        <li>
-          <label htmlFor="opinion-reason-input">opinion-reason: </label>
-          <input
-            id="opinion-reason-input"
-            value={opinion_reason}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                opinion_reason: e.target.value,
-              })
-            }
-            placeholder="start typing"
-          />
-        </li>
-        <li>
-          <label htmlFor="buildStageName-select">stage: </label>
-          <select
-            id="buildStageName-select"
-            defaultValue={"nothing selected"}
-            onChange={(e) =>
-              setNewResourceData({
-                ...newResourceData,
-                build_stage: e.target.value,
-              })
-            }
-          >
-            <option disabled>nothing selected</option>
-            {buildStageNames.map((stage, i) => (
-              <option key={i}>{stage.stage_name}</option>
-            ))}
-          </select>
-        </li>
-      </ul>
+      <h1>ADD NEW RESOURCE</h1>
+
+      <div className="form_element">
+        <label htmlFor="resource-name-input">Resource Name</label>
+        <input
+          id="resource-name-input"
+          value={resource_name}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              resource_name: e.target.value,
+            })
+          }
+          placeholder="Resource Title"
+        />
+      </div>
+
+      <div className="form_element">
+        <label htmlFor="author-name-input">Author Name</label>
+        <input
+          id="author-name-input"
+          value={author_name}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              author_name: e.target.value,
+            })
+          }
+          placeholder="Author"
+        />
+      </div>
+
+      <div className="form_element">
+        <label htmlFor="url-input">URL</label>
+        <input
+          id="url-input"
+          value={url}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              url: e.target.value,
+            })
+          }
+          placeholder="URL"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="content-type-input">Content Type</label>
+        <input
+          id="content-type-input"
+          value={content_type}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              content_type: e.target.value,
+            })
+          }
+          placeholder="Content Type"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="description-input">Description</label>
+        <input
+          id="description-input"
+          value={description}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              description: e.target.value,
+            })
+          }
+          placeholder="Description"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="opinion-select">Opinion</label>
+        <select
+          id="opinion-select"
+          defaultValue={"nothing selected"}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              opinion: e.target.value,
+            })
+          }
+        >
+          <option disabled>Nothing Selected</option>
+          {opinions.map((option, i) => (
+            <option key={i}>{option.opinion}</option>
+          ))}
+        </select>
+      </div>
+      <div className="form_element">
+        <label htmlFor="opinion-reason-input">Opinion Explanation</label>
+        <input
+          id="opinion-reason-input"
+          value={opinion_reason}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              opinion_reason: e.target.value,
+            })
+          }
+          placeholder="Explanation"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="buildStageName-select">Stage</label>
+        <select
+          id="buildStageName-select"
+          defaultValue={"Nothing Selected"}
+          onChange={(e) =>
+            setNewResourceData({
+              ...newResourceData,
+              build_stage: e.target.value,
+            })
+          }
+        >
+          <option disabled>Nothing Selected</option>
+          {buildStageNames.map((stage, i) => (
+            <option key={i}>{stage.stage_name}</option>
+          ))}
+        </select>
+      </div>
+
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
       />
-      <Button variant="primary" onClick={handleSubmit}>
-        Submit
-      </Button>
+
+      <button onClick={handleSubmit}>Submit</button>
     </>
   );
 }

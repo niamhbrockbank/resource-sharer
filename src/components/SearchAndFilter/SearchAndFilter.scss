@@ -1,15 +1,17 @@
 #search_filter {
-  height: 70vh;
+  height: 46vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 #search_bar {
   width: 100%;
   padding: 10px 20px;
   border: 1px solid #7a9e9f;
+  margin-bottom: 8px;
   border-radius: 10em;
+  outline: none;
 }
 
 #search_bar:focus {
@@ -21,7 +23,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 8px;
   flex-wrap: wrap;
 }
 

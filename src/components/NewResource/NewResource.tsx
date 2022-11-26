@@ -1,5 +1,6 @@
 import { IResourceResponse, IUserResponse } from "../../utils/types";
 import CreateNewResource from "./CreateNewResource";
+import "./NewResource.scss";
 
 interface IProps {
   currentUserManager: [
@@ -22,11 +23,13 @@ export default function NewResource({
   buildStageNames,
 }: IProps): JSX.Element {
   return (
-    <CreateNewResource
-      currentUserManager={currentUserManager}
-      setResourceList={setResourceList}
-      opinions={opinions}
-      buildStageNames={buildStageNames}
-    />
+    <div id="new_resource">
+      <CreateNewResource
+        currentUserManager={currentUserManager}
+        setResourceList={setResourceList}
+        opinions={opinions}
+        buildStageNames={buildStageNames}
+      />
+    </div>
   );
 }

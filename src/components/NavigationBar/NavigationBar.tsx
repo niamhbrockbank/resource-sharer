@@ -1,39 +1,42 @@
 import { IUserResponse } from "../../utils/types";
-import SignIn from "./SignIn/SignIn";
 import "./NavigationBar.scss";
 import { useState } from "react";
 import Menu from "./Menu/Menu";
+import { Link, useLocation } from "react-router-dom";
 
 interface IProps {
-  currentUserManager: [
-    IUserResponse | undefined,
-    React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
-  ];
-  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
+  currentUser: IUserResponse | undefined;
 }
 
-export default function NavigationBar({
-  currentUserManager,
-  setUserStudylist,
-}: IProps): JSX.Element {
+export default function NavigationBar({ currentUser }: IProps): JSX.Element {
   const [showMenu, setShowMenu] = useState(false);
+  const location = useLocation().pathname;
+  const siteName = "Study Resources";
 
   return (
     <>
       <div id="navigation_bar">
-        <h1>Study Resources</h1>
+        {location !== "/" && <h1 className="site_name">{siteName}</h1>}
         <img
           src="./img/menu.svg"
           alt="menu list button"
           onClick={() => setShowMenu(!showMenu)}
         />
-        <SignIn
-          currentUserManager={currentUserManager}
-          setUserStudylist={setUserStudylist}
-        />
+        {currentUser ? (
+          <div id="avatar"></div>
+        ) : (
+          <Link to="/login">
+            <button>Sign in</button>
+          </Link>
+        )}
       </div>
-
-      {showMenu && <Menu setShowMenu={setShowMenu} />}
+      {/* TODO: Deal with site name being half way scrolled to top on home page overlapping menu */}
+      {showMenu && <Menu setShowMenu={setShowMenu} loggedIn={currentUser !== undefined}/>}
+      {location === "/" && (
+        <h1 id="home_name" className="site_name">
+          {siteName}
+        </h1>
+      )}
 
       {/* TODO: Move filter area to its own component */}
     </>
