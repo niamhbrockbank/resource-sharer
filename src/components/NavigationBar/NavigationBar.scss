@@ -12,6 +12,11 @@
   justify-content: flex-end;
   align-items: center;
 
+  h1 {
+    flex-basis: 85vw;
+    font-size: 1.5em;
+  }
+
   img {
     padding-right: 15px;
   }
