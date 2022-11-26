@@ -43,4 +43,5 @@ export interface IUserResponse {
 export interface MenuOption {
   name: string;
   route: string;
+  loggedIn: boolean;
 }
