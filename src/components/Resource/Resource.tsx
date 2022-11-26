@@ -25,7 +25,7 @@ interface IProps {
   }[];
 }
 
-export default function IndividualResource({
+export default function Resource({
   resourceData,
   currentUser,
   setResourceList,

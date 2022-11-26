@@ -1,6 +1,6 @@
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { useEffect } from "react";
-import IndividualResource from "../Resource/IndividualResource";
+import Resource from "../Resource/Resource";
 import { IUserResponse } from "../../utils/types";
 import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
@@ -49,7 +49,7 @@ export default function StudyList({
             filterByListMode("study list", userStudylist, resource)
           )
           .map((resource) => (
-            <IndividualResource
+            <Resource
               key={resource.resource_id}
               resourceData={resource}
               currentUser={currentUser}
