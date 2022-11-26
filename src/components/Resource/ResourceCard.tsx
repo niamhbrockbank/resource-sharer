@@ -4,12 +4,10 @@ import { IResourceResponse } from "../../utils/types";
 
 interface IProps {
   resourceData: IResourceResponse;
-  setShowResource: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ResourceCard({
-  resourceData,
-  setShowResource,
+  resourceData
 }: IProps): JSX.Element {
   const {
     resource_name,
@@ -25,7 +23,7 @@ export default function ResourceCard({
 
   return (
     // TODO: OnClick navigate to resource page
-    <div className="resource_card" onClick={() => setShowResource(true)}
+    <div className="resource_card" onClick={() => console.log('this will bring you to full resource soon')}
       style={{backgroundImage : `url(/img/${backgroundImage})`}}
     > 
     <div className='card_details'>

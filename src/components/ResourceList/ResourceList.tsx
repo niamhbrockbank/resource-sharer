@@ -1,38 +1,23 @@
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { useEffect } from "react";
-import Resource from "../Resource/Resource";
-import { IUserResponse } from "../../utils/types";
 import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
 import { filterBySearchTags } from "../../utils/filterBySearchTags";
 import "./ResourceList.scss";
+import ResourceCard from "../Resource/ResourceCard";
 
 interface IProps {
-  currentUser: IUserResponse | undefined;
   searchTags: string[];
   searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  userStudylist: number[] | null;
-  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
-  opinions: {
-    opinion: string;
-  }[];
-  buildStageNames: {
-    stage_name: string;
-  }[];
 }
 
 export default function ResourceList({
-  currentUser,
   searchTags,
   searchTerm,
   resourceList,
-  setResourceList,
-  userStudylist,
-  setUserStudylist,
-  opinions,
-  buildStageNames,
+  setResourceList
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);
@@ -46,16 +31,10 @@ export default function ResourceList({
         {resourceList
           .filter((resource) => filterBySearchTags(searchTags, resource))
           .filter((resource) => filterBySearchTerm(searchTerm, resource))
-          .map((resource) => (
-            <Resource
-              key={resource.resource_id}
+          .map((resource, i) => (
+            <ResourceCard
+              key={i}
               resourceData={resource}
-              currentUser={currentUser}
-              setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
             />
           ))}
       </div>

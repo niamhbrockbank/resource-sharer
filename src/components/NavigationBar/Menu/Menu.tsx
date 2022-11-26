@@ -1,10 +1,6 @@
 import "./Menu.scss";
 import { Link } from "react-router-dom";
-
-interface MenuOption {
-  name: string;
-  route: string;
-}
+import { MenuOption } from "../../../utils/types";
 
 interface IProps {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;

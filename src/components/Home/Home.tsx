@@ -46,13 +46,8 @@ export default function Home({
       <ResourceList
         searchTags={searchTags}
         searchTerm={searchTerm}
-        currentUser={currentUser}
         resourceList={resourceList}
         setResourceList={setResourceList}
-        userStudylist={userStudylist}
-        setUserStudylist={setUserStudylist}
-        opinions={opinions}
-        buildStageNames={buildStageNames}
       />
     </>
   );

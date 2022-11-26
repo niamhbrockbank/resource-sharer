@@ -1,6 +1,4 @@
 import { IResourceResponse } from "../../utils/types";
-import ResourceCard from "./ResourceCard";
-import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
@@ -35,11 +33,10 @@ export default function Resource({
   opinions,
   buildStageNames,
 }: IProps): JSX.Element {
-  const [showResource, setShowResource] = useState(false);
+
   const [showEdit, setShowEdit] = useState(false);
   const currentUserId = currentUser ? currentUser.user_id : undefined;
 
-  const handleClose = () => setShowResource(false);
   const {
     resource_name,
     author_name,
@@ -80,16 +77,7 @@ export default function Resource({
 
   return (
     <div>
-      <ResourceCard
-        setShowResource={setShowResource}
-        resourceData={resourceData}
-      />
 
-      <Modal show={showResource} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
           <p>{resource_name}{author_name}{url}{time_date}</p>
           <h4>{build_stage}</h4>
           <p>{description}</p>
@@ -109,41 +97,33 @@ export default function Resource({
                 </button>
               ))}
           </div>
-          <Button
-            variant="secondary"
+          <button
             onClick={() => {
               setShowEdit(true);
-              setShowResource(false);
             }}
             disabled={currentUserId !== user_id}
           >
             Edit Resource
-          </Button>
-          <Button variant="outline-secondary" onClick={handleDelete}>
+          </button>
+          <button onClick={handleDelete}>
             Delete Resource
-          </Button>
+          </button>
           {userStudylist && userStudylist.includes(resource_id) ? (
-            <Button onClick={removeFromStudyList}>
+            <button onClick={removeFromStudyList}>
               Remove from study list
-            </Button>
+            </button>
           ) : (
-            <Button
+            <button
               onClick={addToStudyList}
               disabled={currentUser === undefined}
             >
               Add to study list
-            </Button>
+            </button>
           )}
 
           <h3>Comments:</h3>
           <Comments resource_id={resource_id} currentUserId={currentUserId} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+
       <EditResource
         currentUserId={currentUserId ?? NaN}
         resource_id={resource_id}
