@@ -76,13 +76,11 @@ export default function Resource({
 
   return (
     <div>
-          <ResourceCard
-            setShowResource={setShowResource}
-            resourceData={resourceData}
-          />
-          {/* <button>Add to study list</button> */}
-          
-
+      <ResourceCard
+        setShowResource={setShowResource}
+        resourceData={resourceData}
+      />
+      {/* <button>Add to study list</button> */}
 
       <Modal show={showResource} onHide={handleClose}>
         <Modal.Header closeButton>

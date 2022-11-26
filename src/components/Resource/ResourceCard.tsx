@@ -21,12 +21,15 @@ export default function ResourceCard({
   } = resourceData;
 
   return (
-    <div className='resource_card' onClick={() => setShowResource(true)}>
+    <div className="resource_card" onClick={() => setShowResource(true)}>
       <h2>{resource_name}</h2>
       <p>by {author_name}</p>
-      <img className='link' src='./img/link.svg' onClick={() =>
-                    window.open(url, "_blank")
-                  } alt='link to resource'/>
+      <img
+        className="link"
+        src="./img/link.svg"
+        onClick={() => window.open(url, "_blank")}
+        alt="link to resource"
+      />
       <p>{content_type}</p>
       {/* TODO: Convert this to a traffic light system */}
       <p>{opinion}</p>
