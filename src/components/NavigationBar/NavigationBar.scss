@@ -12,25 +12,23 @@
   justify-content: flex-end;
   align-items: center;
 
-  h1 {
-    flex-basis: 85vw;
-    font-size: 1.5em;
-  }
-
   img {
     padding-right: 15px;
   }
 }
 
-#site_name {
+#home_name {
   position: sticky;
   top: 0px;
 
   padding-top: 20px;
   margin-top: 24vh;
 
-  h1 {
-    flex-basis: 85vw;
-    font-size: 1.5em;
-  }
+  
+}
+
+.site_name{
+  flex-basis: 85vw;
+  font-size: 1.5em;
+  font-weight: bold;
 }
