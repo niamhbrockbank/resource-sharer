@@ -59,7 +59,7 @@ export function SelectOrCreateTag({
 
   return (
     <>
-      
+      <div id='tags_input' >
         <div className="form_element">
           <label htmlFor="new-tag-input">Tags</label>
           <input
@@ -70,6 +70,7 @@ export function SelectOrCreateTag({
           />
         </div>
         <button onClick={handleCreateNewTag}>Add new tag</button>
+        </div>
 
 
       <div className="tag_cloud tags-to-select">

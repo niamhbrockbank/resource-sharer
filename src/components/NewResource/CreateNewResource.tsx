@@ -196,12 +196,12 @@ export default function CreateNewResource({
             ))}
           </select>
 </div>
-<div className="tags_input">
+
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
       />
-      </div>
+
       <button onClick={handleSubmit}>
         Submit
       </button>
