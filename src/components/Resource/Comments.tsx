@@ -118,7 +118,7 @@ export default function Comments({
                 ) : (
                   <p>{comment_body}</p>
                 )}
-                {/* TODO: Implement comment menu shown when click on menu button
+                {/* TODO: Implement comment menu shown when click on menu button - remove buttons below
                     TODO: Three dots only shown when hover over menu */}
                 <img
                   id="comment_menu"
