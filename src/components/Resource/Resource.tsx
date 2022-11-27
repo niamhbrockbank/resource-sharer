@@ -4,7 +4,7 @@ import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 import Comments from "./Comments";
 import { IUserResponse } from "../../utils/types";
-import LikeResource from "./LikeResource";
+import LikeResource from "./Likes";
 import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import EditResource from "./EditResource";
@@ -76,16 +76,6 @@ export default function Resource({
 
   return (
     <div>
-      <p>
-        {resource_name}
-        {author_name}
-        {url}
-        {time_date}
-      </p>
-      <h4>{build_stage}</h4>
-      <p>{description}</p>
-      <h4>{user_name}'s notes:</h4>
-      <p>{opinion_reason}</p>
       <LikeResource
         currentUser={currentUser}
         resourceData={resourceData}
