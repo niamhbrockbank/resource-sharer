@@ -9,11 +9,8 @@ import { inputsValid } from "../../utils/inputsValid";
 
 interface IEditResourceProps {
   currentUserId: number;
-  resource_id: number;
-  resource_data: IResourceResponse;
+  resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  showEdit: boolean;
-  setShowEdit: React.Dispatch<React.SetStateAction<boolean>>;
   opinions: {
     opinion: string;
   }[];
@@ -24,15 +21,15 @@ interface IEditResourceProps {
 
 export default function EditResource({
   currentUserId,
-  resource_id,
-  resource_data,
+  resourceList,
   setResourceList,
-  showEdit,
-  setShowEdit,
   opinions,
   buildStageNames,
 }: IEditResourceProps): JSX.Element {
+  //TODO: Code this like on the resource page
+  const resource_data = resourceList[0]
   const {
+    resource_id,
     resource_name,
     author_name,
     url,
@@ -82,7 +79,6 @@ export default function EditResource({
           tag_array: selectedTags,
         });
         getResourcesFromServer(setResourceList);
-        setShowEdit(false);
       }
     } catch (error) {
       console.error(error);

@@ -111,7 +111,7 @@ export default function Resource({
           {currentUser?.user_id === user_id && (
             <>
               {/* TODO: Add functionality to edit button */}
-              <button>Edit</button>
+              <button onClick={() => navigate(`/resource/${id}/edit`)}>Edit</button>
               <button onClick={() => handleDelete(resource_id)}>Delete</button>
             </>
           )}
