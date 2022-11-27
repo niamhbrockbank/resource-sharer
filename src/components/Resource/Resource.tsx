@@ -19,7 +19,7 @@ interface IProps {
 //TODO: Migrate functionality from Resource.tsx and rename to Resource
 //TODO: Only fetch all the data for the resources that you click on to the full page of
 //TODO: Only pass the data from the resource you're looking at, rather than the whole resourceList
-export default function ResourcePage({
+export default function Resource({
   resourceList,
   setResourceList,
   currentUser,

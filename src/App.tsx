@@ -10,7 +10,7 @@ import Home from "./components/Home/Home";
 import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
 import LogIn from "./components/LogIn";
-import ResourcePage from "./components/Resource/ResourcePage";
+import Resource from "./components/Resource/Resource";
 import Footer from "./components/Footer";
 
 export interface IUserResponse {
@@ -109,7 +109,7 @@ function App(): JSX.Element {
         <Route
           path="/resource/:id"
           element={
-            <ResourcePage
+            <Resource
               resourceList={resourceList}
               setResourceList={setResourceList}
               currentUser={currentUserManager[0]}
