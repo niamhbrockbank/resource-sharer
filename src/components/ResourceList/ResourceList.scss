@@ -1,5 +1,5 @@
-#resource_list_section{
-  background-color: #EEF5DB;
+#resource_list_section {
+  background-color: #eef5db;
   margin: -24px;
   padding: 24px;
 }
@@ -10,14 +10,14 @@
   gap: 20px;
 }
 
-@media screen and (max-width : 850px) {
-  #resource_list{
+@media screen and (max-width: 850px) {
+  #resource_list {
     grid-template-columns: 1fr;
   }
 }
 
-@media screen and (min-width : 1250px) {
-  #resource_list{
+@media screen and (min-width: 1250px) {
+  #resource_list {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }

@@ -108,7 +108,13 @@ function App(): JSX.Element {
         />
         <Route
           path="/resource/:id"
-          element={<ResourcePage resourceList={resourceList} setResourceList={setResourceList} currentUser={currentUserManager[0]}/>}
+          element={
+            <ResourcePage
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              currentUser={currentUserManager[0]}
+            />
+          }
         />
       </Routes>
 

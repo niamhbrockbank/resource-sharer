@@ -49,10 +49,7 @@ export default function StudyList({
             filterByListMode("study list", userStudylist, resource)
           )
           .map((resource, i) => (
-            <ResourceCard
-              key={i}
-              resourceData={resource}
-            />
+            <ResourceCard key={i} resourceData={resource} />
           ))}
       </div>
     </>

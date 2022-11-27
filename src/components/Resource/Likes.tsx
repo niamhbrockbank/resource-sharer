@@ -40,7 +40,7 @@ export default function Likes({
   }, [currentUser, liking_users_array, disliking_users_array]);
 
   // TODO: Change appearance of buttons when they have been clicked
-    //Use the filled in thumbs instead of the outlines for when have been clicked?
+  //Use the filled in thumbs instead of the outlines for when have been clicked?
   return (
     <div className="likes">
       <div className="like_count">
@@ -58,7 +58,7 @@ export default function Likes({
           }
           disabled={user_id === undefined}
         >
-        <img src='/img/thumb-up.svg' alt='like button'/>
+          <img src="/img/thumb-up.svg" alt="like button" />
         </button>
         <p>{num_likes}</p>
       </div>
@@ -79,7 +79,7 @@ export default function Likes({
           }
           disabled={user_id === undefined}
         >
-        <img src='/img/thumb-down.svg' alt='dislike button'/>
+          <img src="/img/thumb-down.svg" alt="dislike button" />
         </button>
         <p>{num_dislikes}</p>
       </div>
