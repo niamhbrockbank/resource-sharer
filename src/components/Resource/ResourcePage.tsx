@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
+import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import { IResourceResponse, IUserResponse } from "../../utils/types";
 import Comments from "./Comments";
 import Likes from "./Likes";
@@ -11,6 +12,8 @@ interface IProps {
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   currentUser: IUserResponse | undefined;
+  userStudylist: number[] | null;
+  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
 //TODO: Migrate functionality from Resource.tsx and rename to Resource
@@ -20,6 +23,8 @@ export default function ResourcePage({
   resourceList,
   setResourceList,
   currentUser,
+  userStudylist,
+  setUserStudylist,
 }: IProps): JSX.Element {
   const { id } = useParams();
   const errorMessage = "Sorry, that resource can't be found";
@@ -30,6 +35,25 @@ export default function ResourcePage({
     getResourcesFromServer(setResourceList);
 
     navigate("/");
+  }
+
+  async function addToStudyList(resource_id: number): Promise<void> {
+    if (currentUser === undefined) {
+      return;
+    }
+    await axios.post(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
+      resource_id: resource_id,
+    });
+    await getStudylistFromServer(currentUser.user_id, setUserStudylist);
+  }
+
+  async function removeFromStudyList(resource_id: number): Promise<void> {
+    if (currentUser !== undefined) {
+      await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
+        data: { resource_id: resource_id },
+      });
+      await getStudylistFromServer(currentUser.user_id, setUserStudylist);
+    }
   }
 
   if (id) {
@@ -96,6 +120,24 @@ export default function ResourcePage({
             resource_id={resource_id}
             currentUserId={currentUser?.user_id}
           />
+
+          {currentUser === undefined ? (
+            <button onClick={() => navigate("/login")}>
+              Sign in to add to study list
+            </button>
+          ) : (
+            <>
+              {userStudylist && userStudylist.includes(resource_id) ? (
+                <button onClick={() => removeFromStudyList(resource_id)}>
+                  Remove from study list
+                </button>
+              ) : (
+                <button onClick={() => addToStudyList(resource_id)}>
+                  Add to study list
+                </button>
+              )}
+            </>
+          )}
         </div>
       </div>
     );

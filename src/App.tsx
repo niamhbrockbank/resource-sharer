@@ -113,6 +113,8 @@ function App(): JSX.Element {
               resourceList={resourceList}
               setResourceList={setResourceList}
               currentUser={currentUserManager[0]}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
             />
           }
         />
