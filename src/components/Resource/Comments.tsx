@@ -80,53 +80,73 @@ export default function Comments({
   }
 
   return (
-    <div>
-      {currentUserId && (
-        <div>
-          <input
-            id="comment-input"
-            onKeyDown={(e) => handleKeyDown(e.key)}
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-            placeholder="Add a comment..."
-          />
-          <button onClick={submitComment}>Add comment</button>
-        </div>
-      )}
-      {comments.map((comment) => {
-        const { comment_body, comment_id, user_name, user_id } = comment;
-        return (
-          <div key={comment_id}>
-            <h4>{user_name}</h4>
-            {idOfCommentToEdit === comment_id ? (
-              <div>
-                <input
-                  value={editCommentInput}
-                  onChange={(e) => setEditCommentInput(e.target.value)}
-                />
-                <button onClick={handleSubmitEdit}>Submit</button>
-              </div>
-            ) : (
-              <div>
-                <p>{comment_body}</p>
-                <button
-                  disabled={currentUserId !== user_id}
-                  onClick={() => handleEditCommentClick(comment)}
-                >
-                  Edit
-                </button>
-              </div>
-            )}
-
-            <button
-              disabled={currentUserId !== user_id}
-              onClick={() => handleDeleteComment(comment_id)}
-            >
-              Delete
-            </button>
+    <>
+      <hr />
+      <div>
+        {/* TODO: Improve syntax */}
+        {comments.length > 1 ? (
+          <p>{comments.length} comments</p>
+        ) : (
+          <p>{comments.length} comment</p>
+        )}
+        {currentUserId && (
+          <div id="new_comment">
+            <div className="avatar"></div>
+            <input
+              onKeyDown={(e) => handleKeyDown(e.key)}
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+              placeholder="Add a comment..."
+            />
           </div>
-        );
-      })}
-    </div>
+        )}
+        {comments.map((comment) => {
+          const { comment_body, comment_id, user_name, user_id } = comment;
+          return (
+            <div className="comment" key={comment_id}>
+              <div className="avatar"></div>
+              <div>
+                <p>{user_name}</p>
+                {idOfCommentToEdit === comment_id ? (
+                  <div>
+                    <input
+                      value={editCommentInput}
+                      onChange={(e) => setEditCommentInput(e.target.value)}
+                    />
+                    <button onClick={handleSubmitEdit}>Submit</button>
+                  </div>
+                ) : (
+                  <p>{comment_body}</p>
+                )}
+                {/* TODO: Implement comment menu shown when click on menu button
+                    TODO: Three dots only shown when hover over menu */}
+                <img
+                  id="comment_menu"
+                  src="/img/three_dots.svg"
+                  alt="comment menu"
+                  onMouseOver={() => console.log("show comment menu")}
+                />
+                {user_id === currentUserId && (
+                  <>
+                    <button
+                      disabled={currentUserId !== user_id}
+                      onClick={() => handleEditCommentClick(comment)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      disabled={currentUserId !== user_id}
+                      onClick={() => handleDeleteComment(comment_id)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }

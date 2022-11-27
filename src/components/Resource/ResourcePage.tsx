@@ -92,7 +92,6 @@ export default function ResourcePage({
             </>
           )}
 
-          <h3>COMMENTS</h3>
           <Comments
             resource_id={resource_id}
             currentUserId={currentUser?.user_id}
