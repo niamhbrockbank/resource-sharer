@@ -1,4 +1,3 @@
-import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { IResourceRequest, IResourceResponse } from "../../utils/types";
 import { templateResourceRequest } from "../NewResource/CreateNewResource";
@@ -93,11 +92,7 @@ export default function EditResource({
 
   return (
     <>
-      <Modal show={showEdit} onHide={() => setShowEdit(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Resource</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+          <h1>Edit Resource</h1>
           <ul className="resource_modal">
             <li>
               <label htmlFor="resource-name-edit">resource name: </label>
@@ -221,16 +216,9 @@ export default function EditResource({
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
           />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEdit(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <button onClick={handleSubmit}>
             Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </button>
     </>
   );
 }
