@@ -11,6 +11,7 @@ import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
 import LogIn from "./components/LogIn";
 import ResourcePage from "./components/Resource/ResourcePage";
+import Footer from "./components/Footer";
 
 export interface IUserResponse {
   user_id: number;
@@ -110,6 +111,8 @@ function App(): JSX.Element {
           element={<ResourcePage resourceList={resourceList} />}
         />
       </Routes>
+
+      <Footer />
     </>
   );
 }
