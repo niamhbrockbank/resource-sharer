@@ -25,15 +25,17 @@ export default function ResourceList({
 
   return (
     <>
-      <h1>RESOURCE LIST</h1>
-      {/* TODO: Format at smaller screen sizes */}
-      <div id="resource_list">
-        {resourceList
-          .filter((resource) => filterBySearchTags(searchTags, resource))
-          .filter((resource) => filterBySearchTerm(searchTerm, resource))
-          .map((resource, i) => (
-            <ResourceCard key={i} resourceData={resource} />
-          ))}
+      <div id='resource_list_section'>
+        <h1>RESOURCE LIST</h1>
+        {/* TODO: Format at smaller screen sizes */}
+        <div id="resource_list">
+          {resourceList
+            .filter((resource) => filterBySearchTags(searchTags, resource))
+            .filter((resource) => filterBySearchTerm(searchTerm, resource))
+            .map((resource, i) => (
+              <ResourceCard key={i} resourceData={resource} />
+            ))}
+        </div>
       </div>
     </>
   );
