@@ -18,7 +18,7 @@ export default function Comments({
   const [idOfCommentToEdit, setIdOfCommentToEdit] = useState<number>(NaN); // Equal to NaN when not editing a comment, else equal to id of comment being edited
   const [editCommentInput, setEditCommentInput] = useState<string>("");
 
-  const currentUserId = currentUser?.user_id
+  const currentUserId = currentUser?.user_id;
 
   const getComments = useCallback(async () => {
     try {
@@ -94,7 +94,7 @@ export default function Comments({
         )}
         {currentUserId && (
           <div id="new_comment">
-            <Avatar name={currentUser.name}/>
+            <Avatar name={currentUser.name} />
             <input
               onKeyDown={(e) => handleKeyDown(e.key)}
               value={commentInput}
@@ -107,7 +107,7 @@ export default function Comments({
           const { comment_body, comment_id, user_name, user_id } = comment;
           return (
             <div className="comment" key={comment_id}>
-              <Avatar name={user_name}/>
+              <Avatar name={user_name} />
               <div>
                 <p>{user_name}</p>
                 {idOfCommentToEdit === comment_id ? (

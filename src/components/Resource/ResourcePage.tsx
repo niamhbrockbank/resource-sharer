@@ -116,10 +116,7 @@ export default function ResourcePage({
             </>
           )}
 
-          <Comments
-            resource_id={resource_id}
-            currentUser={currentUser}
-          />
+          <Comments resource_id={resource_id} currentUser={currentUser} />
 
           {currentUser === undefined ? (
             <button onClick={() => navigate("/login")}>

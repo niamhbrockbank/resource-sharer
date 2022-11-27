@@ -24,7 +24,7 @@ export default function NavigationBar({ currentUser }: IProps): JSX.Element {
           onClick={() => setShowMenu(!showMenu)}
         />
         {currentUser ? (
-          <Avatar name={currentUser.name}/>
+          <Avatar name={currentUser.name} />
         ) : (
           <Link to="/login">
             <button>Sign in</button>
