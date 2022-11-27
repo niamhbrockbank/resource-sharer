@@ -2,7 +2,7 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import selectRandElement from "../../utils/selectRandElement";
 import { IResourceResponse } from "../../utils/types";
-import "./Resource.scss";
+import "./ResourceCard.scss";
 
 interface IProps {
   resourceData: IResourceResponse;
