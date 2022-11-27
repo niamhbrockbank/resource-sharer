@@ -2,6 +2,7 @@
   position: sticky;
   top: 0px;
   background-color: #eef5db;
+  z-index: 254;
 
   margin-left: -20px;
   margin-right: -20px;
@@ -25,6 +26,8 @@
 #home_name {
   position: sticky;
   top: 0px;
+  width: fit-content;
+  z-index: 255;
 
   padding-top: 20px;
   margin-top: 24vh;
@@ -36,6 +39,7 @@
   position: absolute;
   left: 20px;
   top: 24px;
+  z-index: 255;
 }
 
 #avatar {
