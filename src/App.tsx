@@ -119,7 +119,18 @@ function App(): JSX.Element {
             />
           }
         />
-        <Route path='/resource/:id/edit'  element={<EditResource currentUserId={currentUserManager[0]?.user_id ?? NaN} resourceList={resourceList} setResourceList={setResourceList} opinions={opinions} buildStageNames={buildStageNames}/>}/>
+        <Route
+          path="/resource/:id/edit"
+          element={
+            <EditResource
+              currentUserId={currentUserManager[0]?.user_id ?? NaN}
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+            />
+          }
+        />
       </Routes>
 
       <Footer />

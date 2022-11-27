@@ -27,7 +27,7 @@ export default function EditResource({
   buildStageNames,
 }: IEditResourceProps): JSX.Element {
   //TODO: Code this like on the resource page
-  const resource_data = resourceList[0]
+  const resource_data = resourceList[0];
   const {
     resource_id,
     resource_name,
