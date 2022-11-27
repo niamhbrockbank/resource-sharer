@@ -118,7 +118,7 @@ export default function ResourcePage({
 
           <Comments
             resource_id={resource_id}
-            currentUserId={currentUser?.user_id}
+            currentUser={currentUser}
           />
 
           {currentUser === undefined ? (

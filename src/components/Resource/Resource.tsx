@@ -108,7 +108,7 @@ export default function Resource({
       )}
 
       <h3>Comments:</h3>
-      <Comments resource_id={resource_id} currentUserId={currentUserId} />
+      <Comments resource_id={resource_id} currentUser={currentUser} />
 
       <EditResource
         currentUserId={currentUserId ?? NaN}

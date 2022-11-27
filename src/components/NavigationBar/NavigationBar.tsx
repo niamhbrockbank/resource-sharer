@@ -3,7 +3,7 @@ import "./NavigationBar.scss";
 import { useState } from "react";
 import Menu from "./Menu/Menu";
 import { Link, useLocation } from "react-router-dom";
-import Avatar from "../Avatar";
+import Avatar from "../Avatar/Avatar";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
@@ -24,7 +24,7 @@ export default function NavigationBar({ currentUser }: IProps): JSX.Element {
           onClick={() => setShowMenu(!showMenu)}
         />
         {currentUser ? (
-          <Avatar />
+          <Avatar name={currentUser.name}/>
         ) : (
           <Link to="/login">
             <button>Sign in</button>

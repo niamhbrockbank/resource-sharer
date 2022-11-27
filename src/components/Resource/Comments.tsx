@@ -1,22 +1,24 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { baseUrl } from "../../utils/baseUrl";
-import { ICommentResponse } from "../../utils/types";
-import Avatar from "../Avatar";
+import { ICommentResponse, IUserResponse } from "../../utils/types";
+import Avatar from "../Avatar/Avatar";
 
 interface IProps {
   resource_id: number;
-  currentUserId: number | undefined;
+  currentUser: IUserResponse | undefined;
 }
 
 export default function Comments({
   resource_id,
-  currentUserId,
+  currentUser,
 }: IProps): JSX.Element {
   const [comments, setComments] = useState<ICommentResponse[]>([]);
   const [commentInput, setCommentInput] = useState<string>("");
   const [idOfCommentToEdit, setIdOfCommentToEdit] = useState<number>(NaN); // Equal to NaN when not editing a comment, else equal to id of comment being edited
   const [editCommentInput, setEditCommentInput] = useState<string>("");
+
+  const currentUserId = currentUser?.user_id
 
   const getComments = useCallback(async () => {
     try {
@@ -92,7 +94,7 @@ export default function Comments({
         )}
         {currentUserId && (
           <div id="new_comment">
-            <Avatar />
+            <Avatar name={currentUser.name}/>
             <input
               onKeyDown={(e) => handleKeyDown(e.key)}
               value={commentInput}
@@ -105,7 +107,7 @@ export default function Comments({
           const { comment_body, comment_id, user_name, user_id } = comment;
           return (
             <div className="comment" key={comment_id}>
-              <div className="avatar"></div>
+              <Avatar name={user_name}/>
               <div>
                 <p>{user_name}</p>
                 {idOfCommentToEdit === comment_id ? (
