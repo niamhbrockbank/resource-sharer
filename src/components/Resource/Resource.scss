@@ -33,16 +33,19 @@
   }
 }
 
-.likes_area {
+.likes {
   display: flex;
   flex-direction: row;
   text-align: center;
 }
 
-.likes {
+.like_count {
   margin: 10px 10px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
 .likes p {
-  margin: 0px;
+  margin: 0px 8px 0px 8px;
 }

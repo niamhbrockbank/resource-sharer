@@ -4,7 +4,7 @@ import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 import Comments from "./Comments";
 import { IUserResponse } from "../../utils/types";
-import LikeResource from "./Likes";
+import Likes from "./Likes";
 import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import EditResource from "./EditResource";
@@ -76,7 +76,7 @@ export default function Resource({
 
   return (
     <div>
-      <LikeResource
+      <Likes
         currentUser={currentUser}
         resourceData={resourceData}
         setResourceList={setResourceList}
