@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { ICommentResponse } from "../../utils/types";
+import Avatar from "../Avatar";
 
 interface IProps {
   resource_id: number;
@@ -91,7 +92,7 @@ export default function Comments({
         )}
         {currentUserId && (
           <div id="new_comment">
-            <div className="avatar"></div>
+            <Avatar />
             <input
               onKeyDown={(e) => handleKeyDown(e.key)}
               value={commentInput}
