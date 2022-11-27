@@ -1,56 +1,43 @@
-import { IResourceResponse } from "../../utils/types";
-import { useState } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils/baseUrl";
-import Comments from "./Comments";
-import { IUserResponse } from "../../utils/types";
-import LikeResource from "./LikeResource";
-import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
-import EditResource from "./EditResource";
+import getStudylistFromServer from "../../utils/getStudylistFromServer";
+import { IResourceResponse, IUserResponse } from "../../utils/types";
+import Comments from "./Comments";
+import Likes from "./Likes";
 import "./Resource.scss";
 
 interface IProps {
-  resourceData: IResourceResponse;
-  currentUser: IUserResponse | undefined;
+  resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  currentUser: IUserResponse | undefined;
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
-  opinions: {
-    opinion: string;
-  }[];
-  buildStageNames: {
-    stage_name: string;
-  }[];
 }
 
+//TODO: Migrate functionality from Resource.tsx and rename to Resource
+//TODO: Only fetch all the data for the resources that you click on to the full page of
+//TODO: Only pass the data from the resource you're looking at, rather than the whole resourceList
 export default function Resource({
-  resourceData,
-  currentUser,
+  resourceList,
   setResourceList,
+  currentUser,
   userStudylist,
   setUserStudylist,
-  opinions,
-  buildStageNames,
 }: IProps): JSX.Element {
-  const [showEdit, setShowEdit] = useState(false);
-  const currentUserId = currentUser ? currentUser.user_id : undefined;
+  const { id } = useParams();
+  const errorMessage = "Sorry, that resource can't be found";
+  const navigate = useNavigate();
 
-  const {
-    resource_name,
-    author_name,
-    url,
-    time_date,
-    description,
-    build_stage,
-    opinion_reason,
-    user_name,
-    resource_id,
-    tag_array,
-    user_id,
-  } = resourceData;
+  async function handleDelete(resource_id: number): Promise<void> {
+    await axios.delete(`${baseUrl}/resources/${resource_id}`);
+    getResourcesFromServer(setResourceList);
 
-  async function addToStudyList(): Promise<void> {
+    navigate("/");
+  }
+
+  async function addToStudyList(resource_id: number): Promise<void> {
     if (currentUser === undefined) {
       return;
     }
@@ -60,7 +47,7 @@ export default function Resource({
     await getStudylistFromServer(currentUser.user_id, setUserStudylist);
   }
 
-  async function removeFromStudyList(): Promise<void> {
+  async function removeFromStudyList(resource_id: number): Promise<void> {
     if (currentUser !== undefined) {
       await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
         data: { resource_id: resource_id },
@@ -69,67 +56,91 @@ export default function Resource({
     }
   }
 
-  async function handleDelete(): Promise<void> {
-    await axios.delete(`${baseUrl}/resources/${resource_id}`);
-    getResourcesFromServer(setResourceList);
-  }
+  if (id) {
+    const resource = resourceList.find(
+      (res) => res.resource_id === parseInt(id)
+    );
 
-  return (
-    <div>
-      <p>
-        {resource_name}
-        {author_name}
-        {url}
-        {time_date}
-      </p>
-      <h4>{build_stage}</h4>
-      <p>{description}</p>
-      <h4>{user_name}'s notes:</h4>
-      <p>{opinion_reason}</p>
-      <LikeResource
-        currentUser={currentUser}
-        resourceData={resourceData}
-        setResourceList={setResourceList}
-      />
-      <div className="tag_cloud">
-        Tags:
-        {tag_array.length > 0 &&
-          tag_array.map((tag, i) => (
-            <button className="tag" key={i}>
-              {tag}
+    if (!resource) {
+      return <h1>{errorMessage}</h1>;
+    }
+
+    const {
+      resource_id,
+      resource_name,
+      author_name,
+      url,
+      description,
+      opinion_reason,
+      user_name,
+      tag_array,
+      user_id,
+    } = resource;
+
+    return (
+      <div id="resource_page">
+        <div id="resource">
+          <h1>{resource_name}</h1>
+          <p>by {author_name}</p>
+          <div className="link">
+            <img src="/img/link.svg" alt="link icon" />
+            <a href={url}>{url.slice(0, 50)}</a>
+          </div>
+
+          <p>{description}</p>
+
+          <p>
+            {user_name}'s notes: {opinion_reason}
+          </p>
+          <div className="tag_cloud">
+            {tag_array.length > 0 &&
+              tag_array.map((tag, i) => (
+                <div className="tag" key={i}>
+                  {tag}
+                </div>
+              ))}
+          </div>
+
+          <Likes
+            currentUser={currentUser}
+            resourceData={resource}
+            setResourceList={setResourceList}
+          />
+
+          {/* If the user signed in is the one that added the resource */}
+          {currentUser?.user_id === user_id && (
+            <>
+              {/* TODO: Add functionality to edit button */}
+              <button onClick={() => navigate(`/resource/${id}/edit`)}>
+                Edit
+              </button>
+              <button onClick={() => handleDelete(resource_id)}>Delete</button>
+            </>
+          )}
+
+          <Comments resource_id={resource_id} currentUser={currentUser} />
+
+          {currentUser === undefined ? (
+            <button onClick={() => navigate("/login")}>
+              Sign in to add to study list
             </button>
-          ))}
+          ) : (
+            <>
+              {userStudylist && userStudylist.includes(resource_id) ? (
+                <button onClick={() => removeFromStudyList(resource_id)}>
+                  Remove from study list
+                </button>
+              ) : (
+                <button onClick={() => addToStudyList(resource_id)}>
+                  Add to study list
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
-      <button
-        onClick={() => {
-          setShowEdit(true);
-        }}
-        disabled={currentUserId !== user_id}
-      >
-        Edit Resource
-      </button>
-      <button onClick={handleDelete}>Delete Resource</button>
-      {userStudylist && userStudylist.includes(resource_id) ? (
-        <button onClick={removeFromStudyList}>Remove from study list</button>
-      ) : (
-        <button onClick={addToStudyList} disabled={currentUser === undefined}>
-          Add to study list
-        </button>
-      )}
-
-      <h3>Comments:</h3>
-      <Comments resource_id={resource_id} currentUserId={currentUserId} />
-
-      <EditResource
-        currentUserId={currentUserId ?? NaN}
-        resource_id={resource_id}
-        resource_data={resourceData}
-        setResourceList={setResourceList}
-        showEdit={showEdit}
-        setShowEdit={setShowEdit}
-        opinions={opinions}
-        buildStageNames={buildStageNames}
-      />
-    </div>
-  );
+    );
+  } else {
+    return <h1>{errorMessage}</h1>;
+  }
 }

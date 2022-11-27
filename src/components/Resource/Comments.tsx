@@ -1,21 +1,24 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { baseUrl } from "../../utils/baseUrl";
-import { ICommentResponse } from "../../utils/types";
+import { ICommentResponse, IUserResponse } from "../../utils/types";
+import Avatar from "../Avatar/Avatar";
 
 interface IProps {
   resource_id: number;
-  currentUserId: number | undefined;
+  currentUser: IUserResponse | undefined;
 }
 
 export default function Comments({
   resource_id,
-  currentUserId,
+  currentUser,
 }: IProps): JSX.Element {
   const [comments, setComments] = useState<ICommentResponse[]>([]);
   const [commentInput, setCommentInput] = useState<string>("");
   const [idOfCommentToEdit, setIdOfCommentToEdit] = useState<number>(NaN); // Equal to NaN when not editing a comment, else equal to id of comment being edited
   const [editCommentInput, setEditCommentInput] = useState<string>("");
+
+  const currentUserId = currentUser?.user_id;
 
   const getComments = useCallback(async () => {
     try {
@@ -80,53 +83,73 @@ export default function Comments({
   }
 
   return (
-    <div>
-      {currentUserId && (
-        <div>
-          <input
-            id="comment-input"
-            onKeyDown={(e) => handleKeyDown(e.key)}
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-            placeholder="Add a comment..."
-          />
-          <button onClick={submitComment}>Add comment</button>
-        </div>
-      )}
-      {comments.map((comment) => {
-        const { comment_body, comment_id, user_name, user_id } = comment;
-        return (
-          <div key={comment_id}>
-            <h4>{user_name}</h4>
-            {idOfCommentToEdit === comment_id ? (
-              <div>
-                <input
-                  value={editCommentInput}
-                  onChange={(e) => setEditCommentInput(e.target.value)}
-                />
-                <button onClick={handleSubmitEdit}>Submit</button>
-              </div>
-            ) : (
-              <div>
-                <p>{comment_body}</p>
-                <button
-                  disabled={currentUserId !== user_id}
-                  onClick={() => handleEditCommentClick(comment)}
-                >
-                  Edit
-                </button>
-              </div>
-            )}
-
-            <button
-              disabled={currentUserId !== user_id}
-              onClick={() => handleDeleteComment(comment_id)}
-            >
-              Delete
-            </button>
+    <>
+      <hr />
+      <div>
+        {/* TODO: Improve syntax */}
+        {comments.length > 1 ? (
+          <p>{comments.length} comments</p>
+        ) : (
+          <p>{comments.length} comment</p>
+        )}
+        {currentUserId && (
+          <div id="new_comment">
+            <Avatar name={currentUser.name} />
+            <input
+              onKeyDown={(e) => handleKeyDown(e.key)}
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+              placeholder="Add a comment..."
+            />
           </div>
-        );
-      })}
-    </div>
+        )}
+        {comments.map((comment) => {
+          const { comment_body, comment_id, user_name, user_id } = comment;
+          return (
+            <div className="comment" key={comment_id}>
+              <Avatar name={user_name} />
+              <div>
+                <p>{user_name}</p>
+                {idOfCommentToEdit === comment_id ? (
+                  <div>
+                    <input
+                      value={editCommentInput}
+                      onChange={(e) => setEditCommentInput(e.target.value)}
+                    />
+                    <button onClick={handleSubmitEdit}>Submit</button>
+                  </div>
+                ) : (
+                  <p>{comment_body}</p>
+                )}
+                {/* TODO: Implement comment menu shown when click on menu button - remove buttons below
+                    TODO: Three dots only shown when hover over menu */}
+                <img
+                  id="comment_menu"
+                  src="/img/three_dots.svg"
+                  alt="comment menu"
+                  onMouseOver={() => console.log("show comment menu")}
+                />
+                {user_id === currentUserId && (
+                  <>
+                    <button
+                      disabled={currentUserId !== user_id}
+                      onClick={() => handleEditCommentClick(comment)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      disabled={currentUserId !== user_id}
+                      onClick={() => handleDeleteComment(comment_id)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }

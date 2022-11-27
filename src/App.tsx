@@ -10,7 +10,9 @@ import Home from "./components/Home/Home";
 import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
 import LogIn from "./components/LogIn";
-import ResourcePage from "./components/Resource/ResourcePage";
+import Resource from "./components/Resource/Resource";
+import Footer from "./components/Footer";
+import EditResource from "./components/Resource/EditResource";
 
 export interface IUserResponse {
   user_id: number;
@@ -107,9 +109,31 @@ function App(): JSX.Element {
         />
         <Route
           path="/resource/:id"
-          element={<ResourcePage resourceList={resourceList} />}
+          element={
+            <Resource
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              currentUser={currentUserManager[0]}
+              userStudylist={userStudylist}
+              setUserStudylist={setUserStudylist}
+            />
+          }
+        />
+        <Route
+          path="/resource/:id/edit"
+          element={
+            <EditResource
+              currentUserId={currentUserManager[0]?.user_id ?? NaN}
+              resourceList={resourceList}
+              setResourceList={setResourceList}
+              opinions={opinions}
+              buildStageNames={buildStageNames}
+            />
+          }
         />
       </Routes>
+
+      <Footer />
     </>
   );
 }
