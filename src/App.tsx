@@ -5,7 +5,7 @@ import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import StudyList from "./components/ResourceList/StudyList";
 import Resource from "./components/Resource/Resource";
@@ -131,6 +131,7 @@ function App(): JSX.Element {
             />
           }
         />
+        <Route path='/*' element={ <Navigate to='/' />}/>
       </Routes>
 
       <Footer />
