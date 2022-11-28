@@ -42,14 +42,12 @@
   z-index: 255;
 }
 
-@media screen and (max-width : 530px) {
-
-  .site_name{
+@media screen and (max-width: 530px) {
+  .site_name {
     visibility: hidden;
   }
 
-  #home_name{
+  #home_name {
     z-index: -1;
   }
-  
 }

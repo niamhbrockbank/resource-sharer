@@ -1,4 +1,5 @@
-#new_resourc, #edit_resource {
+#new_resourc,
+#edit_resource {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -9,7 +10,7 @@
   margin-bottom: 20px;
 }
 
-.submit{
+.submit {
   width: 40%;
   align-self: flex-end;
   margin-right: -8px;
@@ -17,7 +18,7 @@
   height: 3em;
 }
 
-hr{
+hr {
   margin-top: 32px;
   margin-right: -8px;
 }

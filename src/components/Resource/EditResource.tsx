@@ -6,7 +6,7 @@ import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "../NewResource/SelectOrCreateTag";
 import { inputsValid } from "../../utils/inputsValid";
-import '../NewResource/FormElement.scss'
+import "../NewResource/FormElement.scss";
 
 interface IEditResourceProps {
   currentUserId: number;
@@ -88,7 +88,7 @@ export default function EditResource({
   }
 
   return (
-    <div id='edit_resource'>
+    <div id="edit_resource">
       <h1>EDIT RESOURCE</h1>
       <ul className="resource_modal">
         <div className="form_element">
@@ -215,7 +215,9 @@ export default function EditResource({
 
       <hr />
       {/* TODO: Add cancel button */}
-      <button onClick={handleSubmit} className='submit'>Submit</button>
+      <button onClick={handleSubmit} className="submit">
+        Submit
+      </button>
     </div>
   );
 }

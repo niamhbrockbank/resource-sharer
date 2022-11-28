@@ -209,7 +209,9 @@ export default function NewResource({
       />
 
       <hr />
-      <button onClick={handleSubmit} className='submit'>Submit</button>
+      <button onClick={handleSubmit} className="submit">
+        Submit
+      </button>
     </div>
   );
 }
