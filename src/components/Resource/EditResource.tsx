@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { IResourceRequest, IResourceResponse } from "../../utils/types";
-import { templateResourceRequest } from "../NewResource/CreateNewResource";
+import { templateResourceRequest } from "../NewResource/NewResource";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
