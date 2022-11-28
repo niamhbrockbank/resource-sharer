@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { IResourceResponse } from "./utils/types";
