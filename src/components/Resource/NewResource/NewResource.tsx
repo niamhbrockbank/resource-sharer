@@ -5,7 +5,7 @@ import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
 import { inputsValid } from "../../../utils/inputsValid";
 import { baseUrl } from "../../../utils/baseUrl";
-import '../FormElement.scss'
+import "../FormElement.scss";
 import "./NewResource.scss";
 
 import getResourcesFromServer from "../../../utils/getResourcesFromServer";

@@ -1,12 +1,10 @@
 import { siteName } from "../../utils/siteName";
-import './Footer.scss'
+import "./Footer.scss";
 
 export default function Footer(): JSX.Element {
   return (
     <>
-      <div id='footer'>
-        {siteName}
-      </div>
+      <div id="footer">{siteName}</div>
     </>
   );
 }

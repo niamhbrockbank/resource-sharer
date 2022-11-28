@@ -90,122 +90,122 @@ export default function EditResource({
   return (
     <div id="edit_resource">
       <h1>EDIT RESOURCE</h1>
-        <div className="form_element">
-          <label htmlFor="resource-name-edit">Resource Name</label>
-          <input
-            id="resource-name-edit"
-            value={editData.resource_name}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                resource_name: e.target.value,
-              })
-            }
-            placeholder="Resource Title"
-          />
-        </div>
+      <div className="form_element">
+        <label htmlFor="resource-name-edit">Resource Name</label>
+        <input
+          id="resource-name-edit"
+          value={editData.resource_name}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              resource_name: e.target.value,
+            })
+          }
+          placeholder="Resource Title"
+        />
+      </div>
 
-        <div className="form_element">
-          <label htmlFor="author-name-edit">Author Name</label>
-          <input
-            id="author-name-edit"
-            value={editData.author_name}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                author_name: e.target.value,
-              })
-            }
-            placeholder="Author"
-          />
-        </div>
-        <div className="form_element">
-          <label htmlFor="url-edit">URL</label>
-          <input
-            id="url-edit"
-            value={editData.url}
-            onChange={(e) => setEditData({ ...editData, url: e.target.value })}
-            placeholder="URL"
-          />
-        </div>
-        <div className="form_element">
-          <label htmlFor="content-type-edit">Content Type</label>
-          <input
-            id="content-type-edit"
-            value={editData.content_type}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                content_type: e.target.value,
-              })
-            }
-            placeholder="Content Type"
-          />
-        </div>
-        <div className="form_element">
-          <label htmlFor="description-edit">Description</label>
-          <input
-            id="description-edit"
-            value={editData.description}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                description: e.target.value,
-              })
-            }
-            placeholder="Description"
-          />
-        </div>
-        <div className="form_element">
-          <label htmlFor="opinion-select-edit">Opinion</label>
-          <select
-            id="opinion-select-edit"
-            defaultValue={resource_data.opinion}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                opinion: e.target.value,
-              })
-            }
-          >
-            <option disabled>Nothing Selected</option>
-            {opinions.map((option, i) => (
-              <option key={i}>{option.opinion}</option>
-            ))}
-          </select>
-        </div>
-        <div className="form_element">
-          <label htmlFor="opinion-reason-input">Opinion Explanation</label>
-          <input
-            id="opinion-reason-input"
-            value={editData.opinion_reason}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                opinion_reason: e.target.value,
-              })
-            }
-            placeholder="Explanation"
-          />
-        </div>
-        <div className="form_element">
-          <label htmlFor="buildStageName-select">Stage</label>
-          <select
-            id="buildStageName-select"
-            defaultValue={resource_data.build_stage}
-            onChange={(e) =>
-              setEditData({
-                ...editData,
-                build_stage: e.target.value,
-              })
-            }
-          >
-            <option disabled>Nothing Selected</option>
-            {buildStageNames.map((stage, i) => (
-              <option key={i}>{stage.stage_name}</option>
-            ))}
-          </select>
-        </div>
+      <div className="form_element">
+        <label htmlFor="author-name-edit">Author Name</label>
+        <input
+          id="author-name-edit"
+          value={editData.author_name}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              author_name: e.target.value,
+            })
+          }
+          placeholder="Author"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="url-edit">URL</label>
+        <input
+          id="url-edit"
+          value={editData.url}
+          onChange={(e) => setEditData({ ...editData, url: e.target.value })}
+          placeholder="URL"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="content-type-edit">Content Type</label>
+        <input
+          id="content-type-edit"
+          value={editData.content_type}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              content_type: e.target.value,
+            })
+          }
+          placeholder="Content Type"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="description-edit">Description</label>
+        <input
+          id="description-edit"
+          value={editData.description}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              description: e.target.value,
+            })
+          }
+          placeholder="Description"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="opinion-select-edit">Opinion</label>
+        <select
+          id="opinion-select-edit"
+          defaultValue={resource_data.opinion}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              opinion: e.target.value,
+            })
+          }
+        >
+          <option disabled>Nothing Selected</option>
+          {opinions.map((option, i) => (
+            <option key={i}>{option.opinion}</option>
+          ))}
+        </select>
+      </div>
+      <div className="form_element">
+        <label htmlFor="opinion-reason-input">Opinion Explanation</label>
+        <input
+          id="opinion-reason-input"
+          value={editData.opinion_reason}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              opinion_reason: e.target.value,
+            })
+          }
+          placeholder="Explanation"
+        />
+      </div>
+      <div className="form_element">
+        <label htmlFor="buildStageName-select">Stage</label>
+        <select
+          id="buildStageName-select"
+          defaultValue={resource_data.build_stage}
+          onChange={(e) =>
+            setEditData({
+              ...editData,
+              build_stage: e.target.value,
+            })
+          }
+        >
+          <option disabled>Nothing Selected</option>
+          {buildStageNames.map((stage, i) => (
+            <option key={i}>{stage.stage_name}</option>
+          ))}
+        </select>
+      </div>
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}

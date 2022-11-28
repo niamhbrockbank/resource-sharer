@@ -1,1 +1,1 @@
-export const siteName = 'Study Resources'
+export const siteName = "Study Resources";
