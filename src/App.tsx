@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import StudyList from "./components/ResourceList/StudyList";
 import Resource from "./components/Resource/Resource";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import EditResource from "./components/Resource/EditResource";
 import SignIn from "./components/NavigationBar/SignIn/SignIn";
 import NewResource from "./components/NewResource/NewResource";

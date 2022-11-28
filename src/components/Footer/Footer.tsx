@@ -1,4 +1,4 @@
-import { siteName } from "../utils/siteName";
+import { siteName } from "../../utils/siteName";
 
 export default function Footer(): JSX.Element {
   return (
