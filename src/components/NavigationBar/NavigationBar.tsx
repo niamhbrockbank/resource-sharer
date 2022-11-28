@@ -26,7 +26,7 @@ export default function NavigationBar({ currentUser }: IProps): JSX.Element {
         {currentUser ? (
           <Avatar name={currentUser.name} />
         ) : (
-          <Link to="/login">
+          <Link to="/signin">
             <button>Sign in</button>
           </Link>
         )}

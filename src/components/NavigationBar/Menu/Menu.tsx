@@ -12,7 +12,7 @@ export default function Menu({ setShowMenu, loggedIn }: IProps): JSX.Element {
     { name: "Home", route: "/", loggedIn: false },
     { name: "Study List", route: "/study", loggedIn: true },
     { name: "Add New Resource", route: "/new", loggedIn: true },
-    { name: "Log Out", route: "/login", loggedIn: true },
+    { name: "Log Out", route: "/signin", loggedIn: true },
   ];
   //TODO: Make add new resource a button
   //TODO: Underline current page

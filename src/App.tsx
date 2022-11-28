@@ -7,12 +7,12 @@ import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
-import NewResource from "./components/NewResource/NewResource";
 import StudyList from "./components/ResourceList/StudyList";
-import LogIn from "./components/LogIn";
 import Resource from "./components/Resource/Resource";
 import Footer from "./components/Footer";
 import EditResource from "./components/Resource/EditResource";
+import SignIn from "./components/NavigationBar/SignIn/SignIn";
+import NewResource from "./components/NewResource/NewResource";
 
 export interface IUserResponse {
   user_id: number;
@@ -70,9 +70,9 @@ function App(): JSX.Element {
           }
         />
         <Route
-          path="/login"
+          path="/signin"
           element={
-            <LogIn
+            <SignIn
               currentUserManager={currentUserManager}
               setUserStudylist={setUserStudylist}
             />

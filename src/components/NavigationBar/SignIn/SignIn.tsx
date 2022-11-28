@@ -17,8 +17,6 @@ export default function SignIn({
   currentUserManager,
   setUserStudylist,
 }: IProps): JSX.Element {
-  //TODO: If not signed in then show as sign in button
-  //TODO: If signed in show as avatar
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
 
@@ -47,13 +45,19 @@ export default function SignIn({
   }
 
   return (
-    <select id="select-user" onChange={(e) => handleSelectUser(e.target.value)}>
-      <option value={undefined}>Not signed in</option>
-      {userList.map((user, i) => (
-        <option key={i} value={user.user_id}>
-          {user.name}
-        </option>
-      ))}
-    </select>
+    <div id="sign_in">
+      <h1>SIGN IN</h1>
+      <select
+        id="select_user"
+        onChange={(e) => handleSelectUser(e.target.value)}
+      >
+        <option value={undefined}>Select User</option>
+        {userList.map((user, i) => (
+          <option key={i} value={user.user_id}>
+            {user.name}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }

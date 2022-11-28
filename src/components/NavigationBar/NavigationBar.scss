@@ -4,10 +4,10 @@
   background-color: #eef5db;
   z-index: 254;
 
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -24px;
+  margin-right: -24px;
   margin-top: -24px;
-  padding: 20px;
+  padding: 24px;
   height: 5em;
 
   display: flex;
@@ -29,7 +29,7 @@
   width: fit-content;
   z-index: 255;
 
-  padding-top: 20px;
+  padding-top: 24px;
   margin-top: 24vh;
 }
 
@@ -40,4 +40,14 @@
   left: 20px;
   top: 24px;
   z-index: 255;
+}
+
+@media screen and (max-width: 530px) {
+  .site_name {
+    visibility: hidden;
+  }
+
+  #home_name {
+    z-index: -1;
+  }
 }

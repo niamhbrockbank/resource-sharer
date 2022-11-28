@@ -25,6 +25,12 @@
   }
 }
 
+@media screen and (max-width: 650px) {
+  #resource {
+    width: 100%;
+  }
+}
+
 .link {
   display: flex;
   gap: 20px;
@@ -33,6 +39,8 @@
 
   a {
     color: #7a9e9f;
+    width: 80%;
+    overflow: hidden;
   }
 }
 
@@ -74,7 +82,7 @@
 
 .comment {
   display: grid;
-  grid-template-columns: 10% 80%;
+  grid-template-columns: max(10%, 48px) 80%;
   flex-direction: column;
 
   p {
@@ -88,6 +96,6 @@
 
 #comment_menu {
   position: relative;
-  left: 105%;
+  left: 102%;
   top: -77%;
 }

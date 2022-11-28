@@ -1,9 +1,24 @@
-#new_resource {
+#new_resourc,
+#edit_resource {
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 40rem;
+  width: 100%;
+  max-width: 40em;
   margin: auto;
   box-sizing: border-box;
   margin-bottom: 20px;
+}
+
+.submit {
+  width: 40%;
+  align-self: flex-end;
+  margin-right: -8px;
+  margin-top: 0px;
+  height: 3em;
+}
+
+hr {
+  margin-top: 32px;
+  margin-right: -8px;
 }

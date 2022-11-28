@@ -121,7 +121,7 @@ export default function Resource({
           <Comments resource_id={resource_id} currentUser={currentUser} />
 
           {currentUser === undefined ? (
-            <button onClick={() => navigate("/login")}>
+            <button onClick={() => navigate("/signin")}>
               Sign in to add to study list
             </button>
           ) : (
