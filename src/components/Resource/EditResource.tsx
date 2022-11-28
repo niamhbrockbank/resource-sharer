@@ -6,6 +6,7 @@ import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "../NewResource/SelectOrCreateTag";
 import { inputsValid } from "../../utils/inputsValid";
+import '../NewResource/FormElement.scss'
 
 interface IEditResourceProps {
   currentUserId: number;
@@ -87,11 +88,11 @@ export default function EditResource({
   }
 
   return (
-    <>
-      <h1>Edit Resource</h1>
+    <div id='edit_resource'>
+      <h1>EDIT RESOURCE</h1>
       <ul className="resource_modal">
-        <li>
-          <label htmlFor="resource-name-edit">resource name: </label>
+        <div className="form_element">
+          <label htmlFor="resource-name-edit">Resource Name</label>
           <input
             id="resource-name-edit"
             value={editData.resource_name}
@@ -101,11 +102,12 @@ export default function EditResource({
                 resource_name: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Resource Title"
           />
-        </li>
-        <li>
-          <label htmlFor="author-name-edit">author name: </label>
+        </div>
+
+        <div className="form_element">
+          <label htmlFor="author-name-edit">Author Name</label>
           <input
             id="author-name-edit"
             value={editData.author_name}
@@ -115,20 +117,20 @@ export default function EditResource({
                 author_name: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Author"
           />
-        </li>
-        <li>
-          <label htmlFor="url-edit">URL: </label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="url-edit">URL</label>
           <input
             id="url-edit"
             value={editData.url}
             onChange={(e) => setEditData({ ...editData, url: e.target.value })}
-            placeholder="paste here"
+            placeholder="URL"
           />
-        </li>
-        <li>
-          <label htmlFor="content-type-edit">content type: </label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="content-type-edit">Content Type</label>
           <input
             id="content-type-edit"
             value={editData.content_type}
@@ -138,11 +140,11 @@ export default function EditResource({
                 content_type: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Content Type"
           />
-        </li>
-        <li>
-          <label htmlFor="description-edit">description: </label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="description-edit">Description</label>
           <input
             id="description-edit"
             value={editData.description}
@@ -152,14 +154,14 @@ export default function EditResource({
                 description: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Description"
           />
-        </li>
-        <li>
-          <label htmlFor="opinion-select-edit">opinion:</label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="opinion-select-edit">Opinion</label>
           <select
             id="opinion-select-edit"
-            defaultValue={"nothing selected"}
+            defaultValue={resource_data.opinion}
             onChange={(e) =>
               setEditData({
                 ...editData,
@@ -167,14 +169,14 @@ export default function EditResource({
               })
             }
           >
-            <option disabled>nothing selected</option>
+            <option disabled>Nothing Selected</option>
             {opinions.map((option, i) => (
               <option key={i}>{option.opinion}</option>
             ))}
           </select>
-        </li>
-        <li>
-          <label htmlFor="opinion-reason-input">opinion-reason: </label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="opinion-reason-input">Opinion Explanation</label>
           <input
             id="opinion-reason-input"
             value={editData.opinion_reason}
@@ -184,14 +186,14 @@ export default function EditResource({
                 opinion_reason: e.target.value,
               })
             }
-            placeholder="start typing"
+            placeholder="Explanation"
           />
-        </li>
-        <li>
-          <label htmlFor="buildStageName-select">stage: </label>
+        </div>
+        <div className="form_element">
+          <label htmlFor="buildStageName-select">Stage</label>
           <select
             id="buildStageName-select"
-            defaultValue={"nothing selected"}
+            defaultValue={resource_data.build_stage}
             onChange={(e) =>
               setEditData({
                 ...editData,
@@ -199,18 +201,21 @@ export default function EditResource({
               })
             }
           >
-            <option disabled>nothing selected</option>
+            <option disabled>Nothing Selected</option>
             {buildStageNames.map((stage, i) => (
               <option key={i}>{stage.stage_name}</option>
             ))}
           </select>
-        </li>
+        </div>
       </ul>
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
       />
-      <button onClick={handleSubmit}>Submit</button>
-    </>
+
+      <hr />
+      {/* TODO: Add cancel button */}
+      <button onClick={handleSubmit} className='submit'>Submit</button>
+    </div>
   );
 }
