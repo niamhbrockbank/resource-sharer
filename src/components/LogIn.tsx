@@ -14,7 +14,6 @@ export default function LogIn({
 }: IProps): JSX.Element {
   return (
     <>
-      <h1>LOG IN</h1>
       <SignIn
         currentUserManager={currentUserManager}
         setUserStudylist={setUserStudylist}
