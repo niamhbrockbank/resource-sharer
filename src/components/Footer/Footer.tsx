@@ -1,9 +1,10 @@
 import { siteName } from "../../utils/siteName";
+import './Footer.scss'
 
 export default function Footer(): JSX.Element {
   return (
     <>
-      <div style={{ height: "48px", marginTop: "24px", paddingTop: "8px" }}>
+      <div id='footer'>
         {siteName}
       </div>
     </>
