@@ -90,7 +90,6 @@ export default function EditResource({
   return (
     <div id="edit_resource">
       <h1>EDIT RESOURCE</h1>
-      <ul className="resource_modal">
         <div className="form_element">
           <label htmlFor="resource-name-edit">Resource Name</label>
           <input
@@ -207,7 +206,6 @@ export default function EditResource({
             ))}
           </select>
         </div>
-      </ul>
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
