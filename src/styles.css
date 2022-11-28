@@ -22,6 +22,7 @@ body {
 button {
   margin: 2px 5px;
   background-color: #fe5f55;
+  color: black;
   font-size: 1em;
   padding: 6px 25px;
   margin: 10px 0px 10px 0px;
