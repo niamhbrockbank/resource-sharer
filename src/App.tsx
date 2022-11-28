@@ -12,7 +12,7 @@ import Resource from "./components/Resource/Resource";
 import Footer from "./components/Footer/Footer";
 import EditResource from "./components/Resource/EditResource";
 import SignIn from "./components/NavigationBar/SignIn/SignIn";
-import NewResource from "./components/NewResource/NewResource";
+import NewResource from "./components/Resource/NewResource/NewResource";
 
 export interface IUserResponse {
   user_id: number;

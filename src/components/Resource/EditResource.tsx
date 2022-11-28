@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { IResourceRequest, IResourceResponse } from "../../utils/types";
-import { templateResourceRequest } from "../NewResource/NewResource";
+import { templateResourceRequest } from "./NewResource/NewResource";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
-import { SelectOrCreateTag } from "../NewResource/SelectOrCreateTag";
+import { SelectOrCreateTag } from "./NewResource/SelectOrCreateTag";
 import { inputsValid } from "../../utils/inputsValid";
-import "../NewResource/FormElement.scss";
+import "./NewResource/FormElement.scss";
 
 interface IEditResourceProps {
   currentUserId: number;
