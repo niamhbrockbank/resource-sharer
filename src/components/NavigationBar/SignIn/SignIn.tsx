@@ -50,7 +50,7 @@ export default function SignIn({
     <div id='sign_in'>
       <h1>SIGN IN</h1>
       <select id="select_user" onChange={(e) => handleSelectUser(e.target.value)}>
-        <option value={undefined}>Not signed in</option>
+        <option value={undefined}>Select User</option>
         {userList.map((user, i) => (
           <option key={i} value={user.user_id}>
             {user.name}
