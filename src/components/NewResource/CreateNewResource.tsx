@@ -207,7 +207,8 @@ export default function CreateNewResource({
         setSelectedTags={setSelectedTags}
       />
 
-      <button onClick={handleSubmit}>Submit</button>
+      <hr />
+      <button onClick={handleSubmit} className='submit'>Submit</button>
     </>
   );
 }
