@@ -4,6 +4,7 @@ import { useState } from "react";
 import Menu from "./Menu/Menu";
 import { Link, useLocation } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
+import { siteName } from "../../utils/siteName";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
@@ -12,7 +13,6 @@ interface IProps {
 export default function NavigationBar({ currentUser }: IProps): JSX.Element {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation().pathname;
-  const siteName = "Study Resources";
 
   return (
     <>
