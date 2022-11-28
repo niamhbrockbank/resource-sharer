@@ -6,7 +6,7 @@ import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "./NewResource/SelectOrCreateTag";
 import { inputsValid } from "../../utils/inputsValid";
-import "./NewResource/FormElement.scss";
+import "./FormElement.scss";
 
 interface IEditResourceProps {
   currentUserId: number;

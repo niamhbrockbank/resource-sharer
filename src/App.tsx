@@ -11,7 +11,7 @@ import StudyList from "./components/ResourceList/StudyList";
 import Resource from "./components/Resource/Resource";
 import Footer from "./components/Footer/Footer";
 import EditResource from "./components/Resource/EditResource";
-import SignIn from "./components/NavigationBar/SignIn/SignIn";
+import SignIn from "./components/SignIn/SignIn";
 import NewResource from "./components/Resource/NewResource/NewResource";
 
 export interface IUserResponse {
