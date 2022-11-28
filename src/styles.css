@@ -16,6 +16,8 @@ body {
   background-color: #f3f4ef;
   color: #4f6367;
   margin: 24px;
+  width: 100;
+  height: 100;
 }
 
 button {
