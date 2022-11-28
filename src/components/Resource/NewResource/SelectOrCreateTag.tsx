@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { baseUrl } from "../../utils/baseUrl";
-import "./FormElement.scss";
+import { baseUrl } from "../../../utils/baseUrl";
+import "../FormElement.scss";
 
 interface SelectOrCreateTagProps {
   selectedTags: { tag_name: string }[];

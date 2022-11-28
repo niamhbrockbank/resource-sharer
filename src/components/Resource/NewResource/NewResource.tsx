@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { IResourceRequest } from "../../utils/types";
-import { IResourceResponse } from "../../utils/types";
+import { IResourceRequest } from "../../../utils/types";
+import { IResourceResponse } from "../../../utils/types";
 import { SelectOrCreateTag } from "./SelectOrCreateTag";
 import axios from "axios";
-import { inputsValid } from "../../utils/inputsValid";
-import { baseUrl } from "../../utils/baseUrl";
-import "./FormElement.scss";
+import { inputsValid } from "../../../utils/inputsValid";
+import { baseUrl } from "../../../utils/baseUrl";
+import "../FormElement.scss";
 import "./NewResource.scss";
 
-import getResourcesFromServer from "../../utils/getResourcesFromServer";
+import getResourcesFromServer from "../../../utils/getResourcesFromServer";
 
-import { IUserResponse } from "../../utils/types";
+import { IUserResponse } from "../../../utils/types";
 
 interface IProps {
   currentUserManager: [

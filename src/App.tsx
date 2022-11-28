@@ -1,18 +1,17 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { IResourceResponse } from "./utils/types";
 import "./styles.css";
 import { baseUrl } from "./utils/baseUrl";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import StudyList from "./components/ResourceList/StudyList";
 import Resource from "./components/Resource/Resource";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import EditResource from "./components/Resource/EditResource";
-import SignIn from "./components/NavigationBar/SignIn/SignIn";
-import NewResource from "./components/NewResource/NewResource";
+import SignIn from "./components/SignIn/SignIn";
+import NewResource from "./components/Resource/NewResource/NewResource";
 
 export interface IUserResponse {
   user_id: number;
@@ -131,6 +130,7 @@ function App(): JSX.Element {
             />
           }
         />
+        <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
 
       <Footer />
