@@ -18,7 +18,7 @@ interface IEditResourceProps {
 export default function EditResource({
   currentUserId,
   resourceList,
-  setResourceList
+  setResourceList,
 }: IEditResourceProps): JSX.Element {
   //TODO: Code this like on the resource page
   const resource_data = resourceList[0];
@@ -121,14 +121,16 @@ export default function EditResource({
       <div className="form_element">
         <label htmlFor="content_type_edit">Content Type</label>
         <select
-          id='content_type_edit'
+          id="content_type_edit"
           defaultValue={"Nothing Selected"}
           onChange={(e) => {
-            setEditData({...editData, content_type: e.target.value})
+            setEditData({ ...editData, content_type: e.target.value });
           }}
-          >
+        >
           <option disabled>Nothing Selected</option>
-          {contentTypes.map((type, i) => <option key={i}>{type}</option>)}
+          {contentTypes.map((type, i) => (
+            <option key={i}>{type}</option>
+          ))}
         </select>
       </div>
       <div className="form_element">
@@ -146,16 +148,21 @@ export default function EditResource({
         />
       </div>
       <div className="form_element">
-      <label htmlFor="rating_edit">Rating</label>
+        <label htmlFor="rating_edit">Rating</label>
         {/* TODO: Limit this to only numbers input */}
-        <input id='rating_edit' value={rating} 
-          type='range' min='0' max='100'
+        <input
+          id="rating_edit"
+          value={rating}
+          type="range"
+          min="0"
+          max="100"
           onChange={(e) =>
             setEditData({
               ...editData,
               rating: parseInt(e.target.value),
-            })} ></input>
-        
+            })
+          }
+        ></input>
       </div>
       <div className="form_element">
         <label htmlFor="notes-input">Notes</label>

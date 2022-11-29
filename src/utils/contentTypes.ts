@@ -1,1 +1,8 @@
-export const contentTypes = ['Article', 'Documentation', 'Image', 'Video', 'Tweet', 'Other']
+export const contentTypes = [
+  "Article",
+  "Documentation",
+  "Image",
+  "Video",
+  "Tweet",
+  "Other",
+];

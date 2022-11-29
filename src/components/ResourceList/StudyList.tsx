@@ -24,7 +24,7 @@ export default function StudyList({
   resourceList,
   setResourceList,
   userStudylist,
-  setUserStudylist
+  setUserStudylist,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);

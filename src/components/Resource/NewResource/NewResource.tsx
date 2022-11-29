@@ -34,7 +34,7 @@ export const templateResourceRequest = {
 
 export default function NewResource({
   setResourceList,
-  currentUserManager
+  currentUserManager,
 }: IProps): JSX.Element {
   const currentUser = currentUserManager[0];
 
@@ -42,14 +42,8 @@ export default function NewResource({
     templateResourceRequest
   );
 
-  const {
-    resource_name,
-    url,
-    author_name,
-    rating,
-    notes,
-    description,
-  } = newResourceData;
+  const { resource_name, url, author_name, rating, notes, description } =
+    newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
   const handleSubmit = async () => {
@@ -120,14 +114,19 @@ export default function NewResource({
       <div className="form_element">
         <label htmlFor="content_type_select">Content Type</label>
         <select
-          id='content_type_select'
+          id="content_type_select"
           defaultValue={"Nothing Selected"}
           onChange={(e) => {
-            setNewResourceData({...newResourceData, content_type: e.target.value})
+            setNewResourceData({
+              ...newResourceData,
+              content_type: e.target.value,
+            });
           }}
-          >
+        >
           <option disabled>Nothing Selected</option>
-          {contentTypes.map((type, i) => <option key={i}>{type}</option>)}
+          {contentTypes.map((type, i) => (
+            <option key={i}>{type}</option>
+          ))}
         </select>
       </div>
 
@@ -148,13 +147,19 @@ export default function NewResource({
       <div className="form_element">
         <label htmlFor="rating_input">Rating</label>
         {/* TODO: Limit this to only numbers input */}
-        <input id='rating_input' value={rating}
-        type='range' min='0' max='100' 
+        <input
+          id="rating_input"
+          value={rating}
+          type="range"
+          min="0"
+          max="100"
           onChange={(e) =>
             setNewResourceData({
               ...newResourceData,
               rating: parseInt(e.target.value),
-            })} ></input>
+            })
+          }
+        ></input>
       </div>
       <div className="form_element">
         <label htmlFor="notes_input">Notes</label>
