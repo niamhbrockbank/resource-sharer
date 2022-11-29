@@ -1,9 +1,7 @@
 import { IUserResponse } from "../../utils/types";
 import { IResourceResponse } from "../../utils/types";
 import ResourceCard from "../Resource/ResourceCard";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { baseUrl } from "../../utils/baseUrl";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 
@@ -11,14 +9,15 @@ interface IProps {
   currentUser: IUserResponse | undefined;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
+  studyList: number[] | null;
 }
 
 export default function StudyList({
   currentUser,
   resourceList,
-  setResourceList
+  setResourceList,
+  studyList
 }: IProps): JSX.Element {
-  const [studyList, setStudyList] = useState<{resource_id : number}[]>([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,26 +26,17 @@ export default function StudyList({
       getResourcesFromServer(setResourceList)
     }
 
-    async function getStudyList(){
-      if(currentUser){
-        const {user_id} = currentUser
-        const response = await axios.get(`${baseUrl}/users/${user_id}/study_list`)
-        setStudyList(response.data)
-      } else {
-        navigate('/signin')
-      }
+    if (!currentUser){
+      navigate('/signin')
     }
 
-    getStudyList()
-  }, [currentUser, navigate, resourceList, setResourceList])
-
-  const studyListIds = studyList.map(res => res.resource_id)
+  }, [navigate, resourceList, setResourceList, currentUser])
 
   return (
     <>
       <h1>{currentUser && `${currentUser.name.toUpperCase()}'s`} STUDY LIST</h1>
       <div id="resource_list">
-        {resourceList.filter(res => studyListIds.includes(res.resource_id))
+        {resourceList.filter(res => studyList?.includes(res.resource_id))
           .map((resource, i) => (
             <ResourceCard key={i} resourceData={resource} />
           ))}
