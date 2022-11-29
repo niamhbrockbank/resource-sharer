@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IUserResponse } from "../../utils/types";
 import { baseUrl } from "../../utils/baseUrl";
-import getStudylistFromServer from "../../utils/getStudylistFromServer";
+// import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import "./SignIn.scss";
 
 interface IProps {
@@ -10,12 +10,11 @@ interface IProps {
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
-  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
+//TODO: Add sign in with Google
 export default function SignIn({
-  currentUserManager,
-  setUserStudylist,
+  currentUserManager
 }: IProps): JSX.Element {
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
@@ -32,15 +31,12 @@ export default function SignIn({
     getUsers();
   }, []);
 
+  //TODO: Find a more succinct way to handleSelectUser
   async function handleSelectUser(selectedId: string): Promise<void> {
     const futureCurrentUser = userList.find(
       (user) => parseInt(selectedId) === user.user_id
     );
-    if (futureCurrentUser) {
-      getStudylistFromServer(parseInt(selectedId), setUserStudylist);
-    } else {
-      setUserStudylist(null);
-    }
+
     setCurrentUser(futureCurrentUser);
   }
 

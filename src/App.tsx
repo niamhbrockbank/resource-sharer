@@ -51,7 +51,6 @@ function App(): JSX.Element {
           element={
             <SignIn
               currentUserManager={currentUserManager}
-              setUserStudylist={setUserStudylist}
             />
           }
         />
@@ -66,7 +65,7 @@ function App(): JSX.Element {
           }
         />
         {/* TODO: use route params to get users study list */}
-        <Route
+        {/* <Route
           path="/study"
           element={
             <StudyList
@@ -79,7 +78,7 @@ function App(): JSX.Element {
               setUserStudylist={setUserStudylist}
             />
           }
-        />
+        /> */}
         <Route
           path="/resource/:id"
           element={
