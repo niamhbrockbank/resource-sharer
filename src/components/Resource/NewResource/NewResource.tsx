@@ -156,7 +156,7 @@ export default function NewResource({
         <label htmlFor="opinion-select">Opinion</label>
         <select
           id="opinion-select"
-          defaultValue={"nothing selected"}
+          defaultValue={"Nothing Selected"}
           onChange={(e) =>
             setNewResourceData({
               ...newResourceData,
