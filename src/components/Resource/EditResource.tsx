@@ -7,25 +7,18 @@ import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "./NewResource/SelectOrCreateTag";
 import { inputsValid } from "../../utils/inputsValid";
 import "./FormElement.scss";
+import { contentTypes } from "../../utils/contentTypes";
 
 interface IEditResourceProps {
   currentUserId: number;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  opinions: {
-    opinion: string;
-  }[];
-  buildStageNames: {
-    stage_name: string;
-  }[];
 }
 
 export default function EditResource({
   currentUserId,
   resourceList,
-  setResourceList,
-  opinions,
-  buildStageNames,
+  setResourceList
 }: IEditResourceProps): JSX.Element {
   //TODO: Code this like on the resource page
   const resource_data = resourceList[0];
@@ -36,9 +29,8 @@ export default function EditResource({
     url,
     description,
     content_type,
-    build_stage,
-    opinion,
-    opinion_reason,
+    rating,
+    notes,
     user_id,
   } = resource_data;
 
@@ -54,9 +46,8 @@ export default function EditResource({
       url: url,
       description: description,
       content_type: content_type,
-      build_stage: build_stage,
-      opinion: opinion,
-      opinion_reason: opinion_reason,
+      rating: rating,
+      notes: notes,
       user_id: user_id,
     });
   }, [
@@ -65,9 +56,8 @@ export default function EditResource({
     url,
     description,
     content_type,
-    build_stage,
-    opinion,
-    opinion_reason,
+    rating,
+    notes,
     user_id,
   ]);
 
@@ -129,18 +119,17 @@ export default function EditResource({
         />
       </div>
       <div className="form_element">
-        <label htmlFor="content-type-edit">Content Type</label>
-        <input
-          id="content-type-edit"
-          value={editData.content_type}
-          onChange={(e) =>
-            setEditData({
-              ...editData,
-              content_type: e.target.value,
-            })
-          }
-          placeholder="Content Type"
-        />
+        <label htmlFor="content_type_edit">Content Type</label>
+        <select
+          id='content_type_edit'
+          defaultValue={"Nothing Selected"}
+          onChange={(e) => {
+            setEditData({...editData, content_type: e.target.value})
+          }}
+          >
+          <option disabled>Nothing Selected</option>
+          {contentTypes.map((type, i) => <option key={i}>{type}</option>)}
+        </select>
       </div>
       <div className="form_element">
         <label htmlFor="description-edit">Description</label>
@@ -157,55 +146,32 @@ export default function EditResource({
         />
       </div>
       <div className="form_element">
-        <label htmlFor="opinion-select-edit">Opinion</label>
-        <select
-          id="opinion-select-edit"
-          defaultValue={resource_data.opinion}
+      <label htmlFor="rating_edit">Rating</label>
+        {/* TODO: Limit this to only numbers input */}
+        <input id='rating_edit' value={rating} 
+          type='range' min='0' max='100'
           onChange={(e) =>
             setEditData({
               ...editData,
-              opinion: e.target.value,
-            })
-          }
-        >
-          <option disabled>Nothing Selected</option>
-          {opinions.map((option, i) => (
-            <option key={i}>{option.opinion}</option>
-          ))}
-        </select>
+              rating: parseInt(e.target.value),
+            })} ></input>
+        
       </div>
       <div className="form_element">
-        <label htmlFor="opinion-reason-input">Opinion Explanation</label>
+        <label htmlFor="notes-input">Notes</label>
         <input
-          id="opinion-reason-input"
-          value={editData.opinion_reason}
+          id="notes-input"
+          value={editData.notes}
           onChange={(e) =>
             setEditData({
               ...editData,
-              opinion_reason: e.target.value,
+              notes: e.target.value,
             })
           }
-          placeholder="Explanation"
+          placeholder="Notes"
         />
       </div>
-      <div className="form_element">
-        <label htmlFor="buildStageName-select">Stage</label>
-        <select
-          id="buildStageName-select"
-          defaultValue={resource_data.build_stage}
-          onChange={(e) =>
-            setEditData({
-              ...editData,
-              build_stage: e.target.value,
-            })
-          }
-        >
-          <option disabled>Nothing Selected</option>
-          {buildStageNames.map((stage, i) => (
-            <option key={i}>{stage.stage_name}</option>
-          ))}
-        </select>
-      </div>
+
       <SelectOrCreateTag
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}

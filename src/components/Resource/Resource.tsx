@@ -71,7 +71,7 @@ export default function Resource({
       author_name,
       url,
       description,
-      opinion_reason,
+      notes,
       user_name,
       tag_array,
       user_id,
@@ -90,7 +90,7 @@ export default function Resource({
           <p>{description}</p>
 
           <p>
-            {user_name}'s notes: {opinion_reason}
+            {user_name}'s notes: {notes}
           </p>
           <div className="tag_cloud">
             {tag_array.length > 0 &&
