@@ -26,7 +26,7 @@ function App(): JSX.Element {
   const [searchTags, setSearchTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
-  const [userStudylist, setUserStudylist] = useState<number[] | null>(null);
+  const [studyList, setStudylist] = useState<number[] | null>(null);
 
   return (
     <>
@@ -51,7 +51,7 @@ function App(): JSX.Element {
           element={
             <SignIn
               currentUserManager={currentUserManager}
-              setUserStudylist={setUserStudylist}
+              setStudyList={setStudylist}
             />
           }
         />
@@ -65,18 +65,14 @@ function App(): JSX.Element {
             />
           }
         />
-        {/* TODO: use route params to get users study list */}
         <Route
           path="/study"
           element={
             <StudyList
-              searchTags={searchTags}
-              searchTerm={searchTerm}
               currentUser={currentUserManager[0]}
               resourceList={resourceList}
               setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
+              studyList={studyList}
             />
           }
         />
@@ -84,11 +80,10 @@ function App(): JSX.Element {
           path="/resource/:id"
           element={
             <Resource
-              resourceList={resourceList}
               setResourceList={setResourceList}
               currentUser={currentUserManager[0]}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
+              userStudylist={studyList}
+              setUserStudylist={setStudylist}
             />
           }
         />

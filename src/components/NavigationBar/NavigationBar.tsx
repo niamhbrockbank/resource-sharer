@@ -2,7 +2,7 @@ import { IUserResponse } from "../../utils/types";
 import "./NavigationBar.scss";
 import { useState } from "react";
 import Menu from "./Menu/Menu";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import { siteName } from "../../utils/siteName";
 
@@ -11,13 +11,18 @@ interface IProps {
 }
 
 export default function NavigationBar({ currentUser }: IProps): JSX.Element {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation().pathname;
 
   return (
     <>
       <div id="navigation_bar">
-        {location !== "/" && <h1 className="site_name">{siteName}</h1>}
+        {location !== "/" && (
+          <h1 className="site_name" onClick={() => navigate("/")}>
+            {siteName}
+          </h1>
+        )}
         <img
           src="./img/menu.svg"
           alt="menu list button"

@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { IResourceRequest, IResourceResponse } from "../../utils/types";
-import { templateResourceRequest } from "./NewResource/NewResource";
+import { IResourceResponse } from "../../utils/types";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
 import getResourcesFromServer from "../../utils/getResourcesFromServer";
 import { SelectOrCreateTag } from "./NewResource/SelectOrCreateTag";
-import { inputsValid } from "../../utils/inputsValid";
 import "./FormElement.scss";
 import { contentTypes } from "../../utils/contentTypes";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface IEditResourceProps {
   currentUserId: number;
@@ -20,61 +19,64 @@ export default function EditResource({
   resourceList,
   setResourceList,
 }: IEditResourceProps): JSX.Element {
-  //TODO: Code this like on the resource page
-  const resource_data = resourceList[0];
-  const {
-    resource_id,
-    resource_name,
-    author_name,
-    url,
-    description,
-    content_type,
-    rating,
-    notes,
-    user_id,
-  } = resource_data;
-
-  const [editData, setEditData] = useState<IResourceRequest>(
-    templateResourceRequest
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const templateResourceResponse: IResourceResponse = {
+    resource_id: NaN,
+    resource_name: "",
+    author_name: "",
+    url: "",
+    description: "",
+    content_type: "",
+    rating: 50,
+    notes: "",
+    user_id: currentUserId,
+    time_date: "",
+    user_name: "",
+    tag_array: [""],
+    num_dislikes: NaN,
+    num_likes: NaN,
+    liking_users_array: null,
+    disliking_users_array: null,
+  };
+  const [editData, setEditData] = useState<IResourceResponse>(
+    templateResourceResponse
   );
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
+  const currentResource = resourceList.find((res) => {
+    if (id === undefined) {
+      return templateResourceResponse;
+    } else {
+      return res.resource_id === parseInt(id);
+    }
+  });
+
   useEffect(() => {
-    setEditData({
-      resource_name: resource_name,
-      author_name: author_name,
-      url: url,
-      description: description,
-      content_type: content_type,
-      rating: rating,
-      notes: notes,
-      user_id: user_id,
-    });
-  }, [
-    resource_name,
-    author_name,
-    url,
-    description,
-    content_type,
-    rating,
-    notes,
-    user_id,
-  ]);
+    if (currentResource) {
+      setEditData(currentResource);
+    }
+  }, [currentResource]);
 
   async function handleSubmit(): Promise<void> {
+    //TODO: Check validity of inputs
     try {
-      if (inputsValid(editData)) {
-        await axios.put(`${baseUrl}/resources/${resource_id}`, {
-          ...editData,
-          user_id: currentUserId,
-          tag_array: selectedTags,
-        });
-        getResourcesFromServer(setResourceList);
-      }
+      await axios.put(`${baseUrl}/resources/${id}`, {
+        ...editData,
+        user_id: currentUserId,
+        tag_array: selectedTags,
+      });
+      getResourcesFromServer(setResourceList);
     } catch (error) {
       console.error(error);
       window.alert("That url has already been submitted");
     }
+
+    navigate("/");
+  }
+
+  if (!id) {
+    return <h1>Sorry, this resource cannot be found</h1>;
   }
 
   return (
@@ -152,7 +154,7 @@ export default function EditResource({
         {/* TODO: Limit this to only numbers input */}
         <input
           id="rating_edit"
-          value={rating}
+          value={editData.rating}
           type="range"
           min="0"
           max="100"

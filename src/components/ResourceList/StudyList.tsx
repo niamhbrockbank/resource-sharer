@@ -1,45 +1,42 @@
-import getResourcesFromServer from "../../utils/getResourcesFromServer";
-import { useEffect } from "react";
 import { IUserResponse } from "../../utils/types";
-import filterBySearchTerm from "../../utils/filterBySearchTerm";
 import { IResourceResponse } from "../../utils/types";
-import { filterBySearchTags } from "../../utils/filterBySearchTags";
-import filterByListMode from "../../utils/filterByListMode";
 import ResourceCard from "../Resource/ResourceCard";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import getResourcesFromServer from "../../utils/getResourcesFromServer";
 
 interface IProps {
   currentUser: IUserResponse | undefined;
-  searchTags: string[];
-  searchTerm: string;
   resourceList: IResourceResponse[];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  userStudylist: number[] | null;
-  setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
+  studyList: number[] | null;
 }
 
 export default function StudyList({
   currentUser,
-  searchTags,
-  searchTerm,
   resourceList,
   setResourceList,
-  userStudylist,
-  setUserStudylist,
+  studyList,
 }: IProps): JSX.Element {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getResourcesFromServer(setResourceList);
-  }, [setResourceList]);
+    //TODO: Preset resourceList as undefined (in App) and compare to that rather than length
+    if (resourceList.length === 0) {
+      getResourcesFromServer(setResourceList);
+    }
+
+    if (!currentUser) {
+      navigate("/signin");
+    }
+  }, [navigate, resourceList, setResourceList, currentUser]);
 
   return (
     <>
       <h1>{currentUser && `${currentUser.name.toUpperCase()}'s`} STUDY LIST</h1>
       <div id="resource_list">
         {resourceList
-          .filter((resource) => filterBySearchTags(searchTags, resource))
-          .filter((resource) => filterBySearchTerm(searchTerm, resource))
-          .filter((resource) =>
-            filterByListMode("study list", userStudylist, resource)
-          )
+          .filter((res) => studyList?.includes(res.resource_id))
           .map((resource, i) => (
             <ResourceCard key={i} resourceData={resource} />
           ))}
