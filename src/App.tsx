@@ -65,20 +65,16 @@ function App(): JSX.Element {
           }
         />
         {/* TODO: use route params to get users study list */}
-        {/* <Route
+        <Route
           path="/study"
           element={
             <StudyList
-              searchTags={searchTags}
-              searchTerm={searchTerm}
               currentUser={currentUserManager[0]}
               resourceList={resourceList}
               setResourceList={setResourceList}
-              userStudylist={userStudylist}
-              setUserStudylist={setUserStudylist}
             />
           }
-        /> */}
+        />
         <Route
           path="/resource/:id"
           element={
