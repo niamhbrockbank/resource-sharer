@@ -18,6 +18,7 @@ export default function Comments({
   const [idOfCommentToEdit, setIdOfCommentToEdit] = useState<number>(NaN); // Equal to NaN when not editing a comment, else equal to id of comment being edited
   const [editCommentInput, setEditCommentInput] = useState<string>("");
 
+  //TODO: improve this and make it consistent across the code
   const currentUserId = currentUser?.user_id;
 
   const getComments = useCallback(async () => {

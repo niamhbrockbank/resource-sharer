@@ -84,7 +84,6 @@ function App(): JSX.Element {
           path="/resource/:id"
           element={
             <Resource
-              resourceList={resourceList}
               setResourceList={setResourceList}
               currentUser={currentUserManager[0]}
               userStudylist={userStudylist}
