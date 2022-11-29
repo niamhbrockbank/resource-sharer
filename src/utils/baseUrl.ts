@@ -8,6 +8,6 @@
 //     ? "https://resource-sharer.netlify.app/"
 //     : "http://localhost:3000";
 
-export const baseUrl = "https://resource-sharer.onrender.com";
+export const baseUrl = "http://localhost:4000";
 
 export const frontEndUrl = "https://resource-sharer.netlify.app";

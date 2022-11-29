@@ -2,19 +2,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IUserResponse } from "../../utils/types";
 import { baseUrl } from "../../utils/baseUrl";
-// import getStudylistFromServer from "../../utils/getStudylistFromServer";
 import "./SignIn.scss";
+import getStudylistFromServer from "../../utils/getStudylistFromServer";
 
 interface IProps {
   currentUserManager: [
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
+  setStudyList : React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
 //TODO: Add sign in with Google
 export default function SignIn({
-  currentUserManager
+  currentUserManager,
+  setStudyList,
 }: IProps): JSX.Element {
   const setCurrentUser = currentUserManager[1];
   const [userList, setUserList] = useState<IUserResponse[]>([]);
@@ -38,6 +40,8 @@ export default function SignIn({
     );
 
     setCurrentUser(futureCurrentUser);
+    getStudylistFromServer(futureCurrentUser?.user_id, setStudyList)
+
   }
 
   return (
