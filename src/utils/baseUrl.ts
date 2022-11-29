@@ -10,4 +10,4 @@
 
 export const baseUrl = "https://resource-sharer.onrender.com";
 
-export const frontEndUrl = "https://resource-sharer.netlify.app/";
+export const frontEndUrl = "https://resource-sharer.netlify.app";

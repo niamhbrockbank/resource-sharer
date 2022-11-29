@@ -11,6 +11,7 @@ import "./NewResource.scss";
 import getResourcesFromServer from "../../../utils/getResourcesFromServer";
 
 import { IUserResponse } from "../../../utils/types";
+import { contentTypes } from "../../../utils/contentTypes";
 
 interface IProps {
   currentUserManager: [
@@ -18,12 +19,6 @@ interface IProps {
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
-  opinions: {
-    opinion: string;
-  }[];
-  buildStageNames: {
-    stage_name: string;
-  }[];
 }
 
 export const templateResourceRequest = {
@@ -32,17 +27,14 @@ export const templateResourceRequest = {
   url: "",
   description: "",
   content_type: "",
-  build_stage: "",
-  opinion: "",
-  opinion_reason: "",
+  rating: 50,
+  notes: "",
   user_id: NaN,
 };
 
 export default function NewResource({
   setResourceList,
   currentUserManager,
-  opinions,
-  buildStageNames,
 }: IProps): JSX.Element {
   const currentUser = currentUserManager[0];
 
@@ -50,14 +42,8 @@ export default function NewResource({
     templateResourceRequest
   );
 
-  const {
-    resource_name,
-    url,
-    author_name,
-    content_type,
-    opinion_reason,
-    description,
-  } = newResourceData;
+  const { resource_name, url, author_name, rating, notes, description } =
+    newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
   const handleSubmit = async () => {
@@ -124,20 +110,26 @@ export default function NewResource({
           placeholder="URL"
         />
       </div>
+
       <div className="form_element">
-        <label htmlFor="content-type-input">Content Type</label>
-        <input
-          id="content-type-input"
-          value={content_type}
-          onChange={(e) =>
+        <label htmlFor="content_type_select">Content Type</label>
+        <select
+          id="content_type_select"
+          defaultValue={"Nothing Selected"}
+          onChange={(e) => {
             setNewResourceData({
               ...newResourceData,
               content_type: e.target.value,
-            })
-          }
-          placeholder="Content Type"
-        />
+            });
+          }}
+        >
+          <option disabled>Nothing Selected</option>
+          {contentTypes.map((type, i) => (
+            <option key={i}>{type}</option>
+          ))}
+        </select>
       </div>
+
       <div className="form_element">
         <label htmlFor="description-input">Description</label>
         <input
@@ -153,54 +145,35 @@ export default function NewResource({
         />
       </div>
       <div className="form_element">
-        <label htmlFor="opinion-select">Opinion</label>
-        <select
-          id="opinion-select"
-          defaultValue={"nothing selected"}
-          onChange={(e) =>
-            setNewResourceData({
-              ...newResourceData,
-              opinion: e.target.value,
-            })
-          }
-        >
-          <option disabled>Nothing Selected</option>
-          {opinions.map((option, i) => (
-            <option key={i}>{option.opinion}</option>
-          ))}
-        </select>
-      </div>
-      <div className="form_element">
-        <label htmlFor="opinion-reason-input">Opinion Explanation</label>
+        <label htmlFor="rating_input">Rating</label>
+        {/* TODO: Limit this to only numbers input */}
         <input
-          id="opinion-reason-input"
-          value={opinion_reason}
+          id="rating_input"
+          value={rating}
+          type="range"
+          min="0"
+          max="100"
           onChange={(e) =>
             setNewResourceData({
               ...newResourceData,
-              opinion_reason: e.target.value,
+              rating: parseInt(e.target.value),
             })
           }
-          placeholder="Explanation"
-        />
+        ></input>
       </div>
       <div className="form_element">
-        <label htmlFor="buildStageName-select">Stage</label>
-        <select
-          id="buildStageName-select"
-          defaultValue={"Nothing Selected"}
+        <label htmlFor="notes_input">Notes</label>
+        <input
+          id="notes_input"
+          value={notes}
           onChange={(e) =>
             setNewResourceData({
               ...newResourceData,
-              build_stage: e.target.value,
+              notes: e.target.value,
             })
           }
-        >
-          <option disabled>Nothing Selected</option>
-          {buildStageNames.map((stage, i) => (
-            <option key={i}>{stage.stage_name}</option>
-          ))}
-        </select>
+          placeholder="Notes"
+        />
       </div>
 
       <SelectOrCreateTag

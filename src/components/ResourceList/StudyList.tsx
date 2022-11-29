@@ -15,12 +15,6 @@ interface IProps {
   setResourceList: React.Dispatch<React.SetStateAction<IResourceResponse[]>>;
   userStudylist: number[] | null;
   setUserStudylist: React.Dispatch<React.SetStateAction<number[] | null>>;
-  opinions: {
-    opinion: string;
-  }[];
-  buildStageNames: {
-    stage_name: string;
-  }[];
 }
 
 export default function StudyList({
@@ -31,8 +25,6 @@ export default function StudyList({
   setResourceList,
   userStudylist,
   setUserStudylist,
-  opinions,
-  buildStageNames,
 }: IProps): JSX.Element {
   useEffect(() => {
     getResourcesFromServer(setResourceList);

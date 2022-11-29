@@ -4,9 +4,8 @@ export interface IResourceRequest {
   url: string;
   description: string;
   content_type: string;
-  build_stage: string;
-  opinion: string;
-  opinion_reason: string;
+  rating: number;
+  notes: string;
   user_id: number | undefined;
 }
 

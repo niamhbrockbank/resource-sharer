@@ -1,10 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { IResourceResponse } from "./utils/types";
 import "./styles.css";
-import { baseUrl } from "./utils/baseUrl";
-import axios from "axios";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import StudyList from "./components/ResourceList/StudyList";
@@ -29,27 +27,6 @@ function App(): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resourceList, setResourceList] = useState<IResourceResponse[]>([]);
   const [userStudylist, setUserStudylist] = useState<number[] | null>(null);
-  const [opinions, setOpinions] = useState<{ opinion: string }[]>([]);
-  const [buildStageNames, setBuildStageNames] = useState<
-    { stage_name: string }[]
-  >([]);
-
-  useEffect(() => {
-    const getOptions = async () => {
-      try {
-        const opinionsResponse = await axios.get(baseUrl + "/opinions");
-        setOpinions(opinionsResponse.data);
-
-        const buildStageNamesResponse = await axios.get(
-          baseUrl + "/stage_names"
-        );
-        setBuildStageNames(buildStageNamesResponse.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getOptions();
-  }, []);
 
   return (
     <>
@@ -85,8 +62,6 @@ function App(): JSX.Element {
             <NewResource
               currentUserManager={currentUserManager}
               setResourceList={setResourceList}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
             />
           }
         />
@@ -102,8 +77,6 @@ function App(): JSX.Element {
               setResourceList={setResourceList}
               userStudylist={userStudylist}
               setUserStudylist={setUserStudylist}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
             />
           }
         />
@@ -126,8 +99,6 @@ function App(): JSX.Element {
               currentUserId={currentUserManager[0]?.user_id ?? NaN}
               resourceList={resourceList}
               setResourceList={setResourceList}
-              opinions={opinions}
-              buildStageNames={buildStageNames}
             />
           }
         />
