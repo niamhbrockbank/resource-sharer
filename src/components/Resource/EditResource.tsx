@@ -20,61 +20,63 @@ export default function EditResource({
   setResourceList,
 }: IEditResourceProps): JSX.Element {
   const { id } = useParams();
-  const navigate = useNavigate()
-  const templateResourceResponse : IResourceResponse = {
-    resource_id : NaN,
-    resource_name : "",
+  const navigate = useNavigate();
+  const templateResourceResponse: IResourceResponse = {
+    resource_id: NaN,
+    resource_name: "",
     author_name: "",
-    url : "",
-    description : "",
-    content_type : "",
-    rating : 50,
-    notes : "",
-    user_id : currentUserId,
-    time_date : "",
-    user_name : "",
+    url: "",
+    description: "",
+    content_type: "",
+    rating: 50,
+    notes: "",
+    user_id: currentUserId,
+    time_date: "",
+    user_name: "",
     tag_array: [""],
-    num_dislikes : NaN,
-    num_likes : NaN,
-    liking_users_array : null,
-    disliking_users_array : null
-  }
-  const [editData, setEditData] = useState<IResourceResponse>(templateResourceResponse);
+    num_dislikes: NaN,
+    num_likes: NaN,
+    liking_users_array: null,
+    disliking_users_array: null,
+  };
+  const [editData, setEditData] = useState<IResourceResponse>(
+    templateResourceResponse
+  );
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
 
-  const currentResource = resourceList.find(res => {
-    if (id === undefined){
-      return templateResourceResponse
+  const currentResource = resourceList.find((res) => {
+    if (id === undefined) {
+      return templateResourceResponse;
     } else {
-      return res.resource_id === parseInt(id)
+      return res.resource_id === parseInt(id);
     }
-  })
+  });
 
   useEffect(() => {
     if (currentResource) {
-      setEditData(currentResource)
+      setEditData(currentResource);
     }
-  }, [currentResource])
+  }, [currentResource]);
 
   async function handleSubmit(): Promise<void> {
     //TODO: Check validity of inputs
     try {
-        await axios.put(`${baseUrl}/resources/${id}`, {
-          ...editData,
-          user_id: currentUserId,
-          tag_array: selectedTags,
-        });
-        getResourcesFromServer(setResourceList);
+      await axios.put(`${baseUrl}/resources/${id}`, {
+        ...editData,
+        user_id: currentUserId,
+        tag_array: selectedTags,
+      });
+      getResourcesFromServer(setResourceList);
     } catch (error) {
       console.error(error);
       window.alert("That url has already been submitted");
     }
 
-    navigate('/')
+    navigate("/");
   }
 
-  if(!id){
-    return <h1>Sorry, this resource cannot be found</h1>
+  if (!id) {
+    return <h1>Sorry, this resource cannot be found</h1>;
   }
 
   return (

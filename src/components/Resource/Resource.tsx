@@ -25,24 +25,23 @@ export default function Resource({
 }: IProps): JSX.Element {
   const { id } = useParams();
   //TODO: Add placeholder into resource state for initial render
-  const [resource, setResource] = useState<IResourceResponse>()
+  const [resource, setResource] = useState<IResourceResponse>();
   const navigate = useNavigate();
   const errorMessage = "Sorry, that resource can't be found";
-  
+
   useEffect(() => {
-    async function getResourceFromServer():Promise<void> {
+    async function getResourceFromServer(): Promise<void> {
       try {
-        const response = await axios.get(`${baseUrl}/resources/${id}`)
-        const currentResource : IResourceResponse = response.data[0]
-        setResource(currentResource)
+        const response = await axios.get(`${baseUrl}/resources/${id}`);
+        const currentResource: IResourceResponse = response.data[0];
+        setResource(currentResource);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
-    
-    getResourceFromServer()
 
-  }, [id])
+    getResourceFromServer();
+  }, [id]);
 
   async function handleDelete(resource_id: number): Promise<void> {
     await axios.delete(`${baseUrl}/resources/${resource_id}`);
@@ -69,7 +68,6 @@ export default function Resource({
       await getStudylistFromServer(currentUser.user_id, setUserStudylist);
     }
   }
-
 
   if (!resource) {
     return <h1>{errorMessage}</h1>;
@@ -103,7 +101,8 @@ export default function Resource({
           {user_name}'s notes: {notes}
         </p>
         <div className="tag_cloud">
-          {tag_array && tag_array.length > 0 &&
+          {tag_array &&
+            tag_array.length > 0 &&
             tag_array.map((tag, i) => (
               <div className="tag" key={i}>
                 {tag}
@@ -150,5 +149,4 @@ export default function Resource({
       </div>
     </div>
   );
-
 }

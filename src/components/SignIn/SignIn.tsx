@@ -10,7 +10,7 @@ interface IProps {
     IUserResponse | undefined,
     React.Dispatch<React.SetStateAction<IUserResponse | undefined>>
   ];
-  setStudyList : React.Dispatch<React.SetStateAction<number[] | null>>;
+  setStudyList: React.Dispatch<React.SetStateAction<number[] | null>>;
 }
 
 //TODO: Add sign in with Google
@@ -40,8 +40,7 @@ export default function SignIn({
     );
 
     setCurrentUser(futureCurrentUser);
-    getStudylistFromServer(futureCurrentUser?.user_id, setStudyList)
-
+    getStudylistFromServer(futureCurrentUser?.user_id, setStudyList);
   }
 
   return (
