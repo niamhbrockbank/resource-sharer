@@ -43,11 +43,16 @@ export default function Resource({
     getResourceFromServer();
   }, [id]);
 
-  async function handleDelete(resource_id: number): Promise<void> {
-    await axios.delete(`${baseUrl}/resources/${resource_id}`);
-    getResourcesFromServer(setResourceList);
-
-    navigate("/");
+  async function handleDelete(): Promise<void> {
+    try {
+      await axios.delete(`${baseUrl}/resources/${id}`);
+      getResourcesFromServer(setResourceList);
+      navigate("/");
+      
+    } catch (error) {
+      console.error(error)
+      alert('There was a problem deleting. Try again later.')
+    }
   }
 
   async function addToStudyList(resource_id: number): Promise<void> {
@@ -62,7 +67,7 @@ export default function Resource({
 
   async function removeFromStudyList(resource_id: number): Promise<void> {
     if (currentUser !== undefined) {
-      await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study-list`, {
+      await axios.delete(`${baseUrl}/users/${currentUser.user_id}/study_list`, {
         data: { resource_id: resource_id },
       });
       await getStudylistFromServer(currentUser.user_id, setUserStudylist);
@@ -123,7 +128,7 @@ export default function Resource({
             <button onClick={() => navigate(`/resource/${id}/edit`)}>
               Edit
             </button>
-            <button onClick={() => handleDelete(resource_id)}>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
           </>
         )}
 
