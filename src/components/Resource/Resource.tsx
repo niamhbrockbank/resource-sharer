@@ -48,10 +48,9 @@ export default function Resource({
       await axios.delete(`${baseUrl}/resources/${id}`);
       getResourcesFromServer(setResourceList);
       navigate("/");
-      
     } catch (error) {
-      console.error(error)
-      alert('There was a problem deleting. Try again later.')
+      console.error(error);
+      alert("There was a problem deleting. Try again later.");
     }
   }
 

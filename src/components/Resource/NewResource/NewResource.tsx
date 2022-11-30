@@ -46,7 +46,7 @@ export default function NewResource({
   const { resource_name, url, author_name, rating, notes, description } =
     newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
@@ -58,9 +58,9 @@ export default function NewResource({
         });
 
         getResourcesFromServer(setResourceList);
-        navigate("/")
+        navigate("/");
       } catch (error) {
-        console.error(error)
+        console.error(error);
         window.alert("Sorry, there was an issue submitting. Try again later.");
       }
     }
