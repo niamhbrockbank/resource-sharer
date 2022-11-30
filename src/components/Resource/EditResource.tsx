@@ -69,7 +69,7 @@ export default function EditResource({
       getResourcesFromServer(setResourceList);
     } catch (error) {
       console.error(error);
-      window.alert("That url has already been submitted");
+      window.alert("Sorry, there was an issue submitting. Try again later.");
     }
 
     navigate(`/resource/${id}`);
