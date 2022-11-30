@@ -55,9 +55,10 @@ export default function NewResource({
           tag_array: selectedTags,
         });
 
-        await getResourcesFromServer(setResourceList);
+        getResourcesFromServer(setResourceList);
       } catch (error) {
-        window.alert("That url is already taken");
+        console.error(error)
+        window.alert("Sorry, there was an issue submitting. Try again later.");
       }
     }
   };
