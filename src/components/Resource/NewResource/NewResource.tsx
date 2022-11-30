@@ -12,6 +12,7 @@ import getResourcesFromServer from "../../../utils/getResourcesFromServer";
 
 import { IUserResponse } from "../../../utils/types";
 import { contentTypes } from "../../../utils/contentTypes";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   currentUserManager: [
@@ -45,6 +46,7 @@ export default function NewResource({
   const { resource_name, url, author_name, rating, notes, description } =
     newResourceData;
   const [selectedTags, setSelectedTags] = useState<{ tag_name: string }[]>([]);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (inputsValid(newResourceData)) {
@@ -55,9 +57,11 @@ export default function NewResource({
           tag_array: selectedTags,
         });
 
-        await getResourcesFromServer(setResourceList);
+        getResourcesFromServer(setResourceList);
+        navigate("/");
       } catch (error) {
-        window.alert("That url is already taken");
+        console.error(error);
+        window.alert("Sorry, there was an issue submitting. Try again later.");
       }
     }
   };
