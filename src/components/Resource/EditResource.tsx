@@ -72,7 +72,7 @@ export default function EditResource({
       window.alert("That url has already been submitted");
     }
 
-    navigate("/");
+    navigate(`/resource/${id}`);
   }
 
   if (!id) {
