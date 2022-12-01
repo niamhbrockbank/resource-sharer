@@ -150,7 +150,7 @@ export default function NewResource({
       </div>
       <div className="form_element">
         <label htmlFor="rating_input">Rating</label>
-        {/* TODO: Limit this to only numbers input */}
+        <p id='rating_input_perc'>{rating} / 100</p>
         <input
           id="rating_input"
           value={rating}
