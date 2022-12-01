@@ -151,9 +151,9 @@ export default function EditResource({
       </div>
       <div className="form_element">
         <label htmlFor="rating_edit">Rating</label>
-        {/* TODO: Limit this to only numbers input */}
+        <p id="rating_input_perc">{editData.rating} / 100</p>
         <input
-          id="rating_edit"
+          id="rating_input"
           value={editData.rating}
           type="range"
           min="0"

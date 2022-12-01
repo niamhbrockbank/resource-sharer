@@ -35,7 +35,7 @@ test("Correctly filters in/out based on resource_name", () => {
   expect(filterBySearchTerm("cats", templateResOne)).toBe(false);
 });
 
-test("Correctly filters in/out based on tag_array", () => {
+test.skip("Correctly filters in/out based on tag_array", () => {
   expect(filterBySearchTerm("hello", templateResOne)).toBe(true);
   expect(filterBySearchTerm("goodbye", templateResOne)).toBe(false);
 });
