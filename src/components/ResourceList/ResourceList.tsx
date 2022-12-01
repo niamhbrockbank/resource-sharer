@@ -23,23 +23,26 @@ export default function ResourceList({
     getResourcesFromServer(setResourceList);
   }, [setResourceList]);
 
-  const filteredByTags : IResourceResponse[] = resourceList
-            .filter((resource) => filterBySearchTags(searchTags, resource))
+  const filteredByTags: IResourceResponse[] = resourceList.filter((resource) =>
+    filterBySearchTags(searchTags, resource)
+  );
 
-  const filteredResList = filteredByTags
-          .filter((resource) => filterBySearchTerm(searchTerm, resource))
-
+  const filteredResList = filteredByTags.filter((resource) =>
+    filterBySearchTerm(searchTerm, resource)
+  );
 
   return (
     <>
       <div id="resource_list_section">
         <h1>RESOURCE LIST</h1>
         <div id="resource_list">
-          {filteredResList.length > 0 ?
+          {filteredResList.length > 0 ? (
             filteredResList.map((resource, i) => (
               <ResourceCard key={i} resourceData={resource} />
-            )) :
-            <h1>Sorry, no resources found.</h1>}
+            ))
+          ) : (
+            <h1>Sorry, no resources found.</h1>
+          )}
         </div>
       </div>
     </>

@@ -10,9 +10,9 @@ export default function filterBySearchTerm(
   if (description.includes(searchTerm)) {
     return true;
   } else if (author_name.includes(searchTerm)) {
-    return true
+    return true;
   } else if (resource_name.includes(searchTerm)) {
-    return true
+    return true;
   } else {
     return false;
   }
