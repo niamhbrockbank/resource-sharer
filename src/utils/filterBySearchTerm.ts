@@ -7,11 +7,11 @@ export default function filterBySearchTerm(
   const { description, author_name, resource_name } = resource;
   //TODO: Include search/filter by tags
 
-  if (description.includes(searchTerm)) {
+  if (description.toLowerCase().includes(searchTerm.toLowerCase())) {
     return true;
-  } else if (author_name.includes(searchTerm)) {
+  } else if (author_name.toLowerCase().includes(searchTerm.toLowerCase())) {
     return true;
-  } else if (resource_name.includes(searchTerm)) {
+  } else if (resource_name.toLowerCase().includes(searchTerm.toLowerCase())) {
     return true;
   } else {
     return false;
