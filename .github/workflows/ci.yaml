@@ -21,7 +21,5 @@ jobs:
       run: yarn type-check
     - name: Check tests pass
       run: yarn test
-    - name: Audit URLs using Lighthouse
-      uses: treosh/lighthouse-ci-action@v9
     - name: Check app builds
       run: yarn build
