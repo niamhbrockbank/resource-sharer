@@ -1,5 +1,28 @@
-# Simplified CRA starter
+# Resource Sharer - Backend
+## Summary
+This project is a study resources library that users can personalise, once logged into, by creating their own 'study list' of resources. This is a React app styled using Sass.
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+Links to the repos and deployed sites for this project can be found here:
+|           | GitHub Repo              | Deployed |
+|-----------|--------------------------|----------|
+| Front-end | <a href='https://github.com/niamhbrockbank/resource-sharer'>resources-sharer</a>         | <a href='https://resource-sharer.netlify.app/'>Netlify</a>  |
+| Back-end  | <a href='https://github.com/niamhbrockbank/resource-sharer-backend'>resources-sharer-backen</a> | <a href='https://resource-sharer.onrender.com/resources'>render</a>   |
 
-> This is part of Academy's technical curriculum for **The Mark**. All parts of that curriculum, including this project, are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
+## Features
+Currently working on:
+* Updating Cypress tests in line with new site layout
+* Adding CSS animations to make scrolling through resource pages easier
+* Creating more reusable React components
+
+Features coming soon:
+* Offering more helpful error messages when submitting a new reosource
+* Using Firebase to allow users to sign in with Google
+* Suggesting tags based on the new resource's title and description
+
+## Install
+
+`yarn` to install dependencies.
+
+## Documentation
+React component tree:
+![React DOM](./componentTree.png)
