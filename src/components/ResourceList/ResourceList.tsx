@@ -34,7 +34,7 @@ export default function ResourceList({
   return (
     <>
       <div id="resource_list_section">
-        <h1>RESOURCE LIST</h1>
+        <h1 style={{marginTop: '48px', color: 'white'}} >RESOURCE LIST</h1>
         <div id="resource_list">
           {filteredResList.length > 0 ? (
             filteredResList.map((resource, i) => (
