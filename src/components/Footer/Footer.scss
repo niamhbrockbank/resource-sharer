@@ -7,7 +7,7 @@
 
 #checkerboard {
   --square_dim: 50px; 
-  --check_colour: #fe5f55;
+  --check_colour: #4F6367 ;
   height: calc(3 * var(--square_dim));
   margin-top: var(--square_dim);
   margin-left: calc(-1 * calc(24px + var(--square_dim)));
