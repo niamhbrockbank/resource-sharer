@@ -1,7 +1,22 @@
 #resource_list_section {
-  background-color: #eef5db;
+  background-color: #7a9e9f;
   margin: -24px;
   padding: 24px;
+
+  --style: 40px;
+  --size: 40px;
+
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  --R: calc(var(--size) * 1.28);
+
+  --mask: radial-gradient(37.5px at 50% 52.5px, #000 99%, #0000 101%)
+      calc(50% - 60px) 0/120px 100%,
+    radial-gradient(37.5px at 50% -22.5px, #0000 99%, #000 101%) 50% 30px/120px
+      100% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
 }
 
 #resource_list {
