@@ -6,18 +6,22 @@
 }
 
 #checkerboard {
-  --square_dim: 50px; 
-  --check_colour: #4F6367 ;
+  --square_dim: 50px;
+  --check_colour: #4f6367;
   height: calc(3 * var(--square_dim));
   margin-top: var(--square_dim);
   margin-left: calc(-1 * calc(24px + var(--square_dim)));
   margin-right: -24px;
   width: calc(100% + 48px + var(--square_dim));
-  background-image:
-    linear-gradient(45deg, var(--check_colour) 25%, transparent 25%), 
+  background-image: linear-gradient(
+      45deg,
+      var(--check_colour) 25%,
+      transparent 25%
+    ),
     linear-gradient(135deg, var(--check_colour) 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, var(--check_colour) 75%),
     linear-gradient(135deg, transparent 75%, var(--check_colour) 75%);
   background-size: calc(2 * var(--square_dim)) calc(2 * var(--square_dim));
-  background-position:0 0, var(--square_dim) 0, var(--square_dim) calc(-1 * var(--square_dim)), 0px var(--square_dim);
+  background-position: 0 0, var(--square_dim) 0,
+    var(--square_dim) calc(-1 * var(--square_dim)), 0px var(--square_dim);
 }
